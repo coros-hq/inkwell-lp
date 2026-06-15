@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 
 const GITHUB_URL = 'https://github.com/coros-hq/inkwell';
 const RELEASE_URL = 'https://github.com/coros-hq/inkwell/releases/latest';
-const VERSION = '0.1.0';
+const VERSION = '0.3.0';
 
 const features = [
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 6V4m0 16v-2M16 6V4m0 16v-2"/></svg>`,
     title: 'Yours, always',
-    body: 'Notes are stored as plain <code>.md</code> files in a folder you choose. Open them in any editor, back them up anywhere. inkwell never touches a server.',
+    body: 'Notes are stored as plain <code>.md</code> files in a vault folder you choose — real directories, real files, YAML frontmatter. Open them in any editor, back them up anywhere.',
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>`,
@@ -19,12 +19,22 @@ const features = [
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`,
     title: 'Eight themes',
-    body: 'Midnight, Parchment, Ink, Dusk, Forest, Sepia, Gruvbox, Fog — each one tuned for long writing sessions. Syntax highlighting follows your palette.',
+    body: 'Midnight, Parchment, Ink, Dusk, Forest, Sepia, Gruvbox, Fog — each one tuned for long writing sessions. Build your own with the custom theme editor.',
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>`,
     title: 'Built for more',
-    body: 'Kanban boards, linked notes, ⌘K search across everything, and export to Markdown, HTML, or PDF — without leaving the app.',
+    body: 'Kanban boards, linked notes, file attachments, ⌘K search, and export to Markdown, HTML, or PDF — without leaving the app.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>`,
+    title: 'GitHub sync',
+    body: 'Push any note to a GitHub repository as a <code>.md</code> file, or pull the latest version back in. Keep your project docs and READMEs in sync from inside inkwell.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/><path d="M8 3.5A9.96 9.96 0 0 1 12 2"/></svg>`,
+    title: 'Claude MCP',
+    body: 'A native MCP server lets Claude read, search, and write to your vault directly. Ask Claude to summarise your notes, draft new ones, or find anything — it talks to inkwell natively.',
   },
 ];
 
