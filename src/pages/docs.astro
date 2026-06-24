@@ -1,0 +1,676 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const GITHUB_URL  = "https://github.com/coros-hq/inkwell";
+const RELEASE_URL = "https://github.com/coros-hq/inkwell/releases/latest";
+const VERSION     = "0.4.8";
+
+const sections = [
+  { id: "getting-started", label: "Getting Started" },
+  { id: "editor",          label: "Editor" },
+  { id: "canvas",          label: "Canvas" },
+  { id: "organisation",    label: "Organisation" },
+  { id: "themes",          label: "Themes" },
+  { id: "export",          label: "Export" },
+  { id: "github-sync",     label: "GitHub Sync" },
+  { id: "claude-mcp",      label: "Claude MCP" },
+  { id: "shortcuts",       label: "Shortcuts" },
+];
+---
+
+<Layout
+  title="inkwell — Documentation"
+  description="Everything you need to know about inkwell: editor, canvas, themes, GitHub sync, Claude MCP, and keyboard shortcuts."
+>
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="wordmark">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="26" height="26" />
+        inkwell
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#canvas">Canvas</a>
+        <a href="/#themes">Themes</a>
+        <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+        <a href="/docs" class="nav-active">Docs</a>
+      </div>
+      <a href={RELEASE_URL} class="btn-nav" target="_blank" rel="noopener">
+        Download
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Layout ── -->
+  <div class="docs-layout">
+
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-inner">
+        <p class="sidebar-version">v{VERSION}</p>
+        <nav class="sidebar-nav">
+          {sections.map(s => (
+            <a href={`#${s.id}`} class="sidebar-link">{s.label}</a>
+          ))}
+        </nav>
+        <a href={RELEASE_URL} class="sidebar-download" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          Download inkwell
+        </a>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="docs-content">
+
+      <!-- ── Getting Started ── -->
+      <section id="getting-started" class="doc-section">
+        <div class="section-label">01</div>
+        <h1>Getting Started</h1>
+        <p class="lead">inkwell is a local-first markdown editor for macOS. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
+
+        <h3>Install</h3>
+        <ol>
+          <li>Download the latest <code>.dmg</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
+          <li>Open the disk image and drag <strong>inkwell.app</strong> to <strong>/Applications</strong>.</li>
+          <li>On first launch, macOS may show a security prompt — click <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</li>
+        </ol>
+
+        <h3>Open a vault</h3>
+        <p>A <strong>vault</strong> is any folder on your Mac. inkwell stores all notes as <code>.md</code> files inside it, preserving your folder structure exactly.</p>
+        <ol>
+          <li>Click <strong>Open Vault</strong> on the welcome screen.</li>
+          <li>Select a folder (or create a new one).</li>
+          <li>inkwell loads all <code>.md</code> files it finds and shows them in the sidebar.</li>
+        </ol>
+        <div class="callout">
+          <strong>Tip:</strong> Vaults are Obsidian-compatible. If you have an existing Obsidian vault, just point inkwell at the same folder.
+        </div>
+
+        <h3>Create your first note</h3>
+        <p>Press <kbd>⌘N</kbd> or click the <strong>+</strong> button in the sidebar. Type a title and start writing. Notes are saved automatically — there is no Save button.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── Editor ── -->
+      <section id="editor" class="doc-section">
+        <div class="section-label">02</div>
+        <h2>Editor</h2>
+        <p class="lead">inkwell uses CodeMirror 6 for a fast, distraction-free writing experience with live markdown syntax highlighting.</p>
+
+        <h3>Split view</h3>
+        <p>Click the split-view icon in the toolbar (or press <kbd>⌘⇧P</kbd>) to open a rendered preview alongside the editor. The preview updates live as you type. Click the icon again to return to the focused editor.</p>
+
+        <h3>Markdown support</h3>
+        <p>inkwell renders full GitHub Flavored Markdown including tables, task lists, strikethrough, code blocks with syntax highlighting, blockquotes, inline images, and footnotes.</p>
+
+        <div class="code-block">
+          <div class="code-block-header">Markdown examples</div>
+          <pre><code># Heading 1
+## Heading 2
+
+**bold**, _italic_, ~~strikethrough~~, ==highlight==
+
+- [x] Done task
+- [ ] Open task
+
+| Col A | Col B |
+|-------|-------|
+| cell  | cell  |
+
+```javascript
+const note = "write here"
+```</code></pre>
+        </div>
+
+        <h3>Frontmatter</h3>
+        <p>Every note gets automatic YAML frontmatter on creation. You can edit it directly or leave it alone — inkwell uses it to store metadata like tags, pinned state, and timestamps.</p>
+        <div class="code-block">
+          <div class="code-block-header">Note frontmatter</div>
+          <pre><code>---
+id: note_abc123
+title: My Note
+created: 2025-01-15T10:30:00.000Z
+updated: 2025-06-01T09:14:00.000Z
+pinned: false
+tags: [writing, ideas]
+---</code></pre>
+        </div>
+
+        <h3>Font &amp; display settings</h3>
+        <p>Open <strong>Settings → Editor</strong> to adjust the font family (sans-serif, serif, or monospace), font size, and line spacing. Changes apply instantly without restarting.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── Canvas ── -->
+      <section id="canvas" class="doc-section">
+        <div class="section-label">03</div>
+        <h2>Canvas</h2>
+        <p class="lead">A full drawing canvas lives alongside your notes. Sketch diagrams, flowcharts, and mind maps using a custom HTML5 drawing engine — no third-party libraries, no export needed.</p>
+
+        <h3>Opening the canvas</h3>
+        <p>Click the <strong>Draw</strong> icon in the sidebar (or enable it in <strong>Settings → General → Canvas</strong>). The canvas is shared across your entire vault and saves automatically to <code>.inkwell/canvas.json</code>.</p>
+
+        <h3>Tools</h3>
+        <div class="tool-grid">
+          <div class="tool-item">
+            <span class="tool-key">V</span>
+            <div>
+              <strong>Select</strong>
+              <p>Click to select shapes. Shift-click to add to selection. Drag empty space to rubber-band select. Double-click a text shape to edit its content.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">P</span>
+            <div>
+              <strong>Pen</strong>
+              <p>Free-hand drawing. Drag to draw smooth curves.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">R</span>
+            <div>
+              <strong>Rectangle</strong>
+              <p>Drag to draw a rectangle. Hold <kbd>⇧</kbd> to constrain to a square.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">E</span>
+            <div>
+              <strong>Ellipse</strong>
+              <p>Drag to draw an ellipse. Hold <kbd>⇧</kbd> to constrain to a circle.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">L</span>
+            <div>
+              <strong>Line</strong>
+              <p>Click and drag to draw a straight line. Hold <kbd>⇧</kbd> to snap to 45° angles.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">A</span>
+            <div>
+              <strong>Arrow</strong>
+              <p>Like Line but with an arrowhead at the endpoint. Shift to snap angles.</p>
+            </div>
+          </div>
+          <div class="tool-item">
+            <span class="tool-key">T</span>
+            <div>
+              <strong>Text</strong>
+              <p>Click anywhere on the canvas to place text. Press <kbd>Enter</kbd> to confirm, <kbd>Esc</kbd> to cancel.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Shape styling</h3>
+        <p>Select a shape to see its options in the toolbar: stroke colour (12-colour palette), fill toggle, stroke width (thin/medium/thick), and corner radius for rectangles. Text shapes also expose font family, size, bold, and italic controls.</p>
+
+        <h3>Selection &amp; editing</h3>
+        <ul>
+          <li>Drag corner handles to resize a selected shape.</li>
+          <li>Drag the shape itself (or any selected shape in a multi-selection) to move.</li>
+          <li>Double-click a text shape to edit its content in an inline input.</li>
+          <li><kbd>⌘D</kbd> duplicates all selected shapes.</li>
+          <li><kbd>⌘A</kbd> selects everything on the canvas.</li>
+          <li><kbd>Delete</kbd> or <kbd>⌫</kbd> removes selected shapes.</li>
+          <li><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd> undo / redo.</li>
+        </ul>
+
+        <h3>Templates</h3>
+        <p>Click the <strong>Templates</strong> button in the toolbar to load a ready-made diagram. The canvas fits it to the viewport automatically. Available templates:</p>
+        <ul>
+          <li><strong>Flowchart</strong> — Start, two steps, and End with arrows.</li>
+          <li><strong>Mind Map</strong> — Central topic with six branches.</li>
+          <li><strong>Org Chart</strong> — CEO with two managers and three reports.</li>
+          <li><strong>Sequence Diagram</strong> — Two actors with request / response / callback arrows.</li>
+          <li><strong>Timeline</strong> — Four milestones on a horizontal axis.</li>
+          <li><strong>Venn Diagram</strong> — Two overlapping labelled sets.</li>
+        </ul>
+
+        <h3>Canvas notes</h3>
+        <p>Click the <strong>note icon</strong> (top-right of the canvas) or press <kbd>⌘/</kbd> to open a markdown notes panel. It slides in from the right at half the canvas width — the canvas stays fully interactive while the panel is open. Notes are saved to <code>.inkwell/canvas-notes.md</code> in your vault.</p>
+
+        <h3>Navigation</h3>
+        <p>Scroll (or two-finger swipe) to pan. Pinch or <kbd>⌘</kbd>+scroll to zoom. Hold <kbd>Space</kbd> and drag to pan with the hand tool.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── Organisation ── -->
+      <section id="organisation" class="doc-section">
+        <div class="section-label">04</div>
+        <h2>Organisation</h2>
+
+        <h3>Folders &amp; notes</h3>
+        <p>The sidebar shows your vault's folder structure. Create folders with the <strong>+</strong> button next to any folder, or drag notes between folders to reorganise. Folders map 1:1 to real directories on disk.</p>
+        <p>Double-click any note or folder name (or right-click → Rename) to rename it inline. The file on disk is renamed at the same time.</p>
+
+        <h3>Pinned notes</h3>
+        <p>Right-click a note and choose <strong>Pin</strong> to keep it at the top of the sidebar. Pinned notes appear in a dedicated section above the rest of your library.</p>
+
+        <h3>Search</h3>
+        <p>Press <kbd>⌘K</kbd> to open full-text search across every note in your vault. Results update as you type.</p>
+
+        <h3>Kanban board</h3>
+        <p>Click the <strong>Board</strong> icon in the sidebar to open the Kanban view. Create multiple boards, add columns and cards, set due dates, write subtasks, and leave comments on cards. Boards are stored in your vault's <code>.inkwell</code> folder.</p>
+
+        <h3>Note links</h3>
+        <p>Open the <strong>Links</strong> panel in the editor toolbar to connect notes to each other. Linked notes appear in a panel below the editor and are tracked bidirectionally.</p>
+
+        <h3>Attachments</h3>
+        <p>Drag files onto the <strong>Attachments</strong> bar at the bottom of the editor to attach images, PDFs, or documents to a note. Attachments are stored in <code>.inkwell/attachments/</code> inside your vault. Embed an attachment inline with <code>![[filename]]</code> syntax.</p>
+
+        <h3>Trash</h3>
+        <p>Deleted notes are moved to the Trash section at the bottom of the sidebar. They are not removed from disk until you empty the trash — so you can recover them.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── Themes ── -->
+      <section id="themes" class="doc-section">
+        <div class="section-label">05</div>
+        <h2>Themes</h2>
+        <p class="lead">inkwell ships with eight hand-crafted themes. Switch any time from <strong>Settings → Themes</strong>.</p>
+
+        <div class="theme-table">
+          <div class="theme-row header">
+            <span>Name</span><span>Mood</span><span>Background</span>
+          </div>
+          {[
+            ["Midnight", "Warm dark", "#1C1A17"],
+            ["Parchment", "Light sepia", "#F5F2EC"],
+            ["Ink", "Cool dark", "#0E1018"],
+            ["Dusk", "Purple dark", "#0E0C17"],
+            ["Forest", "Green dark", "#0B1410"],
+            ["Sepia", "Light warm", "#EFE8D8"],
+            ["Gruvbox", "Retro dark", "#282828"],
+            ["Fog", "Light cool", "#F4F6FA"],
+          ].map(([name, mood, bg]) => (
+            <div class="theme-row">
+              <span class="theme-name-cell">{name}</span>
+              <span class="theme-mood">{mood}</span>
+              <span class="theme-swatch-dot" style={`background:${bg}`} />
+            </div>
+          ))}
+        </div>
+
+        <h3>Custom themes</h3>
+        <p>Open <strong>Settings → Themes → New Custom Theme</strong> to build your own. The live preview updates instantly as you adjust the background, accent, and text colours. Custom themes are stored in your vault's app data and travel with it.</p>
+
+        <h3>Syntax highlighting</h3>
+        <p>Code block syntax colours are derived automatically from the active theme's accent colour — you don't need to configure anything.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── Export ── -->
+      <section id="export" class="doc-section">
+        <div class="section-label">06</div>
+        <h2>Export</h2>
+        <p>Click the <strong>Share</strong> icon in the editor toolbar to open the export dialog. A live preview shows exactly how the output will look.</p>
+
+        <div class="export-grid">
+          <div class="export-card">
+            <strong>Markdown</strong>
+            <p>Raw <code>.md</code> file — identical to what's on disk, including YAML frontmatter.</p>
+          </div>
+          <div class="export-card">
+            <strong>HTML</strong>
+            <p>Self-contained HTML file with inline styles that match the current theme. Open in any browser.</p>
+          </div>
+          <div class="export-card">
+            <strong>PDF</strong>
+            <p>Rendered via the system print dialog. Choose paper size and margins before saving.</p>
+          </div>
+        </div>
+
+        <p>You can also click <strong>Copy to clipboard</strong> to paste the rendered Markdown or HTML anywhere.</p>
+      </section>
+
+      <hr />
+
+      <!-- ── GitHub Sync ── -->
+      <section id="github-sync" class="doc-section">
+        <div class="section-label">07</div>
+        <h2>GitHub Sync</h2>
+        <p class="lead">Push any note to a GitHub repository as a <code>.md</code> file, and pull the latest version back in with one click.</p>
+
+        <h3>Setup</h3>
+        <ol>
+          <li>Open <strong>Settings → GitHub</strong>.</li>
+          <li>Enter a Personal Access Token with <code>repo</code> scope (create one at github.com/settings/tokens).</li>
+          <li>inkwell saves the token securely in your system keychain.</li>
+        </ol>
+
+        <h3>Push a note</h3>
+        <ol>
+          <li>Open the note you want to sync.</li>
+          <li>Click the <strong>GitHub</strong> icon in the editor toolbar.</li>
+          <li>Choose the repository, branch, and file path.</li>
+          <li>Click <strong>Push</strong>. inkwell commits the note as a <code>.md</code> file.</li>
+        </ol>
+
+        <h3>Pull a note</h3>
+        <p>In the GitHub sync dialog, click <strong>Pull</strong> to fetch the latest version of the file from GitHub and overwrite the current note content.</p>
+
+        <div class="callout">
+          <strong>Tip:</strong> GitHub sync is great for keeping project READMEs, architecture docs, or team runbooks in sync between inkwell and your repository.
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- ── Claude MCP ── -->
+      <section id="claude-mcp" class="doc-section">
+        <div class="section-label">08</div>
+        <h2>Claude MCP</h2>
+        <p class="lead">inkwell ships a native Rust MCP server so Claude can read, write, and search your vault directly — without copy-paste.</p>
+
+        <h3>How it works</h3>
+        <p>The <code>inkwell-mcp</code> binary is bundled inside the app. It communicates with Claude Desktop (or any MCP-compatible client) over stdio using JSON-RPC 2.0. It reads the active vault path from <code>~/.inkwell/active-vault</code>, which inkwell writes whenever you open a vault.</p>
+
+        <h3>Setup</h3>
+        <ol>
+          <li>Build the MCP server binary (or use the one bundled in the app):<br/><code class="inline-code">cd src-tauri &amp;&amp; cargo build --release -p inkwell-mcp</code></li>
+          <li>Add it to your Claude Desktop config at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</li>
+        </ol>
+
+        <div class="code-block">
+          <div class="code-block-header">claude_desktop_config.json</div>
+          <pre><code>{`{
+  "mcpServers": {
+    "inkwell": {
+      "command": "/Applications/inkwell.app/Contents/MacOS/inkwell-mcp"
+    }
+  }
+}`}</code></pre>
+        </div>
+
+        <ol start="3">
+          <li>Restart Claude Desktop. Open a vault in inkwell. Claude now has access to your notes.</li>
+        </ol>
+
+        <h3>Available tools</h3>
+        <div class="mcp-tools">
+          <div class="mcp-tool">
+            <code>list_notes</code>
+            <p>Returns all notes in the vault with their title, path, tags, and timestamps.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>read_note</code>
+            <p>Returns the full content of a note by ID or path (frontmatter stripped).</p>
+          </div>
+          <div class="mcp-tool">
+            <code>create_note</code>
+            <p>Creates a new note with a given title and content. Adds YAML frontmatter automatically.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>update_note</code>
+            <p>Overwrites the content of an existing note by ID.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>search_notes</code>
+            <p>Full-text search across all notes. Returns matching notes with a relevance score.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>get_vault_info</code>
+            <p>Returns vault metadata: path, note count, folder structure, and active theme.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- ── Shortcuts ── -->
+      <section id="shortcuts" class="doc-section">
+        <div class="section-label">09</div>
+        <h2>Keyboard Shortcuts</h2>
+
+        <h3>Global</h3>
+        <div class="shortcut-table">
+          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
+          <div class="shortcut-row"><span>New note</span><span><kbd>⌘N</kbd></span></div>
+          <div class="shortcut-row"><span>Search all notes</span><span><kbd>⌘K</kbd></span></div>
+          <div class="shortcut-row"><span>Toggle split preview</span><span><kbd>⌘⇧P</kbd></span></div>
+          <div class="shortcut-row"><span>Undo</span><span><kbd>⌘Z</kbd></span></div>
+          <div class="shortcut-row"><span>Redo</span><span><kbd>⌘⇧Z</kbd></span></div>
+        </div>
+
+        <h3>Canvas</h3>
+        <div class="shortcut-table">
+          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
+          <div class="shortcut-row"><span>Select tool</span><span><kbd>V</kbd></span></div>
+          <div class="shortcut-row"><span>Pen tool</span><span><kbd>P</kbd></span></div>
+          <div class="shortcut-row"><span>Rectangle tool</span><span><kbd>R</kbd></span></div>
+          <div class="shortcut-row"><span>Ellipse tool</span><span><kbd>E</kbd></span></div>
+          <div class="shortcut-row"><span>Line tool</span><span><kbd>L</kbd></span></div>
+          <div class="shortcut-row"><span>Arrow tool</span><span><kbd>A</kbd></span></div>
+          <div class="shortcut-row"><span>Text tool</span><span><kbd>T</kbd></span></div>
+          <div class="shortcut-row"><span>Select all</span><span><kbd>⌘A</kbd></span></div>
+          <div class="shortcut-row"><span>Duplicate selection</span><span><kbd>⌘D</kbd></span></div>
+          <div class="shortcut-row"><span>Delete selection</span><span><kbd>⌫</kbd></span></div>
+          <div class="shortcut-row"><span>Cancel / back to select</span><span><kbd>Esc</kbd></span></div>
+          <div class="shortcut-row"><span>Toggle diagram notes</span><span><kbd>⌘/</kbd></span></div>
+          <div class="shortcut-row"><span>Pan canvas</span><span><kbd>Space</kbd> + drag</span></div>
+          <div class="shortcut-row"><span>Zoom</span><span><kbd>⌘</kbd> + scroll</span></div>
+          <div class="shortcut-row"><span>Constrain shape / snap angle</span><span><kbd>⇧</kbd> while drawing</span></div>
+        </div>
+
+        <h3>Editor</h3>
+        <div class="shortcut-table">
+          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
+          <div class="shortcut-row"><span>Bold</span><span><kbd>⌘B</kbd></span></div>
+          <div class="shortcut-row"><span>Italic</span><span><kbd>⌘I</kbd></span></div>
+          <div class="shortcut-row"><span>Undo / redo</span><span><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd></span></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="20" height="20" />
+        <span>inkwell</span>
+      </div>
+      <p class="footer-copy">Built with Tauri, React, and Rust. Free and open source.</p>
+      <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ── Nav (shared with index) ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--border);
+    background: var(--nav-bg, rgba(28,26,23,0.88));
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    height: 60px; display: flex; align-items: center; gap: 32px;
+  }
+  .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; flex-shrink: 0; }
+  .wordmark img { border-radius: 7px; }
+  .nav-links { display: flex; align-items: center; gap: 24px; flex: 1; }
+  .nav-links a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-active { color: var(--text) !important; font-weight: 500; }
+  .btn-nav {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: 8px; background: var(--accent-dim);
+    border: 1px solid rgba(196,131,42,0.25); color: var(--accent-light); flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-nav:hover { background: rgba(196,131,42,0.22); border-color: rgba(196,131,42,0.38); }
+
+  /* ── Layout ── */
+  .docs-layout {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 64px;
+    align-items: start; min-height: calc(100vh - 60px);
+  }
+
+  /* ── Sidebar ── */
+  .docs-sidebar { position: sticky; top: 80px; padding: 48px 0; }
+  .sidebar-inner { display: flex; flex-direction: column; gap: 4px; }
+  .sidebar-version { font-size: 11px; color: var(--text-3); letter-spacing: 0.04em; margin-bottom: 16px; font-weight: 500; text-transform: uppercase; }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+  .sidebar-link {
+    font-size: 13.5px; color: var(--text-2); padding: 6px 10px; border-radius: 6px;
+    transition: background 0.12s, color 0.12s;
+  }
+  .sidebar-link:hover { color: var(--text); background: var(--bg-card); }
+  .sidebar-link.active { color: var(--accent-light); background: var(--accent-dim); }
+  .sidebar-download {
+    display: flex; align-items: center; gap: 7px; margin-top: 24px;
+    font-size: 13px; font-weight: 500; color: var(--accent-light);
+    padding: 8px 10px; border-radius: 8px; background: var(--accent-dim);
+    border: 1px solid rgba(196,131,42,0.2); transition: background 0.15s;
+  }
+  .sidebar-download:hover { background: rgba(196,131,42,0.22); }
+
+  /* ── Content ── */
+  .docs-content { padding: 48px 0 96px; }
+  .doc-section { margin-bottom: 0; scroll-margin-top: 80px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
+
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  h1 { font-size: 36px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
+  h2 { font-size: 28px; font-weight: 300; letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 32px 0 10px; letter-spacing: -0.01em; }
+
+  .lead { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 32px; max-width: 680px; }
+
+  p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 14px; max-width: 680px; }
+  p:last-child { margin-bottom: 0; }
+
+  ol, ul { font-size: 14px; color: var(--text-2); line-height: 1.75; padding-left: 22px; margin-bottom: 14px; max-width: 680px; }
+  li { margin-bottom: 6px; }
+  li strong { color: var(--text); }
+
+  code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; color: var(--accent-light); }
+  .inline-code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 2px 6px; border-radius: 4px; color: var(--accent-light); }
+  a code { color: var(--accent-light); }
+  a { color: var(--accent-light); transition: color 0.12s; }
+  a:hover { color: var(--accent); }
+
+  kbd {
+    display: inline-block; font-family: "SF Mono",monospace; font-size: 11px;
+    background: var(--bg-subtle); border: 1px solid var(--border-mid);
+    border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px;
+    color: var(--text); line-height: 1.5;
+  }
+
+  .callout {
+    background: var(--accent-dim); border: 1px solid rgba(196,131,42,0.2);
+    border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: var(--text-2);
+    line-height: 1.65; margin: 20px 0; max-width: 680px;
+  }
+  .callout strong { color: var(--accent-light); }
+
+  /* ── Code block ── */
+  .code-block { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; margin: 20px 0; max-width: 680px; }
+  .code-block-header { font-size: 11px; font-weight: 500; color: var(--text-3); padding: 8px 14px; background: var(--bg-card); border-bottom: 1px solid var(--border); letter-spacing: 0.02em; }
+  .code-block pre { margin: 0; padding: 16px 18px; background: var(--bg-raised); overflow-x: auto; }
+  .code-block pre code { background: none; padding: 0; font-size: 12.5px; color: var(--text-2); line-height: 1.7; }
+
+  /* ── Tool grid (canvas section) ── */
+  .tool-grid { display: flex; flex-direction: column; gap: 14px; margin: 16px 0; max-width: 680px; }
+  .tool-item { display: flex; align-items: flex-start; gap: 14px; }
+  .tool-key {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    background: var(--bg-subtle); border: 1px solid var(--border-mid);
+    font-family: "SF Mono",monospace; font-size: 12px; font-weight: 600; color: var(--text);
+    margin-top: 2px;
+  }
+  .tool-item > div > strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 3px; }
+  .tool-item > div > p { margin: 0; font-size: 13px; }
+
+  /* ── Theme table ── */
+  .theme-table { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 20px 0; max-width: 560px; }
+  .theme-row { display: grid; grid-template-columns: 1fr 1fr 60px; padding: 10px 16px; font-size: 13.5px; border-bottom: 1px solid var(--border); align-items: center; gap: 12px; }
+  .theme-row:last-child { border-bottom: none; }
+  .theme-row.header { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); background: var(--bg-card); }
+  .theme-name-cell { color: var(--text); font-weight: 500; }
+  .theme-mood { color: var(--text-2); }
+  .theme-swatch-dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
+
+  /* ── Export grid ── */
+  .export-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; max-width: 680px; }
+  .export-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .export-card strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 6px; }
+  .export-card p { font-size: 13px; margin: 0; max-width: none; }
+
+  /* ── MCP tools ── */
+  .mcp-tools { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0; max-width: 680px; }
+  .mcp-tool { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--border); align-items: start; }
+  .mcp-tool:last-child { border-bottom: none; }
+  .mcp-tool code { font-size: 12.5px; color: var(--accent-light); }
+  .mcp-tool p { font-size: 13px; margin: 0; max-width: none; color: var(--text-2); }
+
+  /* ── Shortcut table ── */
+  .shortcut-table { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0 28px; max-width: 560px; }
+  .shortcut-row { display: grid; grid-template-columns: 1fr auto; padding: 10px 16px; font-size: 13.5px; border-bottom: 1px solid var(--border); align-items: center; gap: 24px; }
+  .shortcut-row:last-child { border-bottom: none; }
+  .shortcut-row.header { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); background: var(--bg-card); }
+  .shortcut-row > span:first-child { color: var(--text-2); }
+  .shortcut-row > span:last-child { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+  /* ── Footer ── */
+  footer { border-top: 1px solid var(--border); padding: 28px 32px; margin-top: 0; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
+  .footer-brand img { border-radius: 5px; }
+  .footer-copy { flex: 1; font-size: 13px; color: var(--text-3); }
+  .footer-gh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; }
+  .footer-gh:hover { color: var(--text); }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .docs-layout { grid-template-columns: 1fr; padding: 0 20px; gap: 0; }
+    .docs-sidebar { position: static; padding: 24px 0 0; }
+    .sidebar-nav { flex-direction: row; flex-wrap: wrap; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .export-grid { grid-template-columns: 1fr; }
+    .mcp-tool { grid-template-columns: 1fr; gap: 6px; }
+    .nav-links { display: none; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+
+<script>
+  // Highlight active sidebar link as the user scrolls
+  const links = document.querySelectorAll<HTMLAnchorElement>('.sidebar-link');
+  const sections = document.querySelectorAll<HTMLElement>('.doc-section');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.sidebar-link[href="#${entry.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+</script>
+</Layout>
