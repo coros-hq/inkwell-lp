@@ -1,0 +1,344 @@
+{
+  "summary": {
+    "health_score": 55,
+    "business_type": "SaaS / open-source desktop software (free local-first markdown editor for macOS, Windows, Linux)",
+    "top_findings": [
+      "Zero structured data on either page, and no canonical tags — combined with a live duplicate-content bug where /docs and /docs/ serve byte-identical HTML with no redirect",
+      "Version number contradiction live right now: homepage shows v0.6.0, /docs sidebar shows v0.4.8 — independently confirmed by 4 of the 9 specialist audits (technical, content, schema, GEO)",
+      "Title tag and meta description say the product is 'for macOS' only, despite the homepage actively selling Windows (.exe) and Linux (.deb) downloads — self-suppresses discovery for roughly two-thirds of the product's own platform support",
+      "The /docs page breaks on mobile: the two-column sidebar+content layout does not collapse at 375px, causing 592px page width vs 375px viewport and clipping documentation text (install steps, shortcuts) on every section",
+      "Site has no custom domain — running on the shared vercel.app subdomain is a structural SEO liability (no durable backlink equity, brand-trust cost, platform lock-in risk), independent of current traffic"
+    ],
+    "quick_wins": [
+      "Fix the VERSION constant mismatch (0.6.0 vs 0.4.8) — single source of truth, 15 minutes",
+      "Rewrite title tag + meta description to mention macOS, Windows, and Linux — one line, immediate reach impact",
+      "Add robots.txt (5 min) and canonical tags to Layout.astro (15 min — also resolves the /docs vs /docs/ duplicate)",
+      "Add the ready-made SoftwareApplication + WebSite + Organization JSON-LD generated in findings/schema.md (~1 hr, no fabricated data needed)",
+      "Self-host the Inter font to remove the render-blocking Google Fonts chain — single highest-leverage performance fix, should push LCP into 'Good' territory on both pages"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 52,
+      "what_works": [
+        "Site is genuinely static/SSR (Astro) — confirmed NOT a SPA, full content present in raw HTML with zero JS execution required",
+        "Clean single-H1 heading hierarchy on both pages",
+        "Mobile viewport meta correctly configured",
+        "HTTP→HTTPS redirect (308) and HSTS properly configured",
+        "Clean, lowercase URL structure with no query-string cruft"
+      ],
+      "findings": [
+        {
+          "title": "robots.txt and sitemap.xml both return 404 (missing entirely)",
+          "severity": "Critical",
+          "description": "Confirmed via live curl: both https://inkwell-lp.vercel.app/robots.txt and /sitemap.xml return HTTP 404. astro.config.mjs has no `site` property set, which blocks the standard @astrojs/sitemap integration from working correctly.",
+          "recommendation": "Set `site: 'https://inkwell-lp.vercel.app'` in astro.config.mjs, add the @astrojs/sitemap integration, and add public/robots.txt referencing the generated sitemap-index.xml."
+        },
+        {
+          "title": "No canonical tags anywhere, and a live duplicate-content pair exists right now",
+          "severity": "Critical",
+          "description": "Neither page has a <link rel=\"canonical\"> tag. Compounding this: /docs and /docs/ (trailing slash) both return HTTP 200 with byte-identical HTML and no redirect between them — a real, currently-live duplicate-content vector, not a theoretical risk.",
+          "recommendation": "Add a canonical tag to Layout.astro driven by Astro.url, after setting the `site` property in astro.config.mjs."
+        },
+        {
+          "title": "Missing security headers",
+          "severity": "High",
+          "description": "Only strict-transport-security is present. Missing: X-Content-Type-Options, X-Frame-Options/CSP frame-ancestors, Content-Security-Policy, Referrer-Policy, Permissions-Policy. No vercel.json exists to configure these.",
+          "recommendation": "Add vercel.json with a headers block covering nosniff, X-Frame-Options: DENY, Referrer-Policy, Permissions-Policy, and a tuned CSP that allows the existing Google Fonts and Vercel Analytics origins."
+        },
+        {
+          "title": "No JSON-LD structured data",
+          "severity": "High",
+          "description": "Zero <script type=\"application/ld+json\"> blocks on either page. See the Schema category for full detail and ready-to-use generated markup.",
+          "recommendation": "See Schema category recommendations."
+        },
+        {
+          "title": "No Open Graph image or Twitter Card meta tags",
+          "severity": "High",
+          "description": "Only og:title, og:description, og:type are set. No og:image, og:url, twitter:card, twitter:image. Every social share (Hacker News, Product Hunt, Reddit, X) currently renders as a bare text card.",
+          "recommendation": "Generate a 1200x630 OG image and add og:image, og:url, twitter:card=summary_large_image, twitter:image to Layout.astro."
+        },
+        {
+          "title": "Version number inconsistency between pages (VERSION=0.6.0 in index.astro vs VERSION=0.4.8 in docs.astro)",
+          "severity": "Medium",
+          "description": "Confirmed at the source level: src/pages/index.astro:5 hardcodes 0.6.0, src/pages/docs.astro:6 hardcodes 0.4.8. Independently corroborated by the content, schema, and GEO audits.",
+          "recommendation": "Hoist VERSION into a single shared constant imported by both pages, or drive it from package.json / the GitHub Releases API at build time."
+        },
+        {
+          "title": "Render-blocking Google Fonts request chain",
+          "severity": "Medium",
+          "description": "Real Lighthouse data confirms a 3-hop critical chain (HTML → fonts.googleapis.com CSS → fonts.gstatic.com woff2) responsible for ~2,076-3,094ms of LCP element-render-delay on the two pages. See Performance category.",
+          "recommendation": "Self-host the Inter font files and inline @font-face in the existing CSS bundle."
+        },
+        {
+          "title": "No custom 404 page — Vercel platform default is served",
+          "severity": "Low",
+          "description": "Confirmed via curl: text/plain, 79-byte unbranded body. No src/pages/404.astro exists. Correct status code (404) is returned so no SEO penalty, but it's a UX/bounce-rate miss.",
+          "recommendation": "Add src/pages/404.astro using the shared Layout with a branded message and links back to / and /docs."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 54,
+      "what_works": [
+        "The /docs page (~1,474 words across 9 clearly labeled sections) is genuinely strong: concrete, quotable, structurally extractable content (exact file paths, JSON config examples, protocol names) that reads as authentic first-hand documentation",
+        "Structured shortcut tables and enumerated MCP tool lists are close to ideal for AI/LLM extraction"
+      ],
+      "findings": [
+        {
+          "title": "Version mismatch is a live trust/E-E-A-T signal failure",
+          "severity": "High",
+          "description": "Homepage shows v0.6.0 in nav, hero, and CTA download links; /docs sidebar shows v0.4.8. A visible, unresolved contradiction between the two pages of a two-page site reads as stale/unmaintained docs to both human readers and AI crawlers.",
+          "recommendation": "Single source of truth for VERSION, ideally pulled from the GitHub Releases API at build time; add a CI check that fails the build if the values diverge."
+        },
+        {
+          "title": "Homepage meta description and og:description contradict the on-page hero content",
+          "severity": "High",
+          "description": "Meta/OG description says 'A local-first markdown editor for macOS,' but the visible hero says 'for every platform' with a macOS/Windows/Linux badge and three separate platform-specific download buttons.",
+          "recommendation": "Update meta name=\"description\" and og:description to: 'A local-first markdown editor for macOS, Windows, and Linux...' Keep under ~160 characters."
+        },
+        {
+          "title": "/docs page content itself is still macOS-only (not just a metadata issue)",
+          "severity": "Medium",
+          "description": "The 'Getting Started' lead paragraph and the entire Install subsection are Mac-specific (.dmg, /Applications, macOS Gatekeeper) with no equivalent Windows/Linux install steps, despite the homepage actively selling both.",
+          "recommendation": "Add Windows and Linux install steps to Getting Started, and rewrite the lead sentence to name all three platforms."
+        },
+        {
+          "title": "No About, Contact, Privacy Policy, Terms, License, or Changelog pages anywhere",
+          "severity": "Medium",
+          "description": "The only external authority/identity signal is an unlicensed (no license field set), 48-star GitHub repo under an anonymous org handle (coros-hq). No named maintainer, no contact method, no privacy policy backing the 'no telemetry, no cloud' claims despite the app handling vault folder paths and GitHub tokens.",
+          "recommendation": "Add a lightweight footer with links to a declared open-source license (on-site and on the repo) and a short Privacy statement documenting the no-telemetry claim. Consider a minimal About/maintainer note."
+        },
+        {
+          "title": "Homepage is thin relative to its feature density (~300 words), with several features under-described in extractable text",
+          "severity": "Low",
+          "description": "Quick Capture, Weekly Planner, and Canvas templates are communicated almost entirely through visual mockups rather than indexable prose, leaving AI answer engines with thin textual grounding for questions about those specific features.",
+          "recommendation": "Add 1-2 sentences of plain-text detail under each major feature section so capability claims are backed by extractable prose, not just mockup illustrations."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 58,
+      "what_works": [
+        "Title tags are reasonable length and descriptive",
+        "Clean single-H1 hierarchy with correct H2/H3 nesting on both pages",
+        "Clean, low-friction internal navigation for a 2-page site"
+      ],
+      "findings": [
+        {
+          "title": "Title tag and meta description undersell platform support",
+          "severity": "High",
+          "description": "Both say 'for macOS' only, actively working against Windows/Linux search queries ever clicking through — this is a title/content mismatch that likely suppresses non-Mac query matching.",
+          "recommendation": "Rewrite to: 'inkwell — Write without distraction. Free markdown editor for macOS, Windows & Linux.'"
+        },
+        {
+          "title": "Claude MCP integration — inkwell's most differentiated, lowest-competition feature — is buried as one of six equal-weight tiles",
+          "severity": "Medium",
+          "description": "MCP support is real and well-documented on /docs, but the homepage gives it no dedicated section or preview of depth, unlike Canvas and Quick Capture which each get their own homepage section.",
+          "recommendation": "Promote Claude MCP to its own homepage section with a CTA linking directly to /docs#claude-mcp."
+        },
+        {
+          "title": "Homepage mobile nav hides Features/Canvas/Themes/GitHub/Docs links with no menu replacement",
+          "severity": "Medium",
+          "description": "On mobile only the logo and Download button remain visible in nav; no hamburger/drawer exists. Docs (a separate route) becomes hard to discover without scrolling to the footer.",
+          "recommendation": "Add a mobile nav menu (hamburger/drawer) or at minimum surface the Docs link more prominently on mobile."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 28,
+      "what_works": [],
+      "findings": [
+        {
+          "title": "Complete absence of structured data on both pages",
+          "severity": "High",
+          "description": "Zero JSON-LD, microdata, or RDFa anywhere. This is a textbook SoftwareApplication candidate (free, cross-platform, downloadable, versioned) with an active Google rich-result type, and the opportunity is currently fully unused.",
+          "recommendation": "Add a combined @graph of SoftwareApplication + WebSite + Organization to the homepage, and a minimal WebPage node to /docs. Full ready-to-paste JSON-LD is in findings/schema.md — uses only real values already in the codebase, no fabrication."
+        },
+        {
+          "title": "Do not fabricate aggregateRating/review data",
+          "severity": "Info",
+          "description": "No verifiable review/rating data exists. Google can issue a manual action for fabricated review markup.",
+          "recommendation": "Omit aggregateRating/review entirely until real review data exists; consider representing GitHub star count via InteractionCounter instead, once accurate."
+        },
+        {
+          "title": "Avoid FAQPage or HowTo schema on /docs",
+          "severity": "Info",
+          "description": "The 9 docs sections are reference/how-to documentation, not Q&A format (wrong fit for FAQPage) and not a single sequential procedure (wrong fit for HowTo, which is also deprecated for rich results since Sept 2023).",
+          "recommendation": "Use a minimal WebPage node instead, linked back to the homepage entities via shared @id values."
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "score": 87,
+      "what_works": [
+        "CLS is a perfect 0.000 on both pages",
+        "TBT is 0ms on both pages — no long JS tasks, main thread is free",
+        "TTFB is fast (131-355ms) thanks to Vercel edge caching",
+        "No image-related LCP/CLS risk — LCP element is text on both pages, not an image"
+      ],
+      "findings": [
+        {
+          "title": "LCP is 'Needs Improvement' on both pages, driven almost entirely by a render-blocking Google Fonts chain",
+          "severity": "Medium",
+          "description": "Real Lighthouse 13.4.0 lab data: homepage LCP 2.83s (score 89/100), docs LCP 3.1s (score 84/100). Lighthouse's render-blocking-insight identifies a 3-hop chain (HTML → fonts.googleapis.com CSS → fonts.gstatic.com woff2) responsible for an estimated 1,920ms (home) / 2,170ms (docs) of available savings. Element render delay (2,076-3,094ms) is ~73-90% of total LCP time, despite fast TTFB.",
+          "recommendation": "Self-host the Inter font files and inline @font-face directly in the existing CSS bundle, eliminating the cross-origin CSS+font round trips. Should move LCP into 'Good' (<2.5s) territory on both pages."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 42,
+      "what_works": [
+        "Fully SSR'd/static — every fact an AI crawler needs is present in the raw first-response HTML with zero JS execution required",
+        "Docs content is fact-dense, self-contained, and quotable — genuinely well-suited for AI citation once discovered",
+        "No noindex/noai/nosnippet directives suppressing AI or search snippet eligibility"
+      ],
+      "findings": [
+        {
+          "title": "No llms.txt, despite the docs page being a near-perfect structural fit for one",
+          "severity": "Medium",
+          "description": "The 9 docs sections map directly to an llms.txt outline with almost no editorializing needed. Confirmed 404 at /llms.txt.",
+          "recommendation": "Build /llms.txt using the 9 existing docs sections as the outline (draft provided in findings/geo.md), after adding heading IDs (see next finding)."
+        },
+        {
+          "title": "No heading id attributes anywhere on /docs — blocks deep-linkable citation",
+          "severity": "Medium",
+          "description": "None of the 27 headings carry a usable id (only Astro's scoping hashes). AI engines and citation UIs that prefer deep-linking to the relevant passage cannot currently do so — every citation can only point at the page root.",
+          "recommendation": "Add heading id attributes to every H2/H3 on /docs (e.g. #claude-mcp, #github-sync); this is also a prerequisite for a working llms.txt."
+        },
+        {
+          "title": "Confirmed brand naming collision with Wikipedia's 'Inkwell (software)' article",
+          "severity": "Medium",
+          "description": "en.wikipedia.org/wiki/Inkwell_(software) documents Apple's discontinued macOS handwriting-recognition feature — a materially bad collision since it shares both the name and the macOS/Apple context, and Wikipedia is high-authority training data this 1-month-old project cannot currently counterbalance.",
+          "recommendation": "Consistently render the brand as 'inkwell by coros-hq' in title tags and first-sentence copy; add SoftwareApplication/Organization JSON-LD as the most direct machine-readable disambiguation signal."
+        },
+        {
+          "title": "Missing robots.txt removes explicit AI-crawler signaling (though not currently blocking anything)",
+          "severity": "Low",
+          "description": "A missing robots.txt is functionally equivalent to full-allow for crawling — nothing is blocked today. But it removes the ability to differentiate policy between crawlers (e.g. welcoming GPTBot/PerplexityBot) and removes a Sitemap: discovery hint.",
+          "recommendation": "Add a minimal robots.txt explicitly allowing GPTBot, OAI-SearchBot, ClaudeBot, and PerplexityBot, with a Sitemap: line once sitemap.xml exists."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 82,
+      "what_works": [
+        "All <img> tags carry correct alt text and explicit width/height attributes (correct CLS-prevention practice)",
+        "No heavy image assets — the site is almost entirely inline SVG/CSS mockups, so there is no image-weight or lazy-loading concern",
+        "No broken images found in any viewport during visual testing"
+      ],
+      "findings": [
+        {
+          "title": "No Open Graph image for social sharing",
+          "severity": "High",
+          "description": "Cross-referenced from the Technical/Schema findings: no og:image exists, so shared links render with no visual preview on Hacker News, Product Hunt, Reddit, X/LinkedIn — a meaningful launch-channel gap for an OSS tool.",
+          "recommendation": "Design and add a 1200x630 OG image (e.g. a screenshot of the existing app-window mockup) at public/og-image.png."
+        }
+      ]
+    },
+    {
+      "name": "Search Experience (SXO) — supplementary",
+      "score": 54,
+      "what_works": [
+        "Homepage is a well-formed Landing Page for product-aware visitors: single value prop, low-friction direct OS-specific download CTAs, no email gate",
+        "Docs page has genuine topical depth suited to procedural/how-to queries"
+      ],
+      "findings": [
+        {
+          "title": "Page-type mismatch: the site has no Comparison Page or persona/use-case content, but several of its realistic target queries are Comparison-Page intents",
+          "severity": "High",
+          "description": "Queries like 'obsidian alternative' and 'best markdown editor' are dominated in Google's SERPs by listicles and feature-comparison content that explicitly names competitors. A single-product landing page with zero competitor mentions structurally cannot satisfy that intent regardless of copy quality.",
+          "recommendation": "Build a dedicated comparison page/section (e.g. 'inkwell vs Obsidian') with a feature matrix and explicit 'why switch' framing — the single highest-ROI content gap identified across the audit."
+        },
+        {
+          "title": "Trust dimension is the weakest across every persona tested (8-12/25 in all five personas scored)",
+          "severity": "Medium",
+          "description": "No testimonials, no GitHub star count displayed on-site, no Product Hunt/press badges — despite GitHub stars (48, readily available) being a free, unused trust signal.",
+          "recommendation": "Surface the GitHub star count on the homepage; add one lightweight trust element per the strongest-converting persona without adding a full testimonials section."
+        }
+      ]
+    },
+    {
+      "name": "Authority & Backlinks — supplementary",
+      "score": null,
+      "what_works": [
+        "48 GitHub stars / 3 forks in ~1 month is a reasonable early-traction signal for a new OSS desktop app",
+        "Reciprocal, fully-followable link relationship between the landing page and its GitHub repo, confirmed live in both directions"
+      ],
+      "findings": [
+        {
+          "title": "No custom domain — site runs on the shared vercel.app subdomain",
+          "severity": "High",
+          "description": "vercel.app as a whole ranks #374 by PageRank across 106,085 unrelated hosts in the Common Crawl graph — none of that authority is inherited by this specific project. Beyond the measurement noise, this is a structural liability: no durable backlink equity if the project migrates domains later, brand-confusion/trust cost, and platform lock-in risk.",
+          "recommendation": "Register a custom domain (e.g. inkwell.dev) and 301-redirect from inkwell-lp.vercel.app before backlink/mention volume grows, to avoid stranding link equity."
+        },
+        {
+          "title": "No numeric Backlink Health Score reported — insufficient data",
+          "severity": "Info",
+          "description": "Domain has zero footprint in Common Crawl (expected for a 1-month-old project, not a quality signal). Only 1 of 7 standard scoring factors has data at Tier 0 (no Moz/Bing API keys configured).",
+          "recommendation": "Re-check Common Crawl next quarter; consider adding a free Moz API key (2,500 rows/month) for a real Tier 1 baseline going forward."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Fix the VERSION constant mismatch (0.6.0 vs 0.4.8) — single source of truth (15 min)",
+          "Rewrite title tag + meta description to mention macOS, Windows, and Linux (15 min)",
+          "Add public/robots.txt (5 min)",
+          "Set `site` in astro.config.mjs, add @astrojs/sitemap, add canonical tags to Layout.astro — also resolves the /docs vs /docs/ duplicate-content bug (1 hr)",
+          "Fix the /docs mobile layout: constrain .docs-sidebar to width:100% and collapse the grid to a single column below the mobile breakpoint (1-2 hrs)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Add the generated SoftwareApplication + WebSite + Organization JSON-LD to the homepage, and the minimal WebPage JSON-LD to /docs (findings/schema.md has ready-to-paste code) (1-2 hrs)",
+          "Add og:image, og:url, twitter:card meta tags — design a 1200x630 social preview image (2-3 hrs)",
+          "Add vercel.json security headers (X-Content-Type-Options, X-Frame-Options, CSP, Referrer-Policy, Permissions-Policy) — test CSP against Vercel Analytics and inline scripts (1-2 hrs)",
+          "Self-host the Inter font to remove the render-blocking Google Fonts chain (1 hr)",
+          "Update /docs 'Getting Started' section with Windows and Linux install steps (1-2 hrs)"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Add a minimal Privacy statement and declare an open-source license (site + GitHub repo)",
+          "Add heading id attributes to every H2/H3 on /docs, then build /llms.txt using the 9 sections as the outline",
+          "Build a dedicated comparison page/section ('inkwell vs Obsidian') with a feature matrix — highest-ROI content gap identified",
+          "Promote Claude MCP integration to its own homepage section with a CTA to /docs#claude-mcp",
+          "Surface GitHub star count on the homepage as a trust signal",
+          "Register a custom domain and 301-redirect from the vercel.app subdomain before backlink volume grows"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Add a branded 404 page (src/pages/404.astro)",
+          "Add a mobile nav menu for the homepage (hamburger/drawer) so Features/Canvas/Themes/Docs remain reachable on mobile",
+          "Re-verify Core Web Vitals against real CrUX/PSI field data once Google API credentials or sufficient traffic history are available",
+          "Re-check Common Crawl domain presence next quarter as the site accumulates backlinks",
+          "Consider adding a Moz API key for a real Tier 1 backlink baseline"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

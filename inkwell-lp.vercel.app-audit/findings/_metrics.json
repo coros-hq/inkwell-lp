@@ -1,0 +1,446 @@
+{
+  "home_desktop": {
+    "url": "https://inkwell-lp.vercel.app/",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "metrics": {
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 6729,
+      "hasHorizontalOverflow": false
+    },
+    "overflow_elements": [],
+    "h1": {
+      "text": "Write withoutdistraction.",
+      "top": 200,
+      "bottom": 328,
+      "visible": true
+    },
+    "cta": [
+      {
+        "text": "Download",
+        "top": 12,
+        "bottom": 48,
+        "width": 111,
+        "height": 37,
+        "visibleInFold": true
+      }
+    ],
+    "sidebar": null,
+    "nav": {
+      "height": 61,
+      "top": 0
+    },
+    "small_touch_targets": [],
+    "screenshots": {
+      "fold": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/home_desktop.png",
+      "full": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/home_desktop_full.png"
+    }
+  },
+  "home_mobile": {
+    "url": "https://inkwell-lp.vercel.app/",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "metrics": {
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "scrollHeight": 9216,
+      "hasHorizontalOverflow": false
+    },
+    "overflow_elements": [
+      {
+        "tag": "DIV",
+        "class": "hero-glow",
+        "width": 700,
+        "left": -162
+      },
+      {
+        "tag": "DIV",
+        "class": "cta-glow",
+        "width": 600,
+        "left": -112
+      }
+    ],
+    "h1": {
+      "text": "Write withoutdistraction.",
+      "top": 187,
+      "bottom": 267,
+      "visible": true
+    },
+    "cta": [
+      {
+        "text": "Download",
+        "top": 12,
+        "bottom": 48,
+        "width": 111,
+        "height": 37,
+        "visibleInFold": true
+      }
+    ],
+    "sidebar": null,
+    "nav": {
+      "height": 61,
+      "top": 0
+    },
+    "small_touch_targets": [
+      {
+        "tag": "A",
+        "text": "inkwell",
+        "w": 84,
+        "h": 26
+      },
+      {
+        "tag": "A",
+        "text": "Download",
+        "w": 111,
+        "h": 37
+      },
+      {
+        "tag": "A",
+        "text": "GitHub",
+        "w": 66,
+        "h": 22
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "w": 18,
+        "h": 18
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Save",
+        "w": 68,
+        "h": 29
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u2039",
+        "w": 18,
+        "h": 26
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u203a",
+        "w": 18,
+        "h": 26
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "w": 29,
+        "h": 29
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Add",
+        "w": 41,
+        "h": 24
+      },
+      {
+        "tag": "A",
+        "text": "Docs",
+        "w": 31,
+        "h": 21
+      },
+      {
+        "tag": "A",
+        "text": "GitHub",
+        "w": 66,
+        "h": 21
+      }
+    ],
+    "screenshots": {
+      "fold": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/home_mobile.png",
+      "full": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/home_mobile_full.png"
+    }
+  },
+  "docs_desktop": {
+    "url": "https://inkwell-lp.vercel.app/docs",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "metrics": {
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 10396,
+      "hasHorizontalOverflow": false
+    },
+    "overflow_elements": [],
+    "h1": {
+      "text": "Getting Started",
+      "top": 137,
+      "bottom": 180,
+      "visible": true
+    },
+    "cta": [
+      {
+        "text": "Download",
+        "top": 12,
+        "bottom": 48,
+        "width": 111,
+        "height": 37,
+        "visibleInFold": true
+      },
+      {
+        "text": "Download inkwell",
+        "top": 515,
+        "bottom": 553,
+        "width": 220,
+        "height": 39,
+        "visibleInFold": true
+      }
+    ],
+    "sidebar": {
+      "className": "docs-sidebar",
+      "width": 220,
+      "display": "block",
+      "position": "sticky",
+      "visible": true
+    },
+    "nav": {
+      "height": 61,
+      "top": 0
+    },
+    "small_touch_targets": [],
+    "screenshots": {
+      "fold": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/docs_desktop.png",
+      "full": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/docs_desktop_full.png"
+    }
+  },
+  "docs_mobile": {
+    "url": "https://inkwell-lp.vercel.app/docs",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "metrics": {
+      "scrollWidth": 592,
+      "clientWidth": 375,
+      "scrollHeight": 11148,
+      "hasHorizontalOverflow": true
+    },
+    "overflow_elements": [
+      {
+        "tag": "ASIDE",
+        "class": "docs-sidebar",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "DIV",
+        "class": "sidebar-inner",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "P",
+        "class": "sidebar-version",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "NAV",
+        "class": "sidebar-nav",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "A",
+        "class": "sidebar-download",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "MAIN",
+        "class": "docs-content",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "SECTION",
+        "class": "doc-section",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "DIV",
+        "class": "section-label",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "H1",
+        "class": "",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "P",
+        "class": "lead",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "H3",
+        "class": "",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "OL",
+        "class": "",
+        "width": 572,
+        "left": 20
+      },
+      {
+        "tag": "LI",
+        "class": "",
+        "width": 550,
+        "left": 42
+      },
+      {
+        "tag": "LI",
+        "class": "",
+        "width": 550,
+        "left": 42
+      },
+      {
+        "tag": "LI",
+        "class": "",
+        "width": 550,
+        "left": 42
+      }
+    ],
+    "h1": {
+      "text": "Getting Started",
+      "top": 337,
+      "bottom": 370,
+      "visible": true
+    },
+    "cta": [
+      {
+        "text": "Download",
+        "top": 12,
+        "bottom": 48,
+        "width": 111,
+        "height": 37,
+        "visibleInFold": true
+      },
+      {
+        "text": "Download inkwell",
+        "top": 222,
+        "bottom": 261,
+        "width": 572,
+        "height": 39,
+        "visibleInFold": true
+      }
+    ],
+    "sidebar": {
+      "className": "docs-sidebar",
+      "width": 572,
+      "display": "block",
+      "position": "static",
+      "visible": true
+    },
+    "nav": {
+      "height": 61,
+      "top": 0
+    },
+    "small_touch_targets": [
+      {
+        "tag": "A",
+        "text": "inkwell",
+        "w": 84,
+        "h": 26
+      },
+      {
+        "tag": "A",
+        "text": "Download",
+        "w": 111,
+        "h": 37
+      },
+      {
+        "tag": "A",
+        "text": "Getting Started",
+        "w": 117,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Editor",
+        "w": 57,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Canvas",
+        "w": 67,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Organisation",
+        "w": 101,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Themes",
+        "w": 71,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Export",
+        "w": 62,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "GitHub Sync",
+        "w": 100,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Claude MCP",
+        "w": 99,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Shortcuts",
+        "w": 81,
+        "h": 34
+      },
+      {
+        "tag": "A",
+        "text": "Download inkwell",
+        "w": 572,
+        "h": 39
+      },
+      {
+        "tag": "A",
+        "text": "Releases page",
+        "w": 97,
+        "h": 17
+      },
+      {
+        "tag": "A",
+        "text": "GitHub",
+        "w": 66,
+        "h": 21
+      }
+    ],
+    "screenshots": {
+      "fold": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/docs_mobile.png",
+      "full": "/Users/ayphone/Documents/side_projects/inkwell-lp/inkwell-lp.vercel.app-audit/screenshots/docs_mobile_full.png"
+    }
+  }
+}

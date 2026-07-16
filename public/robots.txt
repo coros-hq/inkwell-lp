@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inkwell-lp.vercel.app/sitemap-index.xml

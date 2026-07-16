@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { APP_VERSION, GITHUB_URL } from "../consts";
 
-const GITHUB_URL = "https://github.com/coros-hq/inkwell";
-const VERSION = "0.6.0";
+const VERSION = APP_VERSION;
 const DL_MAC   = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_universal.dmg`;
 const DL_WIN   = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_x64-setup.exe`;
 const DL_LINUX = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_amd64.deb`;

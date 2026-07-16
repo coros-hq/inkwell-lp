@@ -1,9 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { APP_VERSION, GITHUB_URL, RELEASE_URL } from "../consts";
 
-const GITHUB_URL  = "https://github.com/coros-hq/inkwell";
-const RELEASE_URL = "https://github.com/coros-hq/inkwell/releases/latest";
-const VERSION     = "0.4.8";
+const VERSION = APP_VERSION;
 
 const sections = [
   { id: "getting-started", label: "Getting Started" },
@@ -522,6 +521,7 @@ tags: [writing, ideas]
     display: grid; grid-template-columns: 220px 1fr; gap: 64px;
     align-items: start; min-height: calc(100vh - 60px);
   }
+  .docs-sidebar, .docs-content { min-width: 0; }
 
   /* ── Sidebar ── */
   .docs-sidebar { position: sticky; top: 80px; padding: 48px 0; }

@@ -7,8 +7,10 @@ interface Props {
 }
 const {
   title = 'inkwell — Write without distraction.',
-  description = 'A local-first markdown editor for macOS. Your notes stay as plain .md files — private, portable, and completely under your control.',
+  description = 'A local-first markdown editor for macOS, Windows, and Linux. Your notes stay as plain .md files — private, portable, and completely under your control.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -16,9 +18,11 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/inkwell-icon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
