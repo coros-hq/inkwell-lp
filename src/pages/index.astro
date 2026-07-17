@@ -3,9 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import { APP_VERSION, GITHUB_URL } from "../consts";
 
 const VERSION = APP_VERSION;
-const DL_MAC   = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_universal.dmg`;
-const DL_WIN   = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_x64-setup.exe`;
-const DL_LINUX = `https://github.com/coros-hq/inkwell/releases/download/v${VERSION}/inkwell_${VERSION}_amd64.deb`;
+// Linked via GitHub's stable /latest/download/ redirect rather than a pinned
+// v{VERSION} tag path — the project's release tags and its Tauri-embedded
+// version string have drifted before (e.g. tag v0.7.7 shipping binaries
+// still named inkwell_0.7.4_*), so pinning to a tag risks a 404.
+const DL_MAC   = `https://github.com/coros-hq/inkwell/releases/latest/download/inkwell_${VERSION}_universal.dmg`;
+const DL_WIN   = `https://github.com/coros-hq/inkwell/releases/latest/download/inkwell_${VERSION}_x64-setup.exe`;
+const DL_LINUX = `https://github.com/coros-hq/inkwell/releases/latest/download/inkwell_${VERSION}_amd64.deb`;
 
 const features = [
   {
@@ -37,6 +41,16 @@ const features = [
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/><path d="M8 3.5A9.96 9.96 0 0 1 12 2"/></svg>`,
     title: "Claude MCP",
     body: "A native MCP server lets Claude read, search, and write to your vault directly. Ask Claude to summarise your notes, draft new ones, or find anything — it talks to inkwell natively.",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    title: "Abbreviations",
+    body: "Type <code>:today</code> for today's date, <code>:now</code> for the time, or define your own text snippets. The trigger character is configurable in Settings.",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>`,
+    title: "Link notes with @",
+    body: "Type <code>@</code> and start typing a title to search your vault and drop in a link to another note — no copy-pasting, no leaving the keyboard.",
   },
 ];
 
@@ -933,8 +947,9 @@ const themePalettes = {
         <span>inkwell</span>
       </div>
       <p class="footer-copy">
-        Built with Tauri, React, and Rust. Free and open source.
+        An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.
       </p>
+      <a href="/privacy" class="footer-docs">Privacy</a>
       <a href="/docs" class="footer-docs">Docs</a>
       <a
         href={GITHUB_URL}
@@ -2182,6 +2197,12 @@ const themePalettes = {
   }
   .footer-brand img {
     border-radius: 5px;
+  }
+  .footer-copy a {
+    color: var(--text-2);
+  }
+  .footer-copy a:hover {
+    color: var(--text);
   }
   .footer-copy {
     flex: 1;

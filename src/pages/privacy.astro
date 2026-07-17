@@ -1,0 +1,158 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { GITHUB_URL } from "../consts";
+
+const LAST_UPDATED = "17 July 2026";
+---
+
+<Layout
+  title="inkwell — Privacy"
+  description="What inkwell the app collects (nothing), what this website collects (anonymous, cookieless analytics), and where your notes actually live."
+>
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="wordmark">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="26" height="26" />
+        inkwell
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#canvas">Canvas</a>
+        <a href="/#themes">Themes</a>
+        <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+        <a href="/docs">Docs</a>
+      </div>
+      <a href="/" class="btn-nav">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Content ── -->
+  <main class="privacy-content">
+    <div class="section-label">Privacy</div>
+    <h1>Privacy</h1>
+    <p class="lead">
+      Short version: the app collects nothing, and this website collects the
+      bare minimum needed to know it's being visited. Below is exactly what
+      that means and why.
+    </p>
+
+    <h3>The inkwell app</h3>
+    <p>
+      inkwell is local-first by design. There is no account, no sign-up, and
+      no sync server. Your notes are stored as plain <code>.md</code> files in
+      a vault folder you choose on your own machine, and the app does not
+      transmit their contents anywhere. inkwell does not run telemetry or
+      usage tracking of any kind.
+    </p>
+    <p>
+      Two features make outbound network requests, and only when you use them:
+      GitHub Sync, which pushes or pulls the specific note you choose to your
+      own GitHub repository, and the Claude MCP integration, which lets a
+      locally-configured Claude client read from and write to your vault. Both
+      are opt-in and both talk directly to the service you've configured —
+      not to us.
+    </p>
+
+    <h3>This website (inkwell-lp.vercel.app)</h3>
+    <p>
+      This marketing site uses <a href="https://vercel.com/docs/analytics" target="_blank" rel="noopener">Vercel Web Analytics</a> to
+      count page views. It's cookieless and doesn't use any persistent
+      identifier to track you across visits or across other sites — it
+      reports aggregated, anonymous traffic counts only.
+    </p>
+
+    <h3>Downloads</h3>
+    <p>
+      Clicking a download button sends you to a release asset hosted on
+      GitHub's own infrastructure ({GITHUB_URL}), subject to
+      GitHub's privacy policy for that request.
+    </p>
+
+    <h3>Contact</h3>
+    <p>
+      inkwell is an open-source project maintained on GitHub. Questions or
+      concerns about this policy can be raised as an{" "}
+      <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noopener">issue on the repository</a>.
+    </p>
+
+    <h3>Changes</h3>
+    <p>This page was last updated {LAST_UPDATED}. Material changes will be reflected here.</p>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="20" height="20" />
+        <span>inkwell</span>
+      </div>
+      <p class="footer-copy">
+        An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.
+      </p>
+      <a href="/privacy" class="footer-docs">Privacy</a>
+      <a href="/docs" class="footer-docs">Docs</a>
+      <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ── Nav (shared pattern) ── */
+  nav {
+    position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px);
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .wordmark { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text); flex-shrink: 0; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .btn-nav {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: 8px; background: var(--accent-dim);
+    border: 1px solid rgba(196,131,42,0.25); color: var(--accent-light); flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-nav:hover { background: rgba(196,131,42,0.22); border-color: rgba(196,131,42,0.38); }
+
+  /* ── Content ── */
+  .privacy-content { max-width: 680px; margin: 0 auto; padding: 64px 32px 96px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  h1 { font-size: 36px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 32px 0 10px; letter-spacing: -0.01em; }
+  .lead { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 32px; }
+  p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+  code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; color: var(--accent-light); }
+  a { color: var(--accent-light); transition: color 0.12s; }
+  a:hover { color: var(--accent); }
+
+  /* ── Footer (shared pattern) ── */
+  footer { border-top: 1px solid var(--border); padding: 28px 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
+  .footer-brand img { border-radius: 5px; }
+  .footer-copy { flex: 1; font-size: 13px; color: var(--text-3); }
+  .footer-copy a { color: var(--text-2); }
+  .footer-copy a:hover { color: var(--text); }
+  .footer-gh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; }
+  .footer-gh:hover { color: var(--text); }
+  .footer-docs { font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; margin-right: 8px; }
+  .footer-docs:hover { color: var(--text); }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .privacy-content { padding: 48px 20px 72px; }
+    footer { padding: 28px 20px; }
+  }
+</style>

@@ -68,17 +68,30 @@ const sections = [
       <section id="getting-started" class="doc-section">
         <div class="section-label">01</div>
         <h1>Getting Started</h1>
-        <p class="lead">inkwell is a local-first markdown editor for macOS. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
+        <p class="lead">inkwell is a local-first markdown editor for macOS, Windows, and Linux. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
 
-        <h3>Install</h3>
+        <h3>Install on macOS</h3>
         <ol>
           <li>Download the latest <code>.dmg</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Open the disk image and drag <strong>inkwell.app</strong> to <strong>/Applications</strong>.</li>
           <li>On first launch, macOS may show a security prompt — click <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</li>
         </ol>
 
+        <h3>Install on Windows</h3>
+        <ol>
+          <li>Download the latest <code>.exe</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
+          <li>Run the installer and follow the setup wizard.</li>
+          <li>If Windows SmartScreen shows a warning, click <em>More info</em> → <em>Run anyway</em>.</li>
+        </ol>
+
+        <h3>Install on Linux</h3>
+        <ol>
+          <li>Download the latest <code>.deb</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
+          <li>Install it with <code>sudo apt install ./inkwell_{VERSION}_amd64.deb</code>, or double-click it in your file manager if it supports <code>.deb</code> packages.</li>
+        </ol>
+
         <h3>Open a vault</h3>
-        <p>A <strong>vault</strong> is any folder on your Mac. inkwell stores all notes as <code>.md</code> files inside it, preserving your folder structure exactly.</p>
+        <p>A <strong>vault</strong> is any folder on your computer. inkwell stores all notes as <code>.md</code> files inside it, preserving your folder structure exactly.</p>
         <ol>
           <li>Click <strong>Open Vault</strong> on the welcome screen.</li>
           <li>Select a folder (or create a new one).</li>
@@ -141,6 +154,18 @@ tags: [writing, ideas]
 
         <h3>Font &amp; display settings</h3>
         <p>Open <strong>Settings → Editor</strong> to adjust the font family (sans-serif, serif, or monospace), font size, and line spacing. Changes apply instantly without restarting.</p>
+
+        <h3>Abbreviations</h3>
+        <p>Type the trigger character followed by a key to expand it into text as you type, or pick it from the autocomplete dropdown. Five date/time shortcuts are built in:</p>
+        <div class="code-block">
+          <div class="code-block-header">Built-in abbreviations</div>
+          <pre><code>:today      → 2026-07-17
+:tomorrow   → 2026-07-18
+:nextweek   → 2026-07-24
+:nextmonth  → 2026-08-17
+:now        → 14:30</code></pre>
+        </div>
+        <p>Add your own in <strong>Settings → Abbreviations</strong> — define a key and the text it expands to, and change the trigger character (default <code>:</code>) to whatever you prefer.</p>
       </section>
 
       <hr />
@@ -260,7 +285,7 @@ tags: [writing, ideas]
         <p>Click the <strong>Board</strong> icon in the sidebar to open the Kanban view. Create multiple boards, add columns and cards, set due dates, write subtasks, and leave comments on cards. Boards are stored in your vault's <code>.inkwell</code> folder.</p>
 
         <h3>Note links</h3>
-        <p>Open the <strong>Links</strong> panel in the editor toolbar to connect notes to each other. Linked notes appear in a panel below the editor and are tracked bidirectionally.</p>
+        <p>Open the <strong>Links</strong> panel in the editor toolbar to connect notes to each other. Linked notes appear in a panel below the editor and are tracked bidirectionally. The fastest way to link while writing: type <code>@</code> and start typing a note's title — inkwell searches your vault and inserts the link for you.</p>
 
         <h3>Attachments</h3>
         <p>Drag files onto the <strong>Attachments</strong> bar at the bottom of the editor to attach images, PDFs, or documents to a note. Attachments are stored in <code>.inkwell/attachments/</code> inside your vault. Embed an attachment inline with <code>![[filename]]</code> syntax.</p>
@@ -480,7 +505,8 @@ tags: [writing, ideas]
         <img src="/inkwell-icon.svg" alt="inkwell" width="20" height="20" />
         <span>inkwell</span>
       </div>
-      <p class="footer-copy">Built with Tauri, React, and Rust. Free and open source.</p>
+      <p class="footer-copy">An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.</p>
+      <a href="/privacy" class="footer-docs">Privacy</a>
       <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
@@ -639,6 +665,10 @@ tags: [writing, ideas]
   .footer-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
   .footer-brand img { border-radius: 5px; }
   .footer-copy { flex: 1; font-size: 13px; color: var(--text-3); }
+  .footer-copy a { color: var(--text-2); }
+  .footer-copy a:hover { color: var(--text); }
+  .footer-docs { font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; margin-right: 8px; }
+  .footer-docs:hover { color: var(--text); }
   .footer-gh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; }
   .footer-gh:hover { color: var(--text); }
 

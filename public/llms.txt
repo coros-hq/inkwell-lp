@@ -1,0 +1,18 @@
+# inkwell
+
+> A local-first markdown editor for macOS, Windows, and Linux. Notes are stored as plain .md files in a folder you choose — no accounts, no cloud, no telemetry.
+
+inkwell is free and open source, built with Tauri, React, and Rust.
+
+Key features: live split-view markdown preview, eight built-in themes, a full drawing canvas (flowcharts, mind maps, sequence diagrams), Kanban boards, GitHub sync for notes, a Claude MCP server for reading/writing the vault from Claude, a global Quick Note capture window, and a weekly planner with tagged tasks.
+
+## Pages
+
+- [Homepage](https://inkwell-lp.vercel.app/): overview, features, and download links for macOS, Windows, and Linux
+- [Documentation](https://inkwell-lp.vercel.app/docs): install instructions per platform, editor and canvas usage, themes, export, GitHub sync, Claude MCP setup, and keyboard shortcuts
+- [Privacy](https://inkwell-lp.vercel.app/privacy): what the app collects (nothing) and what the website collects (anonymous page-view analytics)
+
+## Source
+
+- [GitHub repository](https://github.com/coros-hq/inkwell)
+- [Latest release](https://github.com/coros-hq/inkwell/releases/latest)
