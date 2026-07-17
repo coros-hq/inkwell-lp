@@ -136,6 +136,10 @@ const LAST_UPDATED = "17 July 2026";
   code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; color: var(--accent-light); }
   a { color: var(--accent-light); transition: color 0.12s; }
   a:hover { color: var(--accent); }
+  /* Prose links need a non-color cue (WCAG 1.4.1) — nav/footer links stay
+     unmarked since position and styling already distinguish them. */
+  .privacy-content a { text-decoration: underline; text-decoration-color: rgba(212, 152, 64, 0.4); text-underline-offset: 2px; }
+  .privacy-content a:hover { text-decoration-color: var(--accent); }
 
   /* ── Footer (shared pattern) ── */
   footer { border-top: 1px solid var(--border); padding: 28px 32px; }
@@ -143,8 +147,8 @@ const LAST_UPDATED = "17 July 2026";
   .footer-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
   .footer-brand img { border-radius: 5px; }
   .footer-copy { flex: 1; font-size: 13px; color: var(--text-3); }
-  .footer-copy a { color: var(--text-2); }
-  .footer-copy a:hover { color: var(--text); }
+  .footer-copy a { color: var(--text-2); text-decoration: underline; text-decoration-color: rgba(154, 142, 126, 0.4); text-underline-offset: 2px; }
+  .footer-copy a:hover { color: var(--text); text-decoration-color: var(--text); }
   .footer-gh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; }
   .footer-gh:hover { color: var(--text); }
   .footer-docs { font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; margin-right: 8px; }

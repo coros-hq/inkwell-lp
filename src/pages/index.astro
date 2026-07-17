@@ -212,6 +212,7 @@ const themePalettes = {
     </div>
   </nav>
 
+  <main>
   <!-- ── Hero ─────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-glow" aria-hidden="true"></div>
@@ -938,6 +939,7 @@ const themePalettes = {
       <p class="cta-sub">v{VERSION} · Free · Open Source</p>
     </div>
   </section>
+  </main>
 
   <!-- ── Footer ────────────────────────────────────────────── -->
   <footer>
@@ -2200,9 +2202,13 @@ const themePalettes = {
   }
   .footer-copy a {
     color: var(--text-2);
+    text-decoration: underline;
+    text-decoration-color: rgba(154, 142, 126, 0.4);
+    text-underline-offset: 2px;
   }
   .footer-copy a:hover {
     color: var(--text);
+    text-decoration-color: var(--text);
   }
   .footer-copy {
     flex: 1;
