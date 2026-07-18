@@ -1,13 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { GITHUB_URL } from "../consts";
-
-const LAST_UPDATED = "17 July 2026";
 ---
 
 <Layout
-  title="inkwell — Privacy"
-  description="What inkwell the app collects (nothing), what this website collects (anonymous, cookieless analytics), and where your notes actually live."
+  title="inkwell — Page not found"
+  description="This page doesn't exist. Find inkwell's homepage, documentation, or download links instead."
 >
   <!-- ── Nav ── -->
   <nav>
@@ -29,56 +27,27 @@ const LAST_UPDATED = "17 July 2026";
   </nav>
 
   <!-- ── Content ── -->
-  <main class="privacy-content">
-    <div class="section-label">Privacy</div>
-    <h1>Privacy</h1>
+  <main class="notfound-content">
+    <div class="section-label">404</div>
+    <h1>Page not found.</h1>
     <p class="lead">
-      Short version: the app collects nothing, and this website collects the
-      bare minimum needed to know it's being visited. Below is exactly what
-      that means and why.
+      That page doesn't exist — but here's where you probably meant to go.
     </p>
 
-    <h3>The inkwell app</h3>
-    <p>
-      inkwell is local-first by design. There is no account, no sign-up, and
-      no sync server. Your notes are stored as plain <code>.md</code> files in
-      a vault folder you choose on your own machine, and the app does not
-      transmit their contents anywhere. inkwell does not run telemetry or
-      usage tracking of any kind.
-    </p>
-    <p>
-      Two features make outbound network requests, and only when you use them:
-      GitHub Sync, which pushes or pulls the specific note you choose to your
-      own GitHub repository, and the Claude MCP integration, which lets a
-      locally-configured Claude client read from and write to your vault. Both
-      are opt-in and both talk directly to the service you've configured —
-      not to us.
-    </p>
-
-    <h3>This website (inkwell-lp.vercel.app)</h3>
-    <p>
-      This marketing site uses <a href="https://vercel.com/docs/analytics" target="_blank" rel="noopener">Vercel Web Analytics</a> to
-      count page views. It's cookieless and doesn't use any persistent
-      identifier to track you across visits or across other sites — it
-      reports aggregated, anonymous traffic counts only.
-    </p>
-
-    <h3>Downloads</h3>
-    <p>
-      Clicking a download button sends you to a release asset hosted on
-      GitHub's own infrastructure ({GITHUB_URL}), subject to
-      GitHub's privacy policy for that request.
-    </p>
-
-    <h3>Contact</h3>
-    <p>
-      inkwell is an open-source project maintained on GitHub. Questions or
-      concerns about this policy can be raised as an{" "}
-      <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noopener">issue on the repository</a>.
-    </p>
-
-    <h3>Changes</h3>
-    <p>This page was last updated {LAST_UPDATED}. Material changes will be reflected here.</p>
+    <div class="notfound-links">
+      <a href="/" class="notfound-card">
+        <strong>Homepage</strong>
+        <span>Overview, features, and downloads for macOS, Windows, and Linux</span>
+      </a>
+      <a href="/docs" class="notfound-card">
+        <strong>Documentation</strong>
+        <span>Install steps, editor and canvas usage, Claude MCP setup, keyboard shortcuts</span>
+      </a>
+      <a href={GITHUB_URL} class="notfound-card" target="_blank" rel="noopener">
+        <strong>GitHub repository</strong>
+        <span>Source code, releases, and issues</span>
+      </a>
+    </div>
   </main>
 
   <!-- ── Footer ── -->
@@ -110,10 +79,11 @@ const LAST_UPDATED = "17 July 2026";
   }
   .nav-inner {
     max-width: 1200px; margin: 0 auto; padding: 14px 32px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    display: flex; align-items: center; gap: 32px;
   }
-  .wordmark { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text); flex-shrink: 0; }
-  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; flex-shrink: 0; }
+  .wordmark img { border-radius: 7px; }
+  .nav-links { display: flex; align-items: center; gap: 24px; flex: 1; }
   .nav-links a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
   .btn-nav {
@@ -125,23 +95,24 @@ const LAST_UPDATED = "17 July 2026";
   .btn-nav:hover { background: rgba(196,131,42,0.22); border-color: rgba(196,131,42,0.38); }
 
   /* ── Content ── */
-  .privacy-content { max-width: 680px; margin: 0 auto; padding: 64px 32px 96px; }
+  .notfound-content { max-width: 680px; margin: 0 auto; padding: 96px 32px 120px; text-align: center; }
   .section-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
   }
   h1 { font-size: 36px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
-  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 32px 0 10px; letter-spacing: -0.01em; }
-  .lead { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 32px; }
-  p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 14px; }
-  p:last-child { margin-bottom: 0; }
-  code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; color: var(--accent-light); }
-  a { color: var(--accent-light); transition: color 0.12s; }
-  a:hover { color: var(--accent); }
-  /* Prose links need a non-color cue (WCAG 1.4.1) — nav/footer links stay
-     unmarked since position and styling already distinguish them. */
-  .privacy-content a { text-decoration: underline; text-decoration-color: rgba(212, 152, 64, 0.4); text-underline-offset: 2px; }
-  .privacy-content a:hover { text-decoration-color: var(--accent); }
+  .lead { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 40px; }
+
+  .notfound-links { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
+  .notfound-card {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 18px 20px; border-radius: 10px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .notfound-card:hover { border-color: rgba(196,131,42,0.35); background: var(--bg-subtle); }
+  .notfound-card strong { font-size: 15px; color: var(--text); }
+  .notfound-card span { font-size: 13.5px; color: var(--text-2); }
 
   /* ── Footer (shared pattern) ── */
   footer { border-top: 1px solid var(--border); padding: 28px 32px; }
@@ -158,7 +129,7 @@ const LAST_UPDATED = "17 July 2026";
 
   @media (max-width: 860px) {
     .nav-links { display: none; }
-    .privacy-content { padding: 48px 20px 72px; }
+    .notfound-content { padding: 64px 20px 80px; }
     footer { padding: 28px 20px; }
     .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
   }

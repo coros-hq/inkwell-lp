@@ -1,6 +1,6 @@
-# inkwell
+# inkwell (by coros-hq)
 
-> A local-first markdown editor for macOS, Windows, and Linux. Notes are stored as plain .md files in a folder you choose — no accounts, no cloud, no telemetry.
+> inkwell is a local-first markdown editor for macOS, Windows, and Linux, built by coros-hq. Notes are stored as plain .md files in a folder you choose — no accounts, no cloud, no telemetry. Not to be confused with Apple's discontinued "Inkwell" handwriting-recognition feature for macOS.
 
 inkwell is free and open source, built with Tauri, React, and Rust.
 
@@ -9,8 +9,26 @@ Key features: live split-view markdown preview, eight built-in themes, a full dr
 ## Pages
 
 - [Homepage](https://inkwell-lp.vercel.app/): overview, features, and download links for macOS, Windows, and Linux
-- [Documentation](https://inkwell-lp.vercel.app/docs): install instructions per platform, editor and canvas usage, themes, export, GitHub sync, Claude MCP setup, and keyboard shortcuts
 - [Privacy](https://inkwell-lp.vercel.app/privacy): what the app collects (nothing) and what the website collects (anonymous page-view analytics)
+
+## Documentation
+
+- [Getting Started](https://inkwell-lp.vercel.app/docs#getting-started): install per platform, open a vault, create your first note
+- [Editor](https://inkwell-lp.vercel.app/docs#editor): CodeMirror 6, split view, GitHub Flavored Markdown, frontmatter, abbreviations
+- [Canvas](https://inkwell-lp.vercel.app/docs#canvas): built-in drawing canvas — tools, templates, canvas notes panel
+- [Organisation](https://inkwell-lp.vercel.app/docs#organisation): folders, pinned notes, search, Kanban board, note links, attachments, trash
+- [Themes](https://inkwell-lp.vercel.app/docs#themes): eight built-in themes, custom theme builder
+- [Export](https://inkwell-lp.vercel.app/docs#export): Markdown, HTML, and PDF export
+- [GitHub Sync](https://inkwell-lp.vercel.app/docs#github-sync): push/pull notes to a GitHub repository
+- [Claude MCP](https://inkwell-lp.vercel.app/docs#claude-mcp): native Rust MCP server, stdio + JSON-RPC 2.0, available tools
+- [Keyboard Shortcuts](https://inkwell-lp.vercel.app/docs#shortcuts): global, canvas, and editor shortcuts
+- [Common Questions](https://inkwell-lp.vercel.app/docs#faq): free/offline/Obsidian-compatibility/telemetry/platform questions answered directly
+
+## Blog
+
+- [Why your notes should just be text files](https://inkwell-lp.vercel.app/blog/why-plain-text-notes): the case for plain .md files, vault frontmatter, and Obsidian compatibility
+- [Sketch flowcharts and mind maps without leaving your notes](https://inkwell-lp.vercel.app/blog/canvas-sketch-ideas-in-your-notes): the built-in Canvas feature, its tools, and its six diagram templates
+- [Let Claude read, search, and write your notes directly](https://inkwell-lp.vercel.app/blog/claude-mcp-notes-assistant): how the native Claude MCP server works, setup, and the privacy tradeoffs of local vs. cloud AI integration
 
 ## Source
 

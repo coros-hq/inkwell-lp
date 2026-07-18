@@ -1,6 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro';
-import { APP_VERSION, GITHUB_URL } from '../consts';
+import { APP_VERSION, APP_DESCRIPTION, GITHUB_URL } from '../consts';
 
 interface Props {
   title?: string;
@@ -8,7 +8,7 @@ interface Props {
 }
 const {
   title = 'inkwell — Write without distraction.',
-  description = 'A local-first markdown editor for macOS, Windows, and Linux. Your notes stay as plain .md files — private, portable, and completely under your control.',
+  description = APP_DESCRIPTION,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -16,19 +16,34 @@ const ogImageURL = new URL('/og-image.png', Astro.site);
 
 const softwareApplicationSchema = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'inkwell',
-  description,
-  url: 'https://inkwell-lp.vercel.app/',
-  operatingSystem: ['macOS', 'Windows', 'Linux'],
-  applicationCategory: 'DeveloperApplication',
-  softwareVersion: APP_VERSION,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  downloadUrl: `${GITHUB_URL}/releases/latest`,
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://inkwell-lp.vercel.app/#software',
+      name: 'inkwell',
+      description: APP_DESCRIPTION,
+      url: 'https://inkwell-lp.vercel.app/',
+      operatingSystem: ['macOS', 'Windows', 'Linux'],
+      applicationCategory: 'DeveloperApplication',
+      softwareVersion: APP_VERSION,
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      downloadUrl: `${GITHUB_URL}/releases/latest`,
+      publisher: { '@id': 'https://inkwell-lp.vercel.app/#organization' },
+      author: { '@id': 'https://inkwell-lp.vercel.app/#organization' },
+      sameAs: [GITHUB_URL],
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://inkwell-lp.vercel.app/#organization',
+      name: 'coros-hq',
+      url: GITHUB_URL,
+      sameAs: [GITHUB_URL],
+    },
+  ],
 };
 ---
 <!doctype html>

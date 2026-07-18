@@ -14,6 +14,7 @@ const sections = [
   { id: "github-sync",     label: "GitHub Sync" },
   { id: "claude-mcp",      label: "Claude MCP" },
   { id: "shortcuts",       label: "Shortcuts" },
+  { id: "faq",             label: "Common Questions" },
 ];
 ---
 
@@ -34,6 +35,7 @@ const sections = [
         <a href="/#themes">Themes</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
         <a href="/docs" class="nav-active">Docs</a>
+        <a href="/blog">Blog</a>
       </div>
       <a href={RELEASE_URL} class="btn-nav" target="_blank" rel="noopener">
         Download
@@ -70,27 +72,27 @@ const sections = [
         <h1>Getting Started</h1>
         <p class="lead">inkwell is a local-first markdown editor for macOS, Windows, and Linux. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
 
-        <h3>Install on macOS</h3>
+        <h3 id="install-macos">Install on macOS</h3>
         <ol>
           <li>Download the latest <code>.dmg</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Open the disk image and drag <strong>inkwell.app</strong> to <strong>/Applications</strong>.</li>
           <li>On first launch, macOS may show a security prompt — click <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</li>
         </ol>
 
-        <h3>Install on Windows</h3>
+        <h3 id="install-windows">Install on Windows</h3>
         <ol>
           <li>Download the latest <code>.exe</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Run the installer and follow the setup wizard.</li>
           <li>If Windows SmartScreen shows a warning, click <em>More info</em> → <em>Run anyway</em>.</li>
         </ol>
 
-        <h3>Install on Linux</h3>
+        <h3 id="install-linux">Install on Linux</h3>
         <ol>
           <li>Download the latest <code>.deb</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Install it with <code>sudo apt install ./inkwell_{VERSION}_amd64.deb</code>, or double-click it in your file manager if it supports <code>.deb</code> packages.</li>
         </ol>
 
-        <h3>Open a vault</h3>
+        <h3 id="open-a-vault">Open a vault</h3>
         <p>A <strong>vault</strong> is any folder on your computer. inkwell stores all notes as <code>.md</code> files inside it, preserving your folder structure exactly.</p>
         <ol>
           <li>Click <strong>Open Vault</strong> on the welcome screen.</li>
@@ -101,7 +103,7 @@ const sections = [
           <strong>Tip:</strong> Vaults are Obsidian-compatible. If you have an existing Obsidian vault, just point inkwell at the same folder.
         </div>
 
-        <h3>Create your first note</h3>
+        <h3 id="create-first-note">Create your first note</h3>
         <p>Press <kbd>⌘N</kbd> or click the <strong>+</strong> button in the sidebar. Type a title and start writing. Notes are saved automatically — there is no Save button.</p>
       </section>
 
@@ -113,10 +115,10 @@ const sections = [
         <h2>Editor</h2>
         <p class="lead">inkwell uses CodeMirror 6 for a fast, distraction-free writing experience with live markdown syntax highlighting.</p>
 
-        <h3>Split view</h3>
+        <h3 id="split-view">Split view</h3>
         <p>Click the split-view icon in the toolbar (or press <kbd>⌘⇧P</kbd>) to open a rendered preview alongside the editor. The preview updates live as you type. Click the icon again to return to the focused editor.</p>
 
-        <h3>Markdown support</h3>
+        <h3 id="markdown-support">Markdown support</h3>
         <p>inkwell renders full GitHub Flavored Markdown including tables, task lists, strikethrough, code blocks with syntax highlighting, blockquotes, inline images, and footnotes.</p>
 
         <div class="code-block">
@@ -138,7 +140,7 @@ const note = "write here"
 ```</code></pre>
         </div>
 
-        <h3>Frontmatter</h3>
+        <h3 id="frontmatter">Frontmatter</h3>
         <p>Every note gets automatic YAML frontmatter on creation. You can edit it directly or leave it alone — inkwell uses it to store metadata like tags, pinned state, and timestamps.</p>
         <div class="code-block">
           <div class="code-block-header">Note frontmatter</div>
@@ -152,10 +154,10 @@ tags: [writing, ideas]
 ---</code></pre>
         </div>
 
-        <h3>Font &amp; display settings</h3>
+        <h3 id="font-display-settings">Font &amp; display settings</h3>
         <p>Open <strong>Settings → Editor</strong> to adjust the font family (sans-serif, serif, or monospace), font size, and line spacing. Changes apply instantly without restarting.</p>
 
-        <h3>Abbreviations</h3>
+        <h3 id="abbreviations">Abbreviations</h3>
         <p>Type the trigger character followed by a key to expand it into text as you type, or pick it from the autocomplete dropdown. Five date/time shortcuts are built in:</p>
         <div class="code-block">
           <div class="code-block-header">Built-in abbreviations</div>
@@ -176,10 +178,10 @@ tags: [writing, ideas]
         <h2>Canvas</h2>
         <p class="lead">A full drawing canvas lives alongside your notes. Sketch diagrams, flowcharts, and mind maps using a custom HTML5 drawing engine — no third-party libraries, no export needed.</p>
 
-        <h3>Opening the canvas</h3>
+        <h3 id="opening-the-canvas">Opening the canvas</h3>
         <p>Click the <strong>Draw</strong> icon in the sidebar (or enable it in <strong>Settings → General → Canvas</strong>). The canvas is shared across your entire vault and saves automatically to <code>.inkwell/canvas.json</code>.</p>
 
-        <h3>Tools</h3>
+        <h3 id="canvas-tools">Tools</h3>
         <div class="tool-grid">
           <div class="tool-item">
             <span class="tool-key">V</span>
@@ -232,10 +234,10 @@ tags: [writing, ideas]
           </div>
         </div>
 
-        <h3>Shape styling</h3>
+        <h3 id="shape-styling">Shape styling</h3>
         <p>Select a shape to see its options in the toolbar: stroke colour (12-colour palette), fill toggle, stroke width (thin/medium/thick), and corner radius for rectangles. Text shapes also expose font family, size, bold, and italic controls.</p>
 
-        <h3>Selection &amp; editing</h3>
+        <h3 id="canvas-selection-editing">Selection &amp; editing</h3>
         <ul>
           <li>Drag corner handles to resize a selected shape.</li>
           <li>Drag the shape itself (or any selected shape in a multi-selection) to move.</li>
@@ -246,7 +248,7 @@ tags: [writing, ideas]
           <li><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd> undo / redo.</li>
         </ul>
 
-        <h3>Templates</h3>
+        <h3 id="canvas-templates">Templates</h3>
         <p>Click the <strong>Templates</strong> button in the toolbar to load a ready-made diagram. The canvas fits it to the viewport automatically. Available templates:</p>
         <ul>
           <li><strong>Flowchart</strong> — Start, two steps, and End with arrows.</li>
@@ -257,10 +259,10 @@ tags: [writing, ideas]
           <li><strong>Venn Diagram</strong> — Two overlapping labelled sets.</li>
         </ul>
 
-        <h3>Canvas notes</h3>
+        <h3 id="canvas-notes-panel">Canvas notes</h3>
         <p>Click the <strong>note icon</strong> (top-right of the canvas) or press <kbd>⌘/</kbd> to open a markdown notes panel. It slides in from the right at half the canvas width — the canvas stays fully interactive while the panel is open. Notes are saved to <code>.inkwell/canvas-notes.md</code> in your vault.</p>
 
-        <h3>Navigation</h3>
+        <h3 id="canvas-navigation">Navigation</h3>
         <p>Scroll (or two-finger swipe) to pan. Pinch or <kbd>⌘</kbd>+scroll to zoom. Hold <kbd>Space</kbd> and drag to pan with the hand tool.</p>
       </section>
 
@@ -271,26 +273,26 @@ tags: [writing, ideas]
         <div class="section-label">04</div>
         <h2>Organisation</h2>
 
-        <h3>Folders &amp; notes</h3>
+        <h3 id="folders-notes">Folders &amp; notes</h3>
         <p>The sidebar shows your vault's folder structure. Create folders with the <strong>+</strong> button next to any folder, or drag notes between folders to reorganise. Folders map 1:1 to real directories on disk.</p>
         <p>Double-click any note or folder name (or right-click → Rename) to rename it inline. The file on disk is renamed at the same time.</p>
 
-        <h3>Pinned notes</h3>
+        <h3 id="pinned-notes">Pinned notes</h3>
         <p>Right-click a note and choose <strong>Pin</strong> to keep it at the top of the sidebar. Pinned notes appear in a dedicated section above the rest of your library.</p>
 
-        <h3>Search</h3>
+        <h3 id="vault-search">Search</h3>
         <p>Press <kbd>⌘K</kbd> to open full-text search across every note in your vault. Results update as you type.</p>
 
-        <h3>Kanban board</h3>
+        <h3 id="kanban-board">Kanban board</h3>
         <p>Click the <strong>Board</strong> icon in the sidebar to open the Kanban view. Create multiple boards, add columns and cards, set due dates, write subtasks, and leave comments on cards. Boards are stored in your vault's <code>.inkwell</code> folder.</p>
 
-        <h3>Note links</h3>
+        <h3 id="note-links">Note links</h3>
         <p>Open the <strong>Links</strong> panel in the editor toolbar to connect notes to each other. Linked notes appear in a panel below the editor and are tracked bidirectionally. The fastest way to link while writing: type <code>@</code> and start typing a note's title — inkwell searches your vault and inserts the link for you.</p>
 
-        <h3>Attachments</h3>
+        <h3 id="attachments">Attachments</h3>
         <p>Drag files onto the <strong>Attachments</strong> bar at the bottom of the editor to attach images, PDFs, or documents to a note. Attachments are stored in <code>.inkwell/attachments/</code> inside your vault. Embed an attachment inline with <code>![[filename]]</code> syntax.</p>
 
-        <h3>Trash</h3>
+        <h3 id="trash">Trash</h3>
         <p>Deleted notes are moved to the Trash section at the bottom of the sidebar. They are not removed from disk until you empty the trash — so you can recover them.</p>
       </section>
 
@@ -324,10 +326,10 @@ tags: [writing, ideas]
           ))}
         </div>
 
-        <h3>Custom themes</h3>
+        <h3 id="custom-themes">Custom themes</h3>
         <p>Open <strong>Settings → Themes → New Custom Theme</strong> to build your own. The live preview updates instantly as you adjust the background, accent, and text colours. Custom themes are stored in your vault's app data and travel with it.</p>
 
-        <h3>Syntax highlighting</h3>
+        <h3 id="syntax-highlighting">Syntax highlighting</h3>
         <p>Code block syntax colours are derived automatically from the active theme's accent colour — you don't need to configure anything.</p>
       </section>
 
@@ -365,14 +367,14 @@ tags: [writing, ideas]
         <h2>GitHub Sync</h2>
         <p class="lead">Push any note to a GitHub repository as a <code>.md</code> file, and pull the latest version back in with one click.</p>
 
-        <h3>Setup</h3>
+        <h3 id="github-sync-setup">Setup</h3>
         <ol>
           <li>Open <strong>Settings → GitHub</strong>.</li>
           <li>Enter a Personal Access Token with <code>repo</code> scope (create one at github.com/settings/tokens).</li>
           <li>inkwell saves the token securely in your system keychain.</li>
         </ol>
 
-        <h3>Push a note</h3>
+        <h3 id="push-a-note">Push a note</h3>
         <ol>
           <li>Open the note you want to sync.</li>
           <li>Click the <strong>GitHub</strong> icon in the editor toolbar.</li>
@@ -380,7 +382,7 @@ tags: [writing, ideas]
           <li>Click <strong>Push</strong>. inkwell commits the note as a <code>.md</code> file.</li>
         </ol>
 
-        <h3>Pull a note</h3>
+        <h3 id="pull-a-note">Pull a note</h3>
         <p>In the GitHub sync dialog, click <strong>Pull</strong> to fetch the latest version of the file from GitHub and overwrite the current note content.</p>
 
         <div class="callout">
@@ -396,10 +398,10 @@ tags: [writing, ideas]
         <h2>Claude MCP</h2>
         <p class="lead">inkwell ships a native Rust MCP server so Claude can read, write, and search your vault directly — without copy-paste.</p>
 
-        <h3>How it works</h3>
+        <h3 id="mcp-how-it-works">How it works</h3>
         <p>The <code>inkwell-mcp</code> binary is bundled inside the app. It communicates with Claude Desktop (or any MCP-compatible client) over stdio using JSON-RPC 2.0. It reads the active vault path from <code>~/.inkwell/active-vault</code>, which inkwell writes whenever you open a vault.</p>
 
-        <h3>Setup</h3>
+        <h3 id="mcp-setup">Setup</h3>
         <ol>
           <li>Build the MCP server binary (or use the one bundled in the app):<br/><code class="inline-code">cd src-tauri &amp;&amp; cargo build --release -p inkwell-mcp</code></li>
           <li>Add it to your Claude Desktop config at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</li>
@@ -420,7 +422,7 @@ tags: [writing, ideas]
           <li>Restart Claude Desktop. Open a vault in inkwell. Claude now has access to your notes.</li>
         </ol>
 
-        <h3>Available tools</h3>
+        <h3 id="mcp-available-tools">Available tools</h3>
         <div class="mcp-tools">
           <div class="mcp-tool">
             <code>list_notes</code>
@@ -456,43 +458,75 @@ tags: [writing, ideas]
         <div class="section-label">09</div>
         <h2>Keyboard Shortcuts</h2>
 
-        <h3>Global</h3>
-        <div class="shortcut-table">
-          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
-          <div class="shortcut-row"><span>New note</span><span><kbd>⌘N</kbd></span></div>
-          <div class="shortcut-row"><span>Search all notes</span><span><kbd>⌘K</kbd></span></div>
-          <div class="shortcut-row"><span>Toggle split preview</span><span><kbd>⌘⇧P</kbd></span></div>
-          <div class="shortcut-row"><span>Undo</span><span><kbd>⌘Z</kbd></span></div>
-          <div class="shortcut-row"><span>Redo</span><span><kbd>⌘⇧Z</kbd></span></div>
-        </div>
+        <h3 id="shortcuts-global">Global</h3>
+        <table class="shortcut-table">
+          <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+          <tbody>
+            <tr><td>New note</td><td><kbd>⌘N</kbd></td></tr>
+            <tr><td>Search all notes</td><td><kbd>⌘K</kbd></td></tr>
+            <tr><td>Toggle split preview</td><td><kbd>⌘⇧P</kbd></td></tr>
+            <tr><td>Undo</td><td><kbd>⌘Z</kbd></td></tr>
+            <tr><td>Redo</td><td><kbd>⌘⇧Z</kbd></td></tr>
+          </tbody>
+        </table>
 
-        <h3>Canvas</h3>
-        <div class="shortcut-table">
-          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
-          <div class="shortcut-row"><span>Select tool</span><span><kbd>V</kbd></span></div>
-          <div class="shortcut-row"><span>Pen tool</span><span><kbd>P</kbd></span></div>
-          <div class="shortcut-row"><span>Rectangle tool</span><span><kbd>R</kbd></span></div>
-          <div class="shortcut-row"><span>Ellipse tool</span><span><kbd>E</kbd></span></div>
-          <div class="shortcut-row"><span>Line tool</span><span><kbd>L</kbd></span></div>
-          <div class="shortcut-row"><span>Arrow tool</span><span><kbd>A</kbd></span></div>
-          <div class="shortcut-row"><span>Text tool</span><span><kbd>T</kbd></span></div>
-          <div class="shortcut-row"><span>Select all</span><span><kbd>⌘A</kbd></span></div>
-          <div class="shortcut-row"><span>Duplicate selection</span><span><kbd>⌘D</kbd></span></div>
-          <div class="shortcut-row"><span>Delete selection</span><span><kbd>⌫</kbd></span></div>
-          <div class="shortcut-row"><span>Cancel / back to select</span><span><kbd>Esc</kbd></span></div>
-          <div class="shortcut-row"><span>Toggle diagram notes</span><span><kbd>⌘/</kbd></span></div>
-          <div class="shortcut-row"><span>Pan canvas</span><span><kbd>Space</kbd> + drag</span></div>
-          <div class="shortcut-row"><span>Zoom</span><span><kbd>⌘</kbd> + scroll</span></div>
-          <div class="shortcut-row"><span>Constrain shape / snap angle</span><span><kbd>⇧</kbd> while drawing</span></div>
-        </div>
+        <h3 id="shortcuts-canvas">Canvas</h3>
+        <table class="shortcut-table">
+          <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+          <tbody>
+            <tr><td>Select tool</td><td><kbd>V</kbd></td></tr>
+            <tr><td>Pen tool</td><td><kbd>P</kbd></td></tr>
+            <tr><td>Rectangle tool</td><td><kbd>R</kbd></td></tr>
+            <tr><td>Ellipse tool</td><td><kbd>E</kbd></td></tr>
+            <tr><td>Line tool</td><td><kbd>L</kbd></td></tr>
+            <tr><td>Arrow tool</td><td><kbd>A</kbd></td></tr>
+            <tr><td>Text tool</td><td><kbd>T</kbd></td></tr>
+            <tr><td>Select all</td><td><kbd>⌘A</kbd></td></tr>
+            <tr><td>Duplicate selection</td><td><kbd>⌘D</kbd></td></tr>
+            <tr><td>Delete selection</td><td><kbd>⌫</kbd></td></tr>
+            <tr><td>Cancel / back to select</td><td><kbd>Esc</kbd></td></tr>
+            <tr><td>Toggle diagram notes</td><td><kbd>⌘/</kbd></td></tr>
+            <tr><td>Pan canvas</td><td><kbd>Space</kbd> + drag</td></tr>
+            <tr><td>Zoom</td><td><kbd>⌘</kbd> + scroll</td></tr>
+            <tr><td>Constrain shape / snap angle</td><td><kbd>⇧</kbd> while drawing</td></tr>
+          </tbody>
+        </table>
 
-        <h3>Editor</h3>
-        <div class="shortcut-table">
-          <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
-          <div class="shortcut-row"><span>Bold</span><span><kbd>⌘B</kbd></span></div>
-          <div class="shortcut-row"><span>Italic</span><span><kbd>⌘I</kbd></span></div>
-          <div class="shortcut-row"><span>Undo / redo</span><span><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd></span></div>
-        </div>
+        <h3 id="shortcuts-editor">Editor</h3>
+        <table class="shortcut-table">
+          <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+          <tbody>
+            <tr><td>Bold</td><td><kbd>⌘B</kbd></td></tr>
+            <tr><td>Italic</td><td><kbd>⌘I</kbd></td></tr>
+            <tr><td>Undo / redo</td><td><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <!-- ── Common Questions ── -->
+      <section id="faq" class="doc-section">
+        <div class="section-label">10</div>
+        <h2>Common Questions</h2>
+
+        <h3 id="faq-free">Is inkwell free?</h3>
+        <p>Yes. inkwell is free and open source, built by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. There is no paid tier, no trial period, and no account required.</p>
+
+        <h3 id="faq-offline">Does inkwell work offline?</h3>
+        <p>Yes. inkwell is local-first — every note is a plain <code>.md</code> file stored in a vault folder on your own computer, with no sync server and no internet connection required to read or write notes.</p>
+
+        <h3 id="faq-obsidian">Can I use my existing Obsidian vault?</h3>
+        <p>Yes. inkwell's vault format is Obsidian-compatible — point inkwell at the same folder as an existing Obsidian vault and it will load the notes it finds.</p>
+
+        <h3 id="faq-telemetry">Does inkwell collect any data or run telemetry?</h3>
+        <p>No. inkwell the app runs no telemetry or usage tracking of any kind. The only outbound network requests happen if you opt in to GitHub Sync or the Claude MCP integration, and both talk directly to the service you configure — not to coros-hq. See the <a href="/privacy">Privacy page</a> for full detail.</p>
+
+        <h3 id="faq-platforms">What platforms does inkwell support?</h3>
+        <p>macOS, Windows, and Linux, with native <code>.dmg</code>, <code>.exe</code>, and <code>.deb</code> builds for each.</p>
+
+        <h3 id="faq-claude">How does inkwell's Claude integration work?</h3>
+        <p>inkwell ships a native Rust MCP server bundled inside the app. It communicates with Claude Desktop or any MCP-compatible client over stdio using JSON-RPC 2.0, letting Claude list, read, search, and write notes directly in your vault.</p>
       </section>
 
     </main>
@@ -507,6 +541,7 @@ tags: [writing, ideas]
       </div>
       <p class="footer-copy">An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.</p>
       <a href="/privacy" class="footer-docs">Privacy</a>
+      <a href="/blog" class="footer-docs">Blog</a>
       <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
@@ -579,7 +614,7 @@ tags: [writing, ideas]
   }
   h1 { font-size: 36px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
   h2 { font-size: 28px; font-weight: 300; letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
-  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 32px 0 10px; letter-spacing: -0.01em; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 32px 0 10px; letter-spacing: -0.01em; scroll-margin-top: 80px; }
 
   .lead { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 32px; max-width: 680px; }
 
@@ -656,12 +691,13 @@ tags: [writing, ideas]
   .mcp-tool p { font-size: 13px; margin: 0; max-width: none; color: var(--text-2); }
 
   /* ── Shortcut table ── */
-  .shortcut-table { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0 28px; max-width: 560px; }
-  .shortcut-row { display: grid; grid-template-columns: 1fr auto; padding: 10px 16px; font-size: 13.5px; border-bottom: 1px solid var(--border); align-items: center; gap: 24px; }
-  .shortcut-row:last-child { border-bottom: none; }
-  .shortcut-row.header { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); background: var(--bg-card); }
-  .shortcut-row > span:first-child { color: var(--text-2); }
-  .shortcut-row > span:last-child { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .shortcut-table { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0 28px; max-width: 560px; border-collapse: collapse; width: 100%; }
+  .shortcut-table th, .shortcut-table td { padding: 10px 16px; font-size: 13.5px; border-bottom: 1px solid var(--border); text-align: left; }
+  .shortcut-table tbody tr:last-child th, .shortcut-table tbody tr:last-child td { border-bottom: none; }
+  .shortcut-table thead th { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); background: var(--bg-card); }
+  .shortcut-table td:first-child { color: var(--text-2); }
+  .shortcut-table td:last-child { white-space: nowrap; }
+  .shortcut-table td kbd { display: inline-flex; align-items: center; gap: 4px; }
 
   /* ── Footer ── */
   footer { border-top: 1px solid var(--border); padding: 28px 32px; margin-top: 0; }
@@ -687,6 +723,7 @@ tags: [writing, ideas]
     .mcp-tool { grid-template-columns: 1fr; gap: 6px; }
     .nav-links { display: none; }
     footer { padding: 28px 20px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
 </style>
 

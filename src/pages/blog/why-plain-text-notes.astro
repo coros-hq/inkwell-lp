@@ -1,0 +1,237 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { GITHUB_URL, RELEASE_URL } from "../../consts";
+
+const title = "Why your notes should just be text files";
+const description = "Apps come and go. Plain .md files outlive all of them. Here's what a vault folder actually buys you, and how inkwell's frontmatter and Obsidian compatibility make it painless.";
+const datePublished = "2026-07-08";
+const dateModified = "2026-07-08";
+
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  datePublished,
+  dateModified,
+  url: "https://inkwell-lp.vercel.app/blog/why-plain-text-notes",
+  author: { "@id": "https://inkwell-lp.vercel.app/#organization" },
+  publisher: { "@id": "https://inkwell-lp.vercel.app/#organization" },
+  mainEntityOfPage: "https://inkwell-lp.vercel.app/blog/why-plain-text-notes",
+};
+---
+
+<Layout title={`inkwell — ${title}`} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="wordmark">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="26" height="26" />
+        inkwell
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#canvas">Canvas</a>
+        <a href="/#themes">Themes</a>
+        <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+        <a href="/docs">Docs</a>
+        <a href="/blog" class="nav-active">Blog</a>
+      </div>
+      <a href={RELEASE_URL} class="btn-nav" target="_blank" rel="noopener">Download</a>
+    </div>
+  </nav>
+
+  <!-- ── Content ── -->
+  <main class="post-content">
+    <a href="/blog" class="back-link">← Blog</a>
+    <div class="section-label">July 8, 2026 · 5 min read</div>
+    <h1>{title}</h1>
+    <p class="lead">
+      Every note app promises to be the last one you'll ever need. Most of
+      them are lying — not maliciously, just because software gets
+      discontinued, companies get acquired, and file formats get abandoned.
+      The only note-taking decision that survives all three is refusing to
+      lock your notes inside an app at all.
+    </p>
+
+    <h2>A vault is just a folder</h2>
+    <p>
+      In inkwell, a <strong>vault</strong> is any folder on your computer.
+      There's no import step, no proprietary database, no hidden binary
+      format. Every note is a real <code>.md</code> file sitting in a real
+      directory, exactly where you can see it in Finder, Explorer, or a
+      terminal. Delete inkwell entirely and your notes are still there,
+      still readable, still yours — because they were never actually
+      "inside" the app to begin with. inkwell just renders them nicely.
+    </p>
+
+    <h2>Frontmatter does the organizing, quietly</h2>
+    <p>
+      Every note gets automatic YAML frontmatter the moment you create it —
+      an ID, a title, creation and update timestamps, a pinned flag, tags.
+      You never have to write it by hand, but it's sitting right there in
+      plain text if you ever want to edit it directly or script against it:
+    </p>
+    <div class="code-block">
+      <div class="code-block-header">Note frontmatter</div>
+      <pre><code>---
+id: note_abc123
+title: My Note
+created: 2025-01-15T10:30:00.000Z
+updated: 2025-06-01T09:14:00.000Z
+pinned: false
+tags: [writing, ideas]
+---</code></pre>
+    </div>
+    <p>
+      This is the part that matters most for durability: metadata that
+      lives <em>in</em> the file travels with the file. Copy a note to
+      another machine, sync it through a folder-syncing tool of your
+      choice, or open it in a completely different editor — the tags and
+      timestamps come with it, because they were never stored in a
+      separate database that could get out of sync or left behind.
+    </p>
+
+    <h2>Compatible with the vault you already have</h2>
+    <p>
+      If you've already built up an Obsidian vault, you don't have to
+      choose between the two. inkwell's vault format is Obsidian-compatible
+      — point it at the same folder, and it loads every <code>.md</code>{" "}
+      file it finds, preserving your existing structure exactly. Try
+      inkwell on real notes without a migration step, and keep using
+      whichever editor fits the moment.
+    </p>
+
+    <h2>Plain text plays well with everything else</h2>
+    <p>
+      Because a vault is just files in a folder, it plugs into tools that
+      have nothing to do with note-taking. Put it under version control and
+      every edit becomes a diffable commit. Back it up with whatever backup
+      tool you already trust — the same one that backs up your photos and
+      documents. Search it with <code>grep</code> or an OS-level search tool
+      when inkwell's own <kbd>⌘K</kbd> search isn't handy. None of that
+      works if your notes are locked in a proprietary format only one app
+      can open.
+    </p>
+
+    <div class="callout">
+      <strong>The test worth applying to any note-taking tool:</strong> if
+      the company behind it disappeared tomorrow, would your notes still
+      open? For a vault of <code>.md</code> files, the answer is always
+      yes.
+    </div>
+
+    <p class="post-cta-text">
+      Read more about how vaults, frontmatter, and file storage work in the{" "}
+      <a href="/docs#getting-started">Getting Started docs</a>.
+    </p>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/inkwell-icon.svg" alt="inkwell" width="20" height="20" />
+        <span>inkwell</span>
+      </div>
+      <p class="footer-copy">
+        An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.
+      </p>
+      <a href="/privacy" class="footer-docs">Privacy</a>
+      <a href="/docs" class="footer-docs">Docs</a>
+      <a href="/blog" class="footer-docs">Blog</a>
+      <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ── Nav (shared pattern) ── */
+  nav {
+    position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px);
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; gap: 32px;
+  }
+  .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; flex-shrink: 0; }
+  .wordmark img { border-radius: 7px; }
+  .nav-links { display: flex; align-items: center; gap: 24px; flex: 1; }
+  .nav-links a { font-size: 14px; color: var(--text-2); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-active { color: var(--text) !important; font-weight: 500; }
+  .btn-nav {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: 8px; background: var(--accent-dim);
+    border: 1px solid rgba(196,131,42,0.25); color: var(--accent-light); flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-nav:hover { background: rgba(196,131,42,0.22); border-color: rgba(196,131,42,0.38); }
+
+  /* ── Content ── */
+  .post-content { max-width: 680px; margin: 0 auto; padding: 56px 32px 96px; }
+  .back-link { display: inline-block; font-size: 13.5px; color: var(--text-2); margin-bottom: 24px; transition: color 0.15s; }
+  .back-link:hover { color: var(--text); }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  h1 { font-size: 34px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; line-height: 1.2; }
+  h2 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--text); margin: 40px 0 14px; line-height: 1.3; }
+  .lead { font-size: 16px; color: var(--text-2); line-height: 1.75; margin-bottom: 8px; }
+  p { font-size: 15px; color: var(--text-2); line-height: 1.8; margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  code { font-family: "SF Mono","Fira Code",monospace; font-size: 12.5px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; color: var(--accent-light); }
+  kbd {
+    display: inline-block; font-family: "SF Mono",monospace; font-size: 11px;
+    background: var(--bg-subtle); border: 1px solid var(--border-mid);
+    border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px;
+    color: var(--text); line-height: 1.5;
+  }
+  a { color: var(--accent-light); transition: color 0.12s; }
+  a:hover { color: var(--accent); }
+  .post-content p a { text-decoration: underline; text-decoration-color: rgba(212, 152, 64, 0.4); text-underline-offset: 2px; }
+  .post-content p a:hover { text-decoration-color: var(--accent); }
+
+  .code-block { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; margin: 20px 0; }
+  .code-block-header { font-size: 11px; font-weight: 500; color: var(--text-3); padding: 8px 14px; background: var(--bg-card); border-bottom: 1px solid var(--border); letter-spacing: 0.02em; }
+  .code-block pre { margin: 0; padding: 16px 18px; background: var(--bg-raised); overflow-x: auto; }
+  .code-block pre code { background: none; padding: 0; font-size: 12.5px; color: var(--text-2); line-height: 1.7; }
+
+  .callout {
+    background: var(--accent-dim); border: 1px solid rgba(196,131,42,0.2);
+    border-radius: 10px; padding: 16px 20px; font-size: 14px; color: var(--text-2);
+    line-height: 1.7; margin: 24px 0;
+  }
+  .callout strong { color: var(--accent-light); }
+
+  .post-cta-text { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 14px; }
+
+  /* ── Footer (shared pattern) ── */
+  footer { border-top: 1px solid var(--border); padding: 28px 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
+  .footer-brand img { border-radius: 5px; }
+  .footer-copy { flex: 1; font-size: 13px; color: var(--text-3); }
+  .footer-copy a { color: var(--text-2); text-decoration: underline; text-decoration-color: rgba(154, 142, 126, 0.4); text-underline-offset: 2px; }
+  .footer-copy a:hover { color: var(--text); text-decoration-color: var(--text); }
+  .footer-gh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; }
+  .footer-gh:hover { color: var(--text); }
+  .footer-docs { font-size: 13px; color: var(--text-2); transition: color 0.15s; flex-shrink: 0; margin-right: 8px; }
+  .footer-docs:hover { color: var(--text); }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .post-content { padding: 40px 20px 72px; }
+    h1 { font-size: 28px; }
+    footer { padding: 28px 20px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
