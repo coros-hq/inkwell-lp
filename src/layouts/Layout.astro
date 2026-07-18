@@ -1,6 +1,7 @@
 ---
 import Analytics from '@vercel/analytics/astro';
 import { APP_VERSION, APP_DESCRIPTION, GITHUB_URL } from '../consts';
+import { THEME_STORAGE_KEY, themePalettes } from '../themes';
 
 interface Props {
   title?: string;
@@ -50,6 +51,19 @@ const softwareApplicationSchema = {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script define:vars={{ themePalettes, THEME_STORAGE_KEY }} is:inline>
+      (function () {
+        try {
+          var name = localStorage.getItem(THEME_STORAGE_KEY);
+          var palette = name && themePalettes[name];
+          if (!palette) return;
+          var root = document.documentElement;
+          for (var key in palette) {
+            root.style.setProperty(key, palette[key]);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />

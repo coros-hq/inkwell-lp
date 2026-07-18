@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { APP_VERSION, GITHUB_URL } from "../consts";
+import { THEME_STORAGE_KEY, DEFAULT_THEME, themePalettes } from "../themes";
 
 const VERSION = APP_VERSION;
 // Linked via GitHub's stable /latest/download/ redirect rather than a pinned
@@ -64,130 +65,6 @@ const themes = [
   { name: "Gruvbox", bg: "#282828", accent: "#D79921", light: false },
   { name: "Fog", bg: "#F4F6FA", accent: "#3A6ACC", light: true },
 ];
-
-// Full palette per theme — used by client-side JS
-const themePalettes = {
-  Midnight: {
-    "--bg": "#1C1A17",
-    "--bg-raised": "#212018",
-    "--bg-card": "#252219",
-    "--bg-subtle": "#2D2A22",
-    "--border": "rgba(255,255,255,0.07)",
-    "--border-mid": "rgba(255,255,255,0.11)",
-    "--accent": "#C4832A",
-    "--accent-light": "#D49840",
-    "--accent-dim": "rgba(196,131,42,0.15)",
-    "--text": "#F0EDE8",
-    "--text-2": "#9A8E7E",
-    "--text-3": "#5A5044",
-    "--nav-bg": "rgba(28,26,23,0.88)",
-  },
-  Parchment: {
-    "--bg": "#F5F2EC",
-    "--bg-raised": "#F0EDE5",
-    "--bg-card": "#EDE9E1",
-    "--bg-subtle": "#E5E0D5",
-    "--border": "rgba(0,0,0,0.08)",
-    "--border-mid": "rgba(0,0,0,0.14)",
-    "--accent": "#9A5E22",
-    "--accent-light": "#B06E28",
-    "--accent-dim": "rgba(154,94,34,0.12)",
-    "--text": "#2A2015",
-    "--text-2": "#6A5A42",
-    "--text-3": "#A89878",
-    "--nav-bg": "rgba(245,242,236,0.9)",
-  },
-  Ink: {
-    "--bg": "#0E1018",
-    "--bg-raised": "#131621",
-    "--bg-card": "#171B26",
-    "--bg-subtle": "#1E2333",
-    "--border": "rgba(255,255,255,0.07)",
-    "--border-mid": "rgba(255,255,255,0.11)",
-    "--accent": "#5599E8",
-    "--accent-light": "#70AAEF",
-    "--accent-dim": "rgba(85,153,232,0.15)",
-    "--text": "#E8EDF5",
-    "--text-2": "#8892A8",
-    "--text-3": "#505870",
-    "--nav-bg": "rgba(14,16,24,0.9)",
-  },
-  Dusk: {
-    "--bg": "#0E0C17",
-    "--bg-raised": "#130F1E",
-    "--bg-card": "#181224",
-    "--bg-subtle": "#1F1830",
-    "--border": "rgba(255,255,255,0.07)",
-    "--border-mid": "rgba(255,255,255,0.11)",
-    "--accent": "#A866E8",
-    "--accent-light": "#BA80F0",
-    "--accent-dim": "rgba(168,102,232,0.15)",
-    "--text": "#EDE8F5",
-    "--text-2": "#8878A8",
-    "--text-3": "#504868",
-    "--nav-bg": "rgba(14,12,23,0.9)",
-  },
-  Forest: {
-    "--bg": "#0B1410",
-    "--bg-raised": "#0F1A14",
-    "--bg-card": "#121F17",
-    "--bg-subtle": "#172A1E",
-    "--border": "rgba(255,255,255,0.07)",
-    "--border-mid": "rgba(255,255,255,0.11)",
-    "--accent": "#42C870",
-    "--accent-light": "#58D882",
-    "--accent-dim": "rgba(66,200,112,0.15)",
-    "--text": "#E8F5EE",
-    "--text-2": "#7A9E88",
-    "--text-3": "#446854",
-    "--nav-bg": "rgba(11,20,16,0.9)",
-  },
-  Sepia: {
-    "--bg": "#EFE8D8",
-    "--bg-raised": "#EAE2D0",
-    "--bg-card": "#E4DBC8",
-    "--bg-subtle": "#DAD0BC",
-    "--border": "rgba(0,0,0,0.08)",
-    "--border-mid": "rgba(0,0,0,0.14)",
-    "--accent": "#8A3818",
-    "--accent-light": "#A04520",
-    "--accent-dim": "rgba(138,56,24,0.12)",
-    "--text": "#2A1A0E",
-    "--text-2": "#6A4A32",
-    "--text-3": "#A8886E",
-    "--nav-bg": "rgba(239,232,216,0.9)",
-  },
-  Gruvbox: {
-    "--bg": "#282828",
-    "--bg-raised": "#2E2E2E",
-    "--bg-card": "#333333",
-    "--bg-subtle": "#3A3A3A",
-    "--border": "rgba(255,255,255,0.08)",
-    "--border-mid": "rgba(255,255,255,0.14)",
-    "--accent": "#D79921",
-    "--accent-light": "#E8AE30",
-    "--accent-dim": "rgba(215,153,33,0.15)",
-    "--text": "#EBDBB2",
-    "--text-2": "#A89880",
-    "--text-3": "#686858",
-    "--nav-bg": "rgba(40,40,40,0.9)",
-  },
-  Fog: {
-    "--bg": "#F4F6FA",
-    "--bg-raised": "#EFF2F8",
-    "--bg-card": "#E8EDF5",
-    "--bg-subtle": "#DDE4EF",
-    "--border": "rgba(0,0,0,0.07)",
-    "--border-mid": "rgba(0,0,0,0.12)",
-    "--accent": "#3A6ACC",
-    "--accent-light": "#4A7ADE",
-    "--accent-dim": "rgba(58,106,204,0.12)",
-    "--text": "#1A2035",
-    "--text-2": "#5A6888",
-    "--text-3": "#9AA8C8",
-    "--nav-bg": "rgba(244,246,250,0.9)",
-  },
-};
 ---
 
 <Layout>
@@ -2315,8 +2192,8 @@ const themePalettes = {
   }
 </style>
 
-<script define:vars={{ themePalettes }}>
-  function applyTheme(name) {
+<script define:vars={{ themePalettes, THEME_STORAGE_KEY, DEFAULT_THEME }}>
+  function applyTheme(name, persist) {
     const palette = themePalettes[name];
     if (!palette) return;
     const root = document.documentElement;
@@ -2335,23 +2212,34 @@ const themePalettes = {
         swatch.style.boxShadow = "";
       }
     });
+    if (persist) {
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, name);
+      } catch (e) {}
+    }
   }
 
   document.querySelectorAll(".theme-swatch").forEach((swatch) => {
     swatch.setAttribute("tabindex", "0");
     swatch.setAttribute("role", "button");
     swatch.setAttribute("aria-label", `Apply ${swatch.dataset.theme} theme`);
-    swatch.addEventListener("click", () => applyTheme(swatch.dataset.theme));
+    swatch.addEventListener("click", () => applyTheme(swatch.dataset.theme, true));
     swatch.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        applyTheme(swatch.dataset.theme);
+        applyTheme(swatch.dataset.theme, true);
       }
     });
   });
 
-  // Boot with Midnight active
-  applyTheme("Midnight");
+  // Boot with the visitor's saved theme (Layout.astro already applied its CSS
+  // variables before paint — this just syncs the swatch UI to match).
+  let bootTheme = DEFAULT_THEME;
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored && themePalettes[stored]) bootTheme = stored;
+  } catch (e) {}
+  applyTheme(bootTheme, false);
 
   // ── OS detection: highlight & scale the matching download button ──────────
   (function () {
