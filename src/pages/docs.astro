@@ -29,6 +29,7 @@ const sections = [
         inkwell
       </a>
       <div class="nav-links">
+        <a href="/#whats-new">What's new</a>
         <a href="/#features">Features</a>
         <a href="/#canvas">Canvas</a>
         <a href="/#themes">Themes</a>
@@ -113,8 +114,25 @@ const sections = [
         <h2>Editor</h2>
         <p class="lead">inkwell uses CodeMirror 6 for a fast, distraction-free writing experience with live markdown syntax highlighting.</p>
 
-        <h3>Split view</h3>
-        <p>Click the split-view icon in the toolbar (or press <kbd>⌘⇧P</kbd>) to open a rendered preview alongside the editor. The preview updates live as you type. Click the icon again to return to the focused editor.</p>
+        <h3>Normal mode &amp; Markdown mode</h3>
+        <p>Every note opens in <strong>Normal mode</strong>: a single, distraction-free editor with a live-preview style borrowed from Obsidian and Typora. The raw Markdown delimiters — <code>#</code>, <code>**</code>, <code>~~</code>, <code>&gt;</code>, list markers, link URLs — are hidden and the text is styled in place, so a heading looks like a heading while you write. Move the cursor onto a line and its delimiters reappear so you can edit them; move away and they hide again.</p>
+        <p>Click the columns icon in the editor header to put that note into <strong>Markdown mode</strong> — a split view with the plain Markdown source on the left and a fully rendered, scroll-synced preview on the right. Drag the divider to rebalance the two panes; the ratio is remembered across notes and restarts. The mode is stored per note, so you can leave reference notes in Markdown mode and keep prose in Normal mode.</p>
+        <p>In both modes, a slim <strong>outline rail</strong> runs down the right edge — one bar per heading, sized by level. The section at the top of the viewport is highlighted as you scroll, giving you a quick map of a long note.</p>
+
+        <h3>Slash commands</h3>
+        <p>At the start of a line, type <code>/</code> to open a command menu for inserting block and inline elements without remembering the syntax:</p>
+        <div class="code-block">
+          <div class="code-block-header">Slash commands</div>
+          <pre><code>/heading1  /heading2  /heading3
+/bullet    /numbered  /todo
+/quote     /code      /table
+/divider   /highlight /bold  /italic
+/video     → embed a YouTube, Vimeo, or Loom link</code></pre>
+        </div>
+        <p>Type <code>@</code> anywhere to link another note, and the abbreviation trigger (<code>:</code> by default) to expand snippets — see <a href="#organisation">Note links</a> and <a href="#abbreviations-anchor">Abbreviations</a> below.</p>
+
+        <h3>Vim mode</h3>
+        <p>Vim keybindings are off by default. Turn them on in <strong>Settings → Editor → Vim mode</strong> and they apply to every note, in both Normal and Markdown mode. You get modal editing (<kbd>Esc</kbd> for normal mode, <kbd>i</kbd>/<kbd>a</kbd> to insert), motions and operators (<code>dw</code>, <code>ciw</code>, <code>yy</code>, …), <code>/</code> to search, and <code>:</code> commands, with a Vim status line at the bottom of the editor. Notes autosave, so there's no need to <code>:w</code>.</p>
 
         <h3>Markdown support</h3>
         <p>inkwell renders full GitHub Flavored Markdown including tables, task lists, strikethrough, code blocks with syntax highlighting, blockquotes, inline images, and footnotes.</p>
@@ -138,6 +156,20 @@ const note = "write here"
 ```</code></pre>
         </div>
 
+        <h3>LaTeX math</h3>
+        <p>Mathematical notation is rendered with KaTeX. Wrap inline math in single dollar signs and display math in double dollar signs. For multi-line formulas, use a fenced <code>math</code> (or <code>latex</code>) code block so you never have to escape a <code>$</code>. Math renders live in the preview and is carried through to HTML and PDF exports.</p>
+        <div class="code-block">
+          <div class="code-block-header">Math examples</div>
+          <pre><code>{`Inline: $E = mc^2$
+
+Display:
+$$\\int_0^1 x^2 \\, dx = \\tfrac{1}{3}$$
+
+\`\`\`math
+\\frac{\\partial \\Psi}{\\partial t} = \\hat{H}\\,\\Psi
+\`\`\``}</code></pre>
+        </div>
+
         <h3>Frontmatter</h3>
         <p>Every note gets automatic YAML frontmatter on creation. You can edit it directly or leave it alone — inkwell uses it to store metadata like tags, pinned state, and timestamps.</p>
         <div class="code-block">
@@ -155,7 +187,7 @@ tags: [writing, ideas]
         <h3>Font &amp; display settings</h3>
         <p>Open <strong>Settings → Editor</strong> to adjust the font family (sans-serif, serif, or monospace), font size, and line spacing. Changes apply instantly without restarting.</p>
 
-        <h3>Abbreviations</h3>
+        <h3 id="abbreviations-anchor">Abbreviations</h3>
         <p>Type the trigger character followed by a key to expand it into text as you type, or pick it from the autocomplete dropdown. Five date/time shortcuts are built in:</p>
         <div class="code-block">
           <div class="code-block-header">Built-in abbreviations</div>
@@ -272,7 +304,9 @@ tags: [writing, ideas]
         <h2>Organisation</h2>
 
         <h3>Folders &amp; notes</h3>
-        <p>The sidebar shows your vault's folder structure. Create folders with the <strong>+</strong> button next to any folder, or drag notes between folders to reorganise. Folders map 1:1 to real directories on disk.</p>
+        <p>The sidebar shows your vault's folder structure. Folders map 1:1 to real directories on disk.</p>
+        <p>Press <kbd>⌘⇧F</kbd> or use the New Folder button to open the New Folder dialog — it lets you pick the parent folder, or drop the new folder at the library root, rather than only nesting it under the current selection.</p>
+        <p>Drag notes and folders in the sidebar to reorder, nest, and un-nest them. A drop indicator follows the cursor so you can see exactly where an item will land, and moving a folder relocates its whole subtree on disk.</p>
         <p>Double-click any note or folder name (or right-click → Rename) to rename it inline. The file on disk is renamed at the same time.</p>
 
         <h3>Pinned notes</h3>
@@ -300,7 +334,8 @@ tags: [writing, ideas]
       <section id="themes" class="doc-section">
         <div class="section-label">05</div>
         <h2>Themes</h2>
-        <p class="lead">inkwell ships with eight hand-crafted themes. Switch any time from <strong>Settings → Themes</strong>.</p>
+        <p class="lead">inkwell ships with ten hand-crafted themes. Switch any time from <strong>Settings → Themes</strong> — the change applies instantly across the editor, sidebar, and code highlighting.</p>
+        <p><strong>Graphite</strong> and <strong>Onyx</strong> are the newest: a light and a dark pair of minimal, near-grayscale themes in the style of Notion, for when you want the page to disappear entirely.</p>
 
         <div class="theme-table">
           <div class="theme-row header">
@@ -315,6 +350,8 @@ tags: [writing, ideas]
             ["Sepia", "Light warm", "#EFE8D8"],
             ["Gruvbox", "Retro dark", "#282828"],
             ["Fog", "Light cool", "#F4F6FA"],
+            ["Graphite", "Light grayscale, Notion-style", "#FFFFFF"],
+            ["Onyx", "Dark grayscale, Notion-style", "#1A1A1A"],
           ].map(([name, mood, bg]) => (
             <div class="theme-row">
               <span class="theme-name-cell">{name}</span>
@@ -346,11 +383,11 @@ tags: [writing, ideas]
           </div>
           <div class="export-card">
             <strong>HTML</strong>
-            <p>Self-contained HTML file with inline styles that match the current theme. Open in any browser.</p>
+            <p>Self-contained HTML file with inline styles that match the current theme. Rendered KaTeX math and syntax-highlighted code are baked in. Open in any browser.</p>
           </div>
           <div class="export-card">
             <strong>PDF</strong>
-            <p>Rendered via the system print dialog. Choose paper size and margins before saving.</p>
+            <p>Rendered via the system print dialog, with math and code highlighting intact. Choose paper size and margins before saving.</p>
           </div>
         </div>
 
@@ -459,9 +496,12 @@ tags: [writing, ideas]
         <h3>Global</h3>
         <div class="shortcut-table">
           <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
-          <div class="shortcut-row"><span>New note</span><span><kbd>⌘N</kbd></span></div>
+          <div class="shortcut-row"><span>Quick Note (capture window)</span><span><kbd>⌘N</kbd></span></div>
+          <div class="shortcut-row"><span>New note</span><span><kbd>⌘⇧N</kbd></span></div>
+          <div class="shortcut-row"><span>New folder</span><span><kbd>⌘⇧F</kbd></span></div>
           <div class="shortcut-row"><span>Search all notes</span><span><kbd>⌘K</kbd></span></div>
-          <div class="shortcut-row"><span>Toggle split preview</span><span><kbd>⌘⇧P</kbd></span></div>
+          <div class="shortcut-row"><span>Toggle sidebar</span><span><kbd>⌘B</kbd></span></div>
+          <div class="shortcut-row"><span>Find in note</span><span><kbd>⌘F</kbd></span></div>
           <div class="shortcut-row"><span>Undo</span><span><kbd>⌘Z</kbd></span></div>
           <div class="shortcut-row"><span>Redo</span><span><kbd>⌘⇧Z</kbd></span></div>
         </div>

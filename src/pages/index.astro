@@ -19,13 +19,18 @@ const features = [
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>`,
-    title: "Write and see at once",
-    body: "A split view shows your Markdown rendered live as you type. Or collapse to a full-screen editor when you need to focus on the words alone.",
+    title: "Normal mode or Markdown mode",
+    body: "Write in a distraction-free editor that styles Markdown inline as you type — or flip any note into Markdown mode: raw source on one side, a live scroll-synced preview on the other.",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-16M12 20l4-16"/><path d="M3 9h6M15 15h6"/></svg>`,
+    title: "LaTeX math",
+    body: "Type <code>$E=mc^2$</code> inline, <code>$$…$$</code> for display math, or a fenced <code>```math</code> block. KaTeX renders it live in the editor and preview — and it carries into HTML and PDF exports.",
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`,
-    title: "Eight themes",
-    body: "Midnight, Parchment, Ink, Dusk, Forest, Sepia, Gruvbox, Fog — each one tuned for long writing sessions. Build your own with the custom theme editor.",
+    title: "Ten themes",
+    body: "Midnight, Parchment, Ink, Dusk, Forest, Sepia, Gruvbox, Fog, plus the new Notion-inspired Graphite and Onyx — each tuned for long writing sessions. Build your own with the custom theme editor.",
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>`,
@@ -52,6 +57,11 @@ const features = [
     title: "Link notes with @",
     body: "Type <code>@</code> and start typing a title to search your vault and drop in a link to another note — no copy-pasting, no leaving the keyboard.",
   },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg>`,
+    title: "Vim mode",
+    body: "Prefer modal editing? Turn on Vim keybindings in Settings — motions, operators, and <code>:</code> commands, with a status line under the editor. Works in both Normal and Markdown mode.",
+  },
 ];
 
 const themes = [
@@ -63,6 +73,8 @@ const themes = [
   { name: "Sepia", bg: "#EFE8D8", accent: "#8A3818", light: true },
   { name: "Gruvbox", bg: "#282828", accent: "#D79921", light: false },
   { name: "Fog", bg: "#F4F6FA", accent: "#3A6ACC", light: true },
+  { name: "Graphite", bg: "#FFFFFF", accent: "#171717", light: true },
+  { name: "Onyx", bg: "#1A1A1A", accent: "#D9D9D9", light: false },
 ];
 
 // Full palette per theme — used by client-side JS
@@ -187,6 +199,36 @@ const themePalettes = {
     "--text-3": "#9AA8C8",
     "--nav-bg": "rgba(244,246,250,0.9)",
   },
+  Graphite: {
+    "--bg": "#FFFFFF",
+    "--bg-raised": "#F7F7F7",
+    "--bg-card": "#F2F2F2",
+    "--bg-subtle": "#EBEBEB",
+    "--border": "rgba(0,0,0,0.09)",
+    "--border-mid": "rgba(0,0,0,0.16)",
+    "--accent": "#1F1F1F",
+    "--accent-light": "#3D3D3D",
+    "--accent-dim": "rgba(23,23,23,0.06)",
+    "--text": "#191919",
+    "--text-2": "#6B6B6B",
+    "--text-3": "#9B9B9B",
+    "--nav-bg": "rgba(255,255,255,0.9)",
+  },
+  Onyx: {
+    "--bg": "#1A1A1A",
+    "--bg-raised": "#1F1F1F",
+    "--bg-card": "#242424",
+    "--bg-subtle": "#2C2C2C",
+    "--border": "rgba(255,255,255,0.08)",
+    "--border-mid": "rgba(255,255,255,0.14)",
+    "--accent": "#D9D9D9",
+    "--accent-light": "#F0F0F0",
+    "--accent-dim": "rgba(217,217,217,0.14)",
+    "--text": "#E8E8E8",
+    "--text-2": "#9B9B9B",
+    "--text-3": "#6B6B6B",
+    "--nav-bg": "rgba(26,26,26,0.9)",
+  },
 };
 ---
 
@@ -199,6 +241,7 @@ const themePalettes = {
         inkwell
       </a>
       <div class="nav-links">
+        <a href="#whats-new">What's new</a>
         <a href="#features">Features</a>
         <a href="#canvas">Canvas</a>
         <a href="#themes">Themes</a>
@@ -315,6 +358,65 @@ const themePalettes = {
             <div class="mock-line mock-code">```</div>
             <div class="mock-cursor"></div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What's new ───────────────────────────────────────── -->
+  <section class="whatsnew" id="whats-new">
+    <div class="section-inner">
+      <div class="whatsnew-head">
+        <div class="section-label">Changelog</div>
+        <span class="whatsnew-pill">v{VERSION} · Latest release</span>
+      </div>
+      <h2>What's new<br /><span class="muted">in {VERSION}.</span></h2>
+
+      <div class="whatsnew-grid">
+        <div class="whatsnew-item">
+          <h3>LaTeX math, everywhere</h3>
+          <p>
+            Inline <code>$…$</code>, display <code>$$…$$</code>, and fenced
+            <code>```math</code> blocks, rendered live with KaTeX in the editor and
+            preview — and carried into HTML and PDF exports.
+          </p>
+        </div>
+        <div class="whatsnew-item">
+          <h3>Markdown mode</h3>
+          <p>
+            A per-note toggle splits any note into raw Markdown and a live,
+            scroll-synced preview. Drag the divider to rebalance the panes, or
+            switch back to the distraction-free editor.
+          </p>
+        </div>
+        <div class="whatsnew-item">
+          <h3>Vim mode</h3>
+          <p>
+            Turn on Vim keybindings in <strong>Settings&nbsp;→&nbsp;Editor</strong> —
+            modal editing, motions, and <code>:</code> commands, with a status line
+            under the editor.
+          </p>
+        </div>
+        <div class="whatsnew-item">
+          <h3>Graphite &amp; Onyx themes</h3>
+          <p>
+            Two Notion-inspired grayscale themes — Graphite in light, Onyx in dark —
+            bringing the built-in theme count to ten.
+          </p>
+        </div>
+        <div class="whatsnew-item">
+          <h3>Create a folder anywhere</h3>
+          <p>
+            The New Folder dialog now lets you choose the parent folder — or drop it
+            at the library root — instead of only nesting under the current one.
+          </p>
+        </div>
+        <div class="whatsnew-item">
+          <h3>Sharper drag &amp; drop</h3>
+          <p>
+            Reorder, nest, and un-nest notes and folders with a drop indicator that
+            follows the cursor. Moving a folder relocates its whole subtree on disk.
+          </p>
         </div>
       </div>
     </div>
@@ -637,7 +739,7 @@ const themePalettes = {
       <div class="section-label">Themes</div>
       <h2>A theme for<br /><span class="muted">every mood.</span></h2>
       <p class="section-sub">
-        Eight hand-crafted themes. Switch in one click from Settings.
+        Ten hand-crafted themes, including the Notion-inspired Graphite and Onyx. Switch in one click from Settings.
       </p>
 
       <div class="themes-grid">
@@ -1353,14 +1455,14 @@ const themePalettes = {
     color: var(--accent);
   }
   .mock-text {
-    color: rgba(240, 237, 232, 0.7);
+    color: var(--text-2);
   }
   .mock-bold {
     font-weight: 600;
     color: var(--text);
   }
   .mock-list {
-    color: rgba(240, 237, 232, 0.6);
+    color: var(--text-2);
     padding-left: 4px;
   }
   .mock-code {
@@ -1371,7 +1473,8 @@ const themePalettes = {
   .mock-code-inner {
     font-family: "SF Mono", monospace;
     font-size: 10.5px;
-    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-2);
+    background: var(--bg-subtle);
     padding: 2px 8px;
     border-radius: 3px;
   }
@@ -1436,6 +1539,63 @@ const themePalettes = {
     margin-bottom: 48px;
   }
 
+  /* ── What's new ───────────────────────────────────────────── */
+  .whatsnew {
+    padding: 100px 32px;
+    border-top: 1px solid var(--border);
+  }
+  .whatsnew-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .whatsnew-head .section-label {
+    margin-bottom: 0;
+  }
+  .whatsnew-pill {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent-light);
+    background: var(--accent-dim);
+    border: 1px solid var(--border-mid);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .whatsnew-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .whatsnew-item {
+    padding: 28px 30px 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .whatsnew-item h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .whatsnew-item p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+  .whatsnew-item code {
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 12.5px;
+    background: var(--bg-subtle);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--accent-light);
+  }
+
   /* ── Features ─────────────────────────────────────────────── */
   .features {
     padding: 100px 32px;
@@ -1445,6 +1605,8 @@ const themePalettes = {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
   .feature-card {
     padding: 32px 32px 36px;
@@ -1457,24 +1619,6 @@ const themePalettes = {
   }
   .feature-card:hover {
     border-color: var(--border-mid);
-  }
-  .feature-card:nth-child(1) {
-    border-radius: var(--radius-lg) 0 0 0;
-  }
-  .feature-card:nth-child(2) {
-    border-radius: 0 var(--radius-lg) 0 0;
-  }
-  .feature-card:nth-child(3) {
-    border-radius: 0;
-  }
-  .feature-card:nth-child(4) {
-    border-radius: 0;
-  }
-  .feature-card:nth-child(5) {
-    border-radius: 0 0 0 var(--radius-lg);
-  }
-  .feature-card:nth-child(6) {
-    border-radius: 0 0 var(--radius-lg) 0;
   }
   .feature-icon {
     width: 38px;
@@ -2274,6 +2418,9 @@ const themePalettes = {
     .features-grid {
       grid-template-columns: 1fr;
     }
+    .whatsnew-grid {
+      grid-template-columns: 1fr;
+    }
     .feature-card {
       border-radius: var(--radius) !important;
     }
@@ -2294,6 +2441,7 @@ const themePalettes = {
     h1 {
       font-size: 36px;
     }
+    .whatsnew,
     .features,
     .themes-section,
     .details {
