@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/audit-data.json": {
-    "mtime": 1789934027.2053704,
-    "ast_hash": "30ef755d274bdda727c7c4edc42a510c",
+    "mtime": 1784275236.1656427,
+    "ast_hash": "342d251df04aa1f1afd6c8d3349efaa5",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/_metrics.json": {
@@ -640,8 +640,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1789934887.7215514,
-    "ast_hash": "690800f6c1a082120d7ce310e477b5da",
+    "mtime": 1784296421.2588243,
+    "ast_hash": "c090922fa3d2705122564197b827ee56",
     "semantic_hash": ""
   },
   "scripts/print-csp-hashes.mjs": {
@@ -660,23 +660,23 @@
     "semantic_hash": ""
   },
   "src/layouts/Layout.astro": {
-    "mtime": 1789934910.9973304,
-    "ast_hash": "63fc46064c4d3cc3103cabed60c0b668",
+    "mtime": 1789052627.5933576,
+    "ast_hash": "58c333546874a55ade92af3e9a8b25a4",
     "semantic_hash": ""
   },
   "src/pages/docs.astro": {
-    "mtime": 1789935068.3786442,
-    "ast_hash": "20bc4e97bd73fe015c618c94ec18aed5",
+    "mtime": 1789052415.226624,
+    "ast_hash": "aa8450da915717521b0fc7f75bd7a4ba",
     "semantic_hash": ""
   },
   "src/pages/index.astro": {
-    "mtime": 1789934940.2620966,
-    "ast_hash": "b822d741d213b411fce9fc3ebf84228b",
+    "mtime": 1789052223.5418065,
+    "ast_hash": "0b3ca9f2382c672b1efc3c4eab828dad",
     "semantic_hash": ""
   },
   "src/pages/privacy.astro": {
-    "mtime": 1789934948.9341161,
-    "ast_hash": "3a793c21e1d1a38826723c5e7b77d15b",
+    "mtime": 1784303959.6172254,
+    "ast_hash": "55012f70e3d06853722b290bcafa0334",
     "semantic_hash": ""
   },
   "tsconfig.json": {
@@ -685,8 +685,8 @@
     "semantic_hash": ""
   },
   "vercel.json": {
-    "mtime": 1789934932.7973688,
-    "ast_hash": "df473f49981377215329259161fda2a6",
+    "mtime": 1784296393.4351056,
+    "ast_hash": "d84dcb5dc95a6240103afea3a8f88ad9",
     "semantic_hash": ""
   },
   "README.md": {
@@ -1845,13 +1845,13 @@
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/ACTION-PLAN.md": {
-    "mtime": 1789933988.0541387,
-    "ast_hash": "3f90da1662d03155efa94a3b203d9f1d",
+    "mtime": 1784275236.1653244,
+    "ast_hash": "9078731aa81c1ef8fef26ae8ddc26822",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/FULL-AUDIT-REPORT.md": {
-    "mtime": 1789933971.5044985,
-    "ast_hash": "eaca4c823b0f11b4d0983d514f5e79ae",
+    "mtime": 1784275236.165496,
+    "ast_hash": "185653b496658199b95c2cc5cb899516",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/backlinks.md": {
@@ -1860,23 +1860,23 @@
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/content.md": {
-    "mtime": 1789933837.2221732,
-    "ast_hash": "fed6b361b1a7452e1e47a064ab30de0d",
+    "mtime": 1784275236.1664898,
+    "ast_hash": "a41407314d91280a6db734f8aac310f1",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/geo.md": {
-    "mtime": 1789933877.4067838,
-    "ast_hash": "c779a2334cb15bccf50527662040a234",
+    "mtime": 1784275236.166632,
+    "ast_hash": "79ce2173d879fbf615a94144532605cb",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/performance.md": {
-    "mtime": 1789933900.2329056,
-    "ast_hash": "9be8178d0662828034a255fe57f22d57",
+    "mtime": 1784275236.1668088,
+    "ast_hash": "3047d53d47dbb3bbd4cfa508ccf2b55f",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/schema.md": {
-    "mtime": 1789933801.048866,
-    "ast_hash": "13a5056f35d075f786015ea19720bd4b",
+    "mtime": 1784275236.16696,
+    "ast_hash": "438ad8dd413f268f5c6232a3879877bc",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/sitemap.md": {
@@ -1885,13 +1885,13 @@
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/sxo.md": {
-    "mtime": 1789933856.7321522,
-    "ast_hash": "4a6d7a7b9fd69cacc071586dea159aa2",
+    "mtime": 1784275236.1672733,
+    "ast_hash": "8462d7fcfea23730597f13d5e3f6fc34",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/technical.md": {
-    "mtime": 1789934244.861286,
-    "ast_hash": "3757632e8beb67758a66dae4a30dfeba",
+    "mtime": 1784275236.1674154,
+    "ast_hash": "903278a5655a9895ad6b827677d70344",
     "semantic_hash": ""
   },
   "inkwell-lp.vercel.app-audit/findings/visual.md": {
@@ -2027,11 +2027,6 @@
   "src/assets/inkwell-icon.svg": {
     "mtime": 1784214509.7944536,
     "ast_hash": "48020023260851ba4854e2bd9fe94056",
-    "semantic_hash": ""
-  },
-  "inkwell-lp.vercel.app-audit/findings/GEO-ANALYSIS.md": {
-    "mtime": 1789934762.1723702,
-    "ast_hash": "1a262a09d8f66d73f4338c48c73c25cc",
     "semantic_hash": ""
   }
 }

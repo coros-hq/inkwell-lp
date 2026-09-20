@@ -1,16 +1,16 @@
-# Graph Report - inkwell-lp  (2026-09-20)
+# Graph Report - inkwell-lp  (2026-09-10)
 
 ## Corpus Check
-- 347 files · ~560,809 words
+- 346 files · ~569,633 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4281 nodes · 4846 edges · 343 communities (304 shown, 39 thin omitted)
+- 4276 nodes · 4844 edges · 339 communities (300 shown, 39 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 111 edges (avg confidence: 0.72)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b38a4714`
+- Built from commit: `87464f23`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -344,10 +344,6 @@
 - [[_COMMUNITY_test_load_oauth_token_remediates_legacy_0o644|test_load_oauth_token_remediates_legacy_0o644]]
 - [[_COMMUNITY_test_validate_url_blocks_obfuscated_bypasses|test_validate_url_blocks_obfuscated_bypasses]]
 - [[_COMMUNITY_vercel.json|vercel.json]]
-- [[_COMMUNITY_Firecrawl Setup Guide|Firecrawl Setup Guide]]
-- [[_COMMUNITY_Deprecated Schema.org rich result types (2024–2026)|Deprecated Schema.org rich result types (2024–2026)]]
-- [[_COMMUNITY_query_history|query_history]]
-- [[_COMMUNITY_1.7.0 - 2026-03-28|[1.7.0] - 2026-03-28]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Command List` - 27 edges
@@ -356,10 +352,10 @@
 4. `Changelog` - 24 edges
 5. `generate_report()` - 22 edges
 6. `_make_finding()` - 19 edges
-7. `../layouts/Layout.astro` - 19 edges
-8. `validate_url_strict()` - 18 edges
-9. `Excluded Competitor Domains` - 18 edges
-10. `Google SEO APIs` - 17 edges
+7. `validate_url_strict()` - 18 edges
+8. `Excluded Competitor Domains` - 18 edges
+9. `Google SEO APIs` - 17 edges
+10. `render_page()` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `analyze_text()` --references--> `features`  [EXTRACTED]
@@ -376,7 +372,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (343 total, 39 thin omitted)
+## Communities (339 total, 39 thin omitted)
 
 ### Community 0 - "run_comparison"
 Cohesion: 0.05
@@ -459,12 +455,12 @@ Cohesion: 0.06
 Nodes (30): AI-Generated Images: `DigitalSourceType` (Merchant Center requirement), Alt Text, CDN Usage, Checks, CLS Prevention, `decoding="async"` for Non-LCP Images, Detected lazy-loader methods (`lazy_method` field), Error Handling (+22 more)
 
 ### Community 20 - "../layouts/Layout.astro"
-Cohesion: 0.06
-Nodes (36): @fontsource/inter/300.css, @fontsource/inter/300-italic.css, @fontsource/inter/400.css, @fontsource/inter/400-italic.css, @fontsource/inter/500.css, @fontsource/inter/600.css, @vercel/analytics/astro, dependencies (+28 more)
+Cohesion: 0.08
+Nodes (25): @vercel/analytics/astro, dependencies, astro, @astrojs/sitemap, @vercel/analytics, engines, node, name (+17 more)
 
 ### Community 21 - "BOFU Page Brief Generator"
-Cohesion: 0.20
-Nodes (9): AI Compatibility, BOFU Page Brief Generator, Example, Inputs, Output, Prompt, See Also, Source Note (+1 more)
+Cohesion: 0.06
+Nodes (27): AI Compatibility, BOFU Page Brief Generator, Example, Inputs, Output, Prompt, See Also, Source Note (+19 more)
 
 ### Community 22 - "Google-Supported LocalBusiness Subtypes"
 Cohesion: 0.07
@@ -615,16 +611,16 @@ Cohesion: 0.10
 Nodes (19): 1. Discovery, 2. Competitive Analysis, 3. Architecture Design, 4. Content Strategy, 5. Technical Foundation, 6. Implementation Roadmap (4 phases), DataForSEO Integration (Optional), Deliverables (+11 more)
 
 ### Community 60 - "README.md"
-Cohesion: 0.23
-Nodes (3): Commands Reference, Overview, Quick Reference
+Cohesion: 0.13
+Nodes (9): Commands Reference, Overview, Quick Reference, Deprecated Schema.org rich result types (2024–2026), Earlier (pre-v2 baseline) retirements, Primary sources, Replacement decision table, Retired July 31, 2025 (+1 more)
 
 ### Community 61 - "Common Operations"
 Cohesion: 0.11
 Nodes (18): 1. Generate with green screen prompt, 2. Remove green screen (ImageMagick), 3. Clean edges + trim (ImageMagick), 4. Alternative (FFmpeg, better for batch), Animation (GIF/Video from Multiple Frames), Background Removal (Transparency), Batch Processing, Color Adjustments (+10 more)
 
 ### Community 62 - "Firecrawl Extension for Claude SEO"
-Cohesion: 0.18
-Nodes (11): Commands, Cost, Firecrawl Extension for Claude SEO, Installation, Integration with Claude SEO, Links, macOS / Linux, Prerequisites (+3 more)
+Cohesion: 0.11
+Nodes (17): 1. Get Your API Key, 2. Run the Installer, 3. Manual MCP Configuration, 4. Verify Installation, 5. Understanding Credits, Firecrawl Setup Guide, Commands, Cost (+9 more)
 
 ### Community 63 - "Excluded Competitor Domains"
 Cohesion: 0.11
@@ -668,7 +664,7 @@ Nodes (17): Community Footer, Error Handling, Industry Detection, Optional Exten
 
 ### Community 74 - "Technical SEO Audit — inkwell-lp.vercel.app"
 Cohesion: 0.11
-Nodes (18): 1. `/docs` and `/docs/` still both return 200 with identical content — no redirect, 2. CSP `style-src` still relies on `'unsafe-inline'`, 3. Render-blocking Google Fonts request (no self-hosting) — unresolved from prior audit, 4. Custom branded 404 page still not implemented, 5. JSON-LD `SoftwareApplication` type reused on non-software pages, and its `url` field is wrong on both, 6. IndexNow protocol still not implemented, Agent-Friendly Pages / Accessibility Tree, AI Crawler Management (+10 more)
+Nodes (17): 10. Custom 404 page not implemented — Vercel platform default is served, 1. `robots.txt` returns 404 (missing entirely), 2. `sitemap.xml` returns 404 (missing entirely), 3. No canonical tags on either page, 4. Missing security headers (X-Content-Type-Options, X-Frame-Options/CSP frame-ancestors, Content-Security-Policy, Referrer-Policy, Permissions-Policy), 5. No JSON-LD structured data, 6. No Open Graph image or Twitter Card meta tags, 7. Version number inconsistency between pages (content-quality / trust signal) (+9 more)
 
 ### Community 75 - "Installation Guide"
 Cohesion: 0.12
@@ -711,8 +707,8 @@ Cohesion: 0.22
 Nodes (15): _bing_request(), compare_links(), get_link_counts(), get_link_details(), main(), _normalize_site_url(), _rate_limit(), Normalize a site URL for Bing API (needs trailing slash for domains). (+7 more)
 
 ### Community 85 - "get_api_key"
-Cohesion: 0.21
-Nodes (13): get_api_key(), Get the Google API key from config or environment.      Returns:         API key, Remove Google API keys from exception/output strings., redact_google_api_key(), analyse(), main(), _percentile(), _query_crux() (+5 more)
+Cohesion: 0.18
+Nodes (14): detect_trends(), main(), query_history(), Analyze p75 timeseries to detect trends.      Compares the average of the last 4, Query CrUX History API for weekly CWV trends.      Args:         url_or_origin:, get_api_key(), Get the Google API key from config or environment.      Returns:         API key, Remove Google API keys from exception/output strings. (+6 more)
 
 ### Community 86 - "pagespeed_check.py"
 Cohesion: 0.20
@@ -747,12 +743,12 @@ Cohesion: 0.12
 Nodes (15): 4-Dimension Scoring Rubric, Aggregation and Prioritization, Dimension 1: Relevance (0-25), Dimension 2: Clarity (0-25), Dimension 3: Trust (0-25), Dimension 4: Action (0-25), Output Format, Persona-Based Scoring Methodology (+7 more)
 
 ### Community 94 - "Search Experience Optimization (SXO) Findings"
-Cohesion: 0.29
-Nodes (6): Carried-over findings (2026-07-16 audit, unchanged pending full SERP re-run), Confirmed current page structure (2026-09-20 fetch), Limitations, Status of this run, SXO Findings — inkwell-lp.vercel.app, SXO Gap Score: 54/100 (carried over, unverified this session — full re-run recommended)
+Cohesion: 0.12
+Nodes (15): Cross-Skill Recommendations, `/docs` — `Hybrid` leaning `Tool/Reference`, Headline Finding: Page-Type Mismatch — HIGH severity, Homepage — `Landing Page`, Limitations, Missing page types entirely, Page Classification (Taxonomy-Based), Persona-Based Scoring (+7 more)
 
 ### Community 95 - "SEO Audit — inkwell-lp.vercel.app"
-Cohesion: 0.13
-Nodes (15): AI Search Readiness (GEO) — 61/100 (up from 42/100), Content Quality — 78/100, Executive Summary, Images — ~92/100 (not independently re-audited; adjusted from confirmed og:image fix), On-Page SEO — ~72/100 (not independently re-audited this cycle), Performance — 86/100 (flat vs. 87/100 in July), Schema & Structured Data — 58/100 (up from 28/100), SEO Audit — inkwell-lp.vercel.app (+7 more)
+Cohesion: 0.12
+Nodes (16): AI Search Readiness (GEO) — 42/100, Content Quality — 54/100, Executive Summary, Images — 82/100, On-Page SEO — 58/100, Performance — 87/100, Schema & Structured Data — 28/100, SEO Audit — inkwell-lp.vercel.app (+8 more)
 
 ### Community 96 - "seo-backlinks.md"
 Cohesion: 0.13
@@ -799,16 +795,16 @@ Cohesion: 0.13
 Nodes (3): Tests for scripts/url_safety.py.  These tests exercise the SSRF policy, DNS-rebi, The non-blocking lock raises rather than corrupts state., test_pin_dns_lock_refuses_concurrent_entry()
 
 ### Community 107 - "Structured Data / Schema.org Audit — inkwell-lp.vercel.app"
-Cohesion: 0.17
-Nodes (11): 1. Detection Results, 2. Validation Results, 3. Missing Opportunities, 4. Recommended JSON-LD (ready to paste), 5. Summary, `/docs` — JSON-LD (verbatim), `/docs` — replace the duplicated `SoftwareApplication` block with `WebPage`, Errors / Issues Found (+3 more)
+Cohesion: 0.13
+Nodes (14): 1. Detection Results, 2. Severity Assessment, 3. Validation Checklist, 4.1 SoftwareApplication (Homepage) — Recommend: Add, 4.2 WebSite (Homepage) — Recommend: Add, 4.3 Organization / Publisher — Recommend: Add (as a lightweight `publisher` node, not a standalone heavy Organization page), 4.4 `/docs` page — Recommend: No forced schema, OR minimal `WebPage` (isPartOf WebSite) only, 4. Missing Opportunities & Judgment Calls (+6 more)
 
 ### Community 108 - "Execution Steps"
 Cohesion: 0.14
 Nodes (13): 1. Fetch and Parse Target Page, 2. SERP Analysis, 3. Page-Type Mismatch Detection, 4. User Story Derivation, 5. Gap Analysis, 6. Persona Scoring, 7. Wireframe (Only if requested), Audit Persistence (+5 more)
 
 ### Community 109 - "Changelog"
-Cohesion: 0.12
-Nodes (16): [1.0.0] - 2026-02-07, [1.6.0] - 2026-03-23, [1.7.1] - 2026-03-30, [1.9.6] - 2026-04-26, [2.1.0] - 2026-05-25, Added, Added, Added (+8 more)
+Cohesion: 0.14
+Nodes (14): [1.0.0] - 2026-02-07, [1.6.0] - 2026-03-23, [1.7.0] - 2026-03-28, [1.7.1] - 2026-03-30, Added, Added, Added, Architecture (+6 more)
 
 ### Community 110 - "Common Issues"
 Cohesion: 0.14
@@ -867,8 +863,8 @@ Cohesion: 0.15
 Nodes (12): 1. Use real interactive elements, 2. Label associations, 3. Interactive target size, 4. Don't cover interactive nodes with transparent overlays, 5. Layout stability, 6. `cursor: pointer` as a legitimate signal, 7. Stable, meaningful selectors, Agent-friendly pages — audit reference (May 2026) (+4 more)
 
 ### Community 124 - "Performance & Core Web Vitals Audit — inkwell-lp.vercel.app"
-Cohesion: 0.18
-Nodes (6): Core Web Vitals status (lab-estimated), Other observations, Performance / Core Web Vitals Audit, Recommendations (prioritized by expected impact), Root cause: Google Fonts render-blocking chain — NOT fixed, Summary
+Cohesion: 0.15
+Nodes (12): 1. Render-blocking Google Fonts request chain (primary LCP bottleneck — both pages), 2. Element render delay dominates LCP on both pages, 3. DOM size — not currently a problem, but worth watching, 4. No image-related LCP/CLS risk, 5. Third-party script (Vercel Analytics) is not a bottleneck, Core Web Vitals — Docs (`/docs`), Core Web Vitals — Homepage (`/`), Data Provenance (+4 more)
 
 ### Community 125 - "Sitemap Audit — inkwell-lp.vercel.app"
 Cohesion: 0.15
@@ -907,8 +903,8 @@ Cohesion: 0.17
 Nodes (11): Bing Webmaster Tools (Tier 2), Common Crawl Web Graph (Always Available), Confidence Weighting, Data Quality Reality Check, Five Systematic Biases in Free Data, Free Backlink Data Sources, Moz API (Tier 1), Source Comparison (+3 more)
 
 ### Community 134 - "Content Quality Audit — inkwell-lp.vercel.app"
-Cohesion: 0.25
-Nodes (7): AI Citation Readiness Score: 80/100 (up from 62), Content Quality Audit — inkwell-lp.vercel.app (Updated 2026-09-20), Content Quality Score: 78/100 (up from 54), E-E-A-T Breakdown, Resolved since July 2026, Still open / new findings, Top Recommendations (priority order)
+Cohesion: 0.17
+Nodes (12): AI Citation Readiness Score: 62/100, Content Quality Audit — inkwell-lp.vercel.app, Content Quality Score: 54/100, E-E-A-T Breakdown, Finding 1: Version number mismatch between homepage and docs (v0.6.0 vs v0.4.8), Finding 2: Homepage meta description contradicts on-page hero content ("macOS" vs "every platform"), Finding 3: Docs page still describes inkwell as macOS-only (product-scope drift, not just a metadata issue), Finding 4: No About, Contact, Privacy Policy, Terms, License, or Changelog pages anywhere on the site (+4 more)
 
 ### Community 135 - "Claude SEO: Multi-Platform Agent Instructions"
 Cohesion: 0.18
@@ -955,12 +951,12 @@ Cohesion: 0.18
 Nodes (10): 1. Landing Page, 2. Blog Post, 3. Product Page, 4. Hybrid (Service + Content), 5. Service Page, 6. Comparison Page, 7. Local Page, 8. Tool / Interactive (+2 more)
 
 ### Community 146 - "FULL-AUDIT-REPORT.md"
-Cohesion: 0.25
-Nodes (7): Action Plan — inkwell-lp.vercel.app, Done since July (no action needed), Effort vs. Impact Summary, Phase 1: Quick Fixes (this week), Phase 2: Structural Improvements (next 2-3 weeks), Phase 3: Content & Authority (month 2), Phase 4: Monitoring & Next-Cycle Re-Verification
+Cohesion: 0.18
+Nodes (6): Action Plan — inkwell-lp.vercel.app, Effort vs. Impact Summary, Phase 1: Critical Fixes (Week 1), Phase 2: High-Impact Improvements (Weeks 2-3), Phase 3: Content & Authority (Month 2), Phase 4: Monitoring & Iteration (Ongoing)
 
 ### Community 147 - "GEO / AI Search Readiness Audit — inkwell-lp.vercel.app"
 Cohesion: 0.18
-Nodes (11): AI Crawler Access, Brand Mention / Naming Collision Risk — unresolved, Changes Since Prior Audit (2026-07-16), Citability, GEO / AI Search Readiness — inkwell-lp.vercel.app, GEO Health Score: 61/100, llms.txt — FIXED since prior audit (2026-07-16), Platform-Specific Estimate (+3 more)
+Nodes (11): 1. AI Crawler Accessibility, 2. llms.txt Status: **Missing — high-value, low-effort opportunity**, 3. Passage-Level Citability of Docs Content, 4. Authority & Brand Signals, 5. Technical Accessibility for AI Crawlers, Files referenced during this audit, GEO / AI Search Readiness Audit — inkwell-lp.vercel.app, GEO Readiness Score: 42 / 100 (+3 more)
 
 ### Community 148 - "seo-google.md"
 Cohesion: 0.20
@@ -1435,8 +1431,8 @@ Cohesion: 0.60
 Nodes (4): check(), main(), parse_args(), Namespace
 
 ### Community 269 - "lcp_subparts.py"
-Cohesion: 0.13
-Nodes (14): AI Crawler Access Status, Authority & Brand Signals Detail, Brand Mention Analysis — the most important new finding this pass, Content Reformatting Suggestions, GEO / AI Search Optimization Analysis — inkwell-lp.vercel.app, GEO Readiness Score: 58/100, llms.txt Status: Present, well-formed, low citation-ranking weight, Multi-Modal Content (+6 more)
+Cohesion: 0.70
+Nodes (4): analyse(), main(), _percentile(), _query_crux()
 
 ### Community 270 - "preload_check.py"
 Cohesion: 0.60
@@ -1531,47 +1527,31 @@ Cohesion: 0.67
 Nodes (3): [1.9.5] - 2026-04-26, Added, License
 
 ### Community 295 - "[1.9.6] - 2026-04-26"
-Cohesion: 0.20
-Nodes (9): AI Compatibility, Conversion Audit Prompt, Example, Inputs, Output, Prompt, See Also, Source Note (+1 more)
+Cohesion: 0.67
+Nodes (3): [1.9.6] - 2026-04-26, Security, Tests
 
 ### Community 296 - "[2.1.0] - 2026-05-25"
-Cohesion: 0.20
-Nodes (9): AI Compatibility, Dual-Surface Content Scorecard, Example, Inputs, Output, Prompt, See Also, Source Note (+1 more)
-
-### Community 339 - "Firecrawl Setup Guide"
-Cohesion: 0.25
-Nodes (6): 1. Get Your API Key, 2. Run the Installer, 3. Manual MCP Configuration, 4. Verify Installation, 5. Understanding Credits, Firecrawl Setup Guide
-
-### Community 340 - "Deprecated Schema.org rich result types (2024–2026)"
-Cohesion: 0.29
-Nodes (6): Deprecated Schema.org rich result types (2024–2026), Earlier (pre-v2 baseline) retirements, Primary sources, Replacement decision table, Retired July 31, 2025, Retired June 19, 2025
-
-### Community 341 - "query_history"
-Cohesion: 0.47
-Nodes (5): detect_trends(), main(), query_history(), Analyze p75 timeseries to detect trends.      Compares the average of the last 4, Query CrUX History API for weekly CWV trends.      Args:         url_or_origin:
-
-### Community 342 - "[1.7.0] - 2026-03-28"
-Cohesion: 0.50
-Nodes (4): [1.7.0] - 2026-03-28, Added, Changed, Security
+Cohesion: 0.67
+Nodes (3): [2.1.0] - 2026-05-25, Added, Changed
 
 ## Knowledge Gaps
-- **2338 isolated node(s):** `$schema`, `name`, `name`, `description`, `plugins` (+2333 more)
+- **2331 isolated node(s):** `$schema`, `name`, `name`, `description`, `plugins` (+2326 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **39 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `analyze_text()` connect `get_api_key` to `../layouts/Layout.astro`, `pagespeed_check.py`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `features` connect `../layouts/Layout.astro` to `get_api_key`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `URLSafetyError` connect `url_safety.py` to `validate_url_strict`, `sync_flow.py`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `Changelog` connect `Changelog` to `[1.1.0] - 2026-02-07`, `[1.4.0] - 2026-03-12`, `[1.9.7] - 2026-05-09`, `[1.2.0] - 2026-02-19`, `[1.3.0] - 2026-03-06`, `[1.5.0] - 2026-03-19`, `[1.6.1] - 2026-03-27`, `[1.8.1] - 2026-04-06`, `[1.8.2] - 2026-04-10`, `[1.9.0] - 2026-04-14`, `[1.9.8] - 2026-05-09`, `[1.2.1] - 2026-02-28`, `[1.7.2] - 2026-03-30`, `[1.9.5] - 2026-04-26`, `[1.9.6] - 2026-04-26`, `[2.1.0] - 2026-05-25`, `Migrating from claude-seo v1.x to v2.0.0`, `[1.9.9] - 2026-05-11`, `[2.0.0] - 2026-05-17`, `[2.2.0] - 2026-06-12`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `Migrating from claude-seo v1.x to v2.0.0` connect `Migrating from claude-seo v1.x to v2.0.0` to `What's new in v2`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Are the 5 inferred relationships involving `run_comparison()` (e.g. with `fetch_cwv_data()` and `fetch_page_data()`) actually correct?**
   _`run_comparison()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `$schema`, `name`, `name` to the rest of the system?**
-  _2715 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2708 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `run_comparison` be split into smaller, more focused modules?**
   _Cohesion score 0.053821800090456805 - nodes in this community are weakly interconnected._
 - **Should `google_report.py` be split into smaller, more focused modules?**

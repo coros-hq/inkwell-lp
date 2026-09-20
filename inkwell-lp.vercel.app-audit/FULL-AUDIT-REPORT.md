@@ -1,159 +1,172 @@
 # SEO Audit — inkwell-lp.vercel.app
 
-**Audit date:** 2026-07-16
+**Audit date:** 2026-09-20 (re-audit; prior baseline 2026-07-16)
 **Business type:** SaaS / open-source desktop software — free local-first markdown editor for macOS, Windows, and Linux
-**Site scope:** 2 pages (`/` homepage, `/docs` documentation), Astro v6 static site, hosted on Vercel
+**Site scope:** 3 pages (`/` homepage, `/docs`, `/privacy` — new since July), Astro v6 static site, hosted on Vercel
 
-## SEO Health Score: 55 / 100
+## SEO Health Score: 77 / 100 (up from 55 / 100)
 
-| Category | Weight | Score |
+| Category | Weight | Score (Jul → Sep) |
 |---|---|---|
-| Technical SEO | 22% | 52 |
-| Content Quality | 23% | 54 |
-| On-Page SEO | 20% | 58 |
-| Schema / Structured Data | 10% | 28 |
-| Performance (CWV) | 10% | 87 |
-| AI Search Readiness (GEO) | 10% | 42 |
-| Images | 5% | 82 |
+| Technical SEO | 22% | 52 → **88** |
+| Content Quality | 23% | 54 → **78** |
+| On-Page SEO | 20% | 58 → **72**\* |
+| Schema / Structured Data | 10% | 28 → **58** |
+| Performance (CWV) | 10% | 87 → **86** |
+| AI Search Readiness (GEO) | 10% | 42 → **61** |
+| Images | 5% | 82 → **92** |
 
-Supplementary (not in weighted score): Search Experience (SXO) 54/100 · Authority & Backlinks — insufficient data for a numeric score, structural finding flagged below.
+\*On-Page and Images were not re-run as standalone specialist passes this cycle; scores are adjusted from cross-referenced evidence in the Technical/Content/Schema findings (title/meta fix, og:image confirmed live) rather than an independent re-audit. Treat as directional, not final.
+
+Supplementary: Search Experience (SXO) — 54/100, **carried over from July, not independently re-verified this cycle** (the SXO pass hit a turn limit before completing a fresh SERP pull; the one thing it did re-confirm live is that no comparison/alternatives page exists yet). Authority & Backlinks — still no numeric score; the core structural finding (no custom domain) is unchanged.
 
 ---
 
 ## Executive Summary
 
-inkwell is a well-designed, genuinely differentiated product (local-first markdown editor with a built-in drawing canvas, Kanban boards, GitHub sync, and a native Claude MCP server) let down by a set of foundational SEO/technical gaps typical of a fast-shipped 2-page launch site: no structured data, no canonical/sitemap/robots.txt, and — most importantly — a handful of live accuracy bugs that actively undercut the product's own story. The docs content itself is strong and AI-citation-ready; the surrounding technical and metadata layer is not yet doing it justice.
+This is a genuinely strong turnaround. Every Critical finding from the July audit is fixed, and 2 of 3 prior High findings are resolved. The site went from a fast-shipped launch page with foundational gaps to a technically solid, well-secured, mostly-consistent site in about two months. The remaining gaps are now second-tier: a font-loading performance fix that was recommended twice and still isn't done, two schema correctness bugs, an unaddressed license/authority trust gap, and a still-unbuilt comparison page that stays the single highest-strategic-ROI content gap.
 
-### Top 5 Critical Issues
+### What got fixed (verified live)
+1. **robots.txt + sitemap-index.xml** both live and correct (3 URLs: `/`, `/docs/`, `/privacy/`).
+2. **Canonical tags** present on all 3 pages, driven by `site` now being set in `astro.config.mjs`.
+3. **Full security header suite** live: CSP (script-src hardened with SHA-256 hashes, not `unsafe-inline`), HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy — even on the 404 response.
+4. **JSON-LD `SoftwareApplication`** schema added sitewide (was zero before).
+5. **og:image** (1200×630) + full Twitter Card meta now live — social shares are no longer bare text cards.
+6. **Version mismatch eliminated** — single source of truth in `src/consts.ts` (`APP_VERSION="0.7.8"`), consistent everywhere.
+7. **Meta description fixed** — now names macOS, Windows, and Linux (was "for macOS" only).
+8. **`/docs` install steps** now cover all three platforms, not just macOS.
+9. **New `/privacy` page**, linked in both footers, with specific verifiable claims.
+10. **`/llms.txt`** now live and well-formed.
 
-1. **Zero structured data + no canonical tags + no robots.txt/sitemap.xml.** This is a textbook `SoftwareApplication` schema candidate with none in place, and a currently-live duplicate-content bug: `/docs` and `/docs/` both return HTTP 200 with byte-identical HTML and no redirect.
-2. **Version mismatch, live right now.** The homepage shows `v0.6.0`; the `/docs` sidebar shows `v0.4.8`. Confirmed independently by 4 of the 9 specialist audits — a direct trust/E-E-A-T failure and an AI-citation-accuracy risk.
-3. **Title tag and meta description say "for macOS" only**, despite the homepage actively selling Windows (`.exe`) and Linux (`.deb`) downloads. This self-suppresses discovery for roughly two-thirds of the product's own platform support.
-4. **`/docs` breaks on mobile.** The two-column sidebar+content layout does not collapse at 375px — page renders at 592px width, clipping install instructions and shortcut text on every section.
-5. **No custom domain.** Running on the shared `vercel.app` subdomain is a structural SEO liability (no durable backlink equity, brand-trust cost, platform lock-in) independent of current traffic.
+### Top 5 Remaining Issues
+
+1. **Font-loading LCP fix still not implemented** — recommended in July, re-confirmed unresolved by two independent passes. Both pages still load Inter via `fonts.googleapis.com` → `fonts.gstatic.com`; LCP is flat at ~2.96–3.09s (Needs Improvement) despite `preconnect` hints being added as a side effect of the CSP work. This remains the single highest-leverage performance fix available.
+2. **`/docs` JSON-LD `url` field points at the homepage**, not its own canonical `/docs/` — a copy-paste bug in the new schema work. Compounding it, `/docs` duplicates the exact homepage `SoftwareApplication` block instead of using a page-appropriate type, creating entity ambiguity.
+3. **No open-source license declared**, on-site or in the GitHub repo, despite "open source" being part of the product's marketing claim — now the single biggest remaining trust/E-E-A-T gap (Authoritativeness scores 38/100, the weakest sub-factor).
+4. **`/docs` vs `/docs/` still both return 200** with identical content and no redirect — canonical tags mitigate but don't eliminate this; internal nav still links to the non-slash path.
+5. **No comparison/alternatives content** ("inkwell vs Obsidian") — re-confirmed live absent. High-intent queries like "obsidian alternative" remain structurally unaddressable by a single-product landing page.
 
 ### Top 5 Quick Wins
 
-1. Fix the `VERSION` constant mismatch — single source of truth (15 min).
-2. Rewrite title tag + meta description to mention all three platforms (15 min).
-3. Add `robots.txt` (5 min) and canonical tags to `Layout.astro` (15 min — also resolves the `/docs` duplicate).
-4. Paste in the ready-made `SoftwareApplication` + `WebSite` + `Organization` JSON-LD from `findings/schema.md` (~1 hr, no fabricated data required).
-5. Self-host the Inter font to remove the render-blocking Google Fonts chain — the single highest-leverage performance fix.
+1. Self-host the Inter font + `@font-face`, drop the now-redundant Google Fonts preconnect tags (~1 hr, should push LCP into "Good" on both pages — do this now, it's been sitting since July).
+2. Fix the `/docs` JSON-LD `url` field to `https://inkwell-lp.vercel.app/docs/` and differentiate its schema type from the homepage block (~30 min).
+3. Add a 308 redirect from `/docs` → `/docs/` in `vercel.json`, and fix the internal nav link (~30 min).
+4. Declare an actual open-source license on the repo and site footer (~30 min, no design work).
+5. Harden `style-src` in the CSP (currently still `unsafe-inline`, unlike the properly hashed `script-src`) (~30–60 min).
 
 ---
 
-## Technical SEO — 52/100
+## Technical SEO — 88/100
 
-**What works:** Genuinely static/SSR site (confirmed not a SPA — full content in raw HTML with zero JS execution needed), clean single-H1 hierarchy, correct mobile viewport meta, proper HTTP→HTTPS redirect and HSTS, clean URL structure.
+**What works:** robots.txt + sitemap live and correct; canonical tags on all 3 pages; full security header suite including hardened CSP script-src; JSON-LD present; og:image + Twitter Cards live; version consistency fixed via `src/consts.ts`.
 
-**Critical:**
-- `robots.txt` and `sitemap.xml` both 404. No `site` property set in `astro.config.mjs`, blocking the standard `@astrojs/sitemap` fix.
-- No canonical tags anywhere — and `/docs` vs `/docs/` is a live, currently-indexable duplicate-content pair with byte-identical HTML.
+**Medium:**
+- `/docs` and `/docs/` still both return 200 with identical content, no redirect.
+- CSP `style-src` still uses `unsafe-inline` (script-src was hardened, style-src was not) — CSS-injection/exfiltration vector remains open.
+- Google Fonts still render-blocking/cross-origin (see Performance).
 
-**High:**
-- Missing security headers: only `strict-transport-security` present; `X-Content-Type-Options`, `X-Frame-Options`/CSP, `Referrer-Policy`, `Permissions-Policy` all absent. No `vercel.json` exists.
-- No JSON-LD structured data (see Schema section).
-- No `og:image`/Twitter Card meta tags — every social share currently renders as a bare text card.
-
-**Medium:** Version mismatch (see Content section); render-blocking Google Fonts chain (see Performance section).
-
-**Low:** No custom 404 page — Vercel's raw platform default (`text/plain`, 79 bytes) is served instead.
+**Low:**
+- No branded `404.astro` — Vercel's plaintext default still serves (correct status code though).
+- JSON-LD detected on `/docs/` and `/privacy/` too but not diffed per page — worth confirming `SoftwareApplication` isn't wrongly reused on non-software pages (it is, on `/docs` — see Schema).
+- IndexNow protocol not implemented (now unblocked since sitemap exists, low effort).
 
 Full detail: [`findings/technical.md`](findings/technical.md)
 
 ---
 
-## Content Quality — 54/100
+## Content Quality — 78/100
 
-**What works:** `/docs` (~1,474 words, 9 clearly labeled sections) is genuinely strong, fact-dense, AI-citation-ready content — exact file paths, JSON config examples, protocol names, structured shortcut tables.
+**What works:** Version consistency, meta description fixed, `/docs` now has separate install steps for all three platforms, new `/privacy` page gives specific verifiable claims, homepage (~1,000+ words) and `/docs` (~2,500 words, 9 sections) both comfortably clear content-depth floors with genuine topical coverage.
 
 **High:**
-- Version mismatch is a live trust/E-E-A-T failure (v0.6.0 vs v0.4.8).
-- Homepage meta/OG description contradicts the on-page hero content ("for macOS" vs "for every platform").
+- Still no About, Contact, Terms, License, or Changelog pages (all 404). GitHub repo has no declared license despite the "open source" marketing claim — the biggest remaining trust gap.
 
 **Medium:**
-- `/docs` content itself (not just metadata) is still macOS-only — no Windows/Linux install steps despite the homepage selling both.
-- No About, Contact, Privacy Policy, Terms, License, or Changelog pages anywhere. Only external trust anchor is an unlicensed, 48-star GitHub repo under an anonymous org handle.
+- Authoritativeness stays weak (38/100): only signal is an anonymous, unlicensed GitHub org (67 stars), no press/testimonials/named maintainer.
 
-**Low:** Homepage is thin (~300 words) relative to its feature density — several features (Quick Capture, Weekly Planner, Canvas templates) are communicated almost entirely through visual mockups rather than extractable prose.
+**Low:**
+- `/privacy` reuses the `SoftwareApplication` schema verbatim (semantically odd — see Schema).
+- Docs "Abbreviations" section has a static example date now stale relative to today.
 
-E-E-A-T weighted score: ≈43/100 (Trustworthiness is the weakest factor at 40/100, the highest-weighted QRG dimension at 30%).
+E-E-A-T weighted score: ≈61/100 (up from ≈43/100 in July). AI citation readiness: 80/100 (up from 62).
 
 Full detail: [`findings/content.md`](findings/content.md)
 
 ---
 
-## On-Page SEO — 58/100
+## On-Page SEO — ~72/100 (not independently re-audited this cycle)
 
-**What works:** Reasonable title lengths, clean heading hierarchy, low-friction internal navigation.
+**What's confirmed fixed:** Title/meta description now name all three platforms (was the July High finding driving most of the score).
 
-**High:** Title/meta undersell platform support (see Content section — same root cause).
+**Not re-verified this cycle** (carried from July, unconfirmed either way):
+- Whether Claude MCP is still buried as one of six equal-weight homepage tiles.
+- Whether the homepage mobile nav still hides Features/Canvas/Themes/GitHub/Docs with no menu replacement.
 
-**Medium:**
-- Claude MCP — inkwell's most differentiated, lowest-competition feature — is buried as one of six equal-weight tiles on the homepage instead of getting its own section like Canvas and Quick Capture.
-- Homepage mobile nav hides Features/Canvas/Themes/GitHub/Docs links with no hamburger/drawer replacement.
-
-Full detail: cross-referenced across [`findings/content.md`](findings/content.md), [`findings/sxo.md`](findings/sxo.md), and [`findings/visual.md`](findings/visual.md)
+Recommend a dedicated on-page + visual/mobile re-pass next cycle to confirm these.
 
 ---
 
-## Schema & Structured Data — 28/100
+## Schema & Structured Data — 58/100 (up from 28/100)
 
-**Finding:** Complete absence of structured data on both pages — no JSON-LD, microdata, or RDFa anywhere.
+**What works:** `SoftwareApplication` JSON-LD now live on both pages (was zero in July) — syntactically valid, correct `https://schema.org` context, no deprecated types, no fabricated `aggregateRating`.
 
-This is a textbook `SoftwareApplication` candidate: free, cross-platform, downloadable, versioned, with an active Google rich-result type. Ready-to-paste JSON-LD for `SoftwareApplication` + `WebSite` + `Organization` (homepage) and a minimal `WebPage` (`/docs`) has been generated using only real values already in the codebase — no fabricated fields.
+**Critical:**
+- `/docs` JSON-LD `url` field is `https://inkwell-lp.vercel.app/` (homepage) instead of its own canonical `https://inkwell-lp.vercel.app/docs/` — a copy-paste error.
 
-**Do not:** fabricate `aggregateRating`/review data (no real review data exists — risks a Google manual action), or force `FAQPage`/`HowTo` schema onto `/docs` (wrong content shape; `HowTo` is also deprecated for rich results).
+**High:**
+- `/docs` duplicates the exact homepage `SoftwareApplication` block (same name/version/offers, only description differs) instead of a page-appropriate type — creates entity ambiguity for crawlers/AI. Same issue confirmed on `/privacy`.
+- Missing sitewide `Organization` + `WebSite` schema — no publisher/site-level entity anywhere.
 
-Full detail + generated code: [`findings/schema.md`](findings/schema.md)
+**Info:** No `aggregateRating`/reviews — correctly not fabricated (no Google rich-result carousel eligibility as a result, which is the right tradeoff). `FAQPage` correctly not forced onto `/docs`.
+
+Ready-to-paste corrected JSON-LD (verified real values only) is in [`findings/schema.md`](findings/schema.md): `Organization` + `WebSite` for the homepage, and a corrected `WebPage` block for `/docs` with the right canonical URL and `about`/`isPartOf` references instead of a duplicated product entity.
 
 ---
 
-## Performance — 87/100
+## Performance — 86/100 (flat vs. 87/100 in July)
 
-**Real Lighthouse 13.4.0 lab data** (no CrUX/PSI field data available — no Google API credentials in this environment).
+**Lighthouse 13.5.0 (mobile, headless)** — no CrUX/PSI field data available (rate-limited / no field record for this low-traffic domain).
 
 | Page | Score | LCP | CLS | TBT |
 |---|---|---|---|---|
-| Homepage | 89/100 | 2.83s (Needs Improvement) | 0.000 (Good) | 0ms (Good) |
-| Docs | 84/100 | 3.1s (Needs Improvement) | 0.000 (Good) | 0ms (Good) |
+| Homepage | 85/100 | 3.09s (Needs Improvement) | 0.000 (Good) | 0ms (Good) |
+| Docs | 87/100 | 2.96s (Needs Improvement) | 0.000 (Good) | 0ms (Good) |
 
-**Root cause:** A 3-hop render-blocking chain (HTML → `fonts.googleapis.com` CSS → `fonts.gstatic.com` woff2) accounts for an estimated 1,920ms (home) / 2,170ms (docs) of available savings per Lighthouse's own render-blocking insight. CLS and TBT are both essentially perfect — this is purely a font-loading-chain problem, not a layout-shift or JS-blocking problem.
+**Root cause, unchanged since July:** the render-blocking Google Fonts chain (HTML → `fonts.googleapis.com` CSS → `fonts.gstatic.com` woff2) was never fixed. `preconnect` hints were added (likely a side effect of the CSP work), but the actual cross-origin stylesheet request remains — Lighthouse still flags ~1,950ms (home) / ~2,080ms (docs) of available render-blocking savings. LCP is essentially flat vs. July (within measurement noise). CLS and TBT remain solidly "Good" — no regressions from the CSP/accessibility work.
 
-**Fix:** Self-host the Inter font and inline `@font-face` in the existing CSS bundle. Should move LCP into "Good" (<2.5s) territory on both pages.
+**Fix, unchanged recommendation:** self-host the Inter woff2 files with `@font-face` + `<link rel="preload" as="font">`, drop the Google Fonts preconnect tags. Should move LCP into "Good" (≤2.5s) on both pages.
 
 Full detail: [`findings/performance.md`](findings/performance.md)
 
 ---
 
-## AI Search Readiness (GEO) — 42/100
+## AI Search Readiness (GEO) — 61/100 (up from 42/100)
 
-**What works:** Fully SSR'd/static — every fact an AI crawler needs is in the raw first-response HTML. Docs content is fact-dense and quotable. No `noindex`/`noai` directives suppressing eligibility.
+**What works:** `/llms.txt` now live (200) and well-formed (summary, feature list, page links, GitHub source). robots.txt still `Allow: /` for all UAs, unblocking GPTBot/ClaudeBot/PerplexityBot/OAI-SearchBot. Both pages remain fully server-rendered. `SoftwareApplication` JSON-LD present on both pages.
 
-**Medium:**
-- No `llms.txt`, despite the docs page being a near-perfect structural fit for one (9 sections map directly to an llms.txt outline).
-- No heading `id` attributes anywhere on `/docs` — blocks deep-linkable citation and is a prerequisite for a working llms.txt.
-- **Confirmed naming collision:** `en.wikipedia.org/wiki/Inkwell_(software)` documents Apple's discontinued macOS handwriting-recognition feature — a materially bad collision sharing both the name and the macOS/Apple context, against which this 1-month-old project has no counterbalancing authority yet.
+Sub-scores: Citability 60, Structural Readability 40, Multi-Modal 55, Authority/Brand 45, Technical Access 95.
 
-**Low:** Missing `robots.txt` removes explicit AI-crawler signaling (though nothing is currently blocked by its absence).
+**Still unresolved:**
+- `/docs` has 47 heading tags but only 1 carries a real `id` attribute — no deep-linkable citation targets for AI systems, and blocks a truly useful `llms.txt` cross-reference.
+- The Wikipedia "Inkwell (software)" naming collision (Apple's discontinued macOS handwriting feature) is unchanged — still no on-site disambiguation.
+- No `Organization`/`Person`/`FAQPage` schema, no author/date bylines. No RSL licensing file, no `/llms-full.txt`.
+- Headings are noun phrases, not question-form; no section hits the 134–167 word optimal-citation length as a self-contained block.
 
 Full detail: [`findings/geo.md`](findings/geo.md)
 
 ---
 
-## Images — 82/100
+## Images — ~92/100 (not independently re-audited; adjusted from confirmed og:image fix)
 
-**What works:** All `<img>` tags have correct alt text and explicit width/height (proper CLS-prevention practice). No heavy image assets — the site is almost entirely inline SVG/CSS mockups, so there's no image-weight concern.
+**What's confirmed fixed:** og:image (1200×630) is now live — the July High finding (no social preview image) is resolved.
 
-**High:** No `og:image` for social sharing (cross-referenced from Technical/Schema).
+Underlying image practices (correct alt text, explicit width/height, no heavy assets) were not re-verified this cycle but are unlikely to have regressed given no visual/image-specific commits landed.
 
 ---
 
-## Supplementary: Search Experience (SXO) — 54/100
+## Supplementary: Search Experience (SXO) — 54/100 (carried over, not independently re-verified this cycle)
 
-Not part of the weighted Health Score, but a significant strategic finding: **the site has no Comparison Page or persona/use-case content**, while several of its realistic target queries ("obsidian alternative," "best markdown editor") are Comparison-Page-dominated intents in Google's SERPs. A single-product landing page with zero competitor mentions structurally cannot satisfy that intent regardless of copy quality — this is the single highest-ROI content gap identified in the audit.
-
-Persona scoring (0-100): Writer wanting distraction-free editor 66 (Good) · Developer wanting MCP tool 52 · Obsidian power user 48 · Windows/Linux user 48 · Privacy researcher 48.
+The SXO re-audit pass confirmed live that **no comparison/alternatives/persona landing pages exist** (`/alternatives`, `/vs`, `/compare` all absent) — the core July finding still holds. It could not complete a fresh SERP pull or persona re-scoring before hitting its turn limit. Recommend a dedicated, uninterrupted SXO re-run next cycle to confirm whether the score has moved.
 
 Full detail: [`findings/sxo.md`](findings/sxo.md)
 
@@ -161,34 +174,10 @@ Full detail: [`findings/sxo.md`](findings/sxo.md)
 
 ## Supplementary: Authority & Backlinks
 
-No numeric score reported — insufficient data at Tier 0 (no Moz/Bing API keys; domain not yet in Common Crawl, expected for a 1-month-old project, not a quality signal).
+Not re-run this cycle. The core July structural finding — no custom domain, running on the shared `vercel.app` subdomain — was independently reconfirmed as unchanged by the Technical audit (canonical URLs still resolve under `inkwell-lp.vercel.app`).
 
-**Structural finding (High):** No custom domain. `vercel.app` as a whole ranks #374 by PageRank across 106,085 unrelated hosts in Common Crawl — none of that authority is inherited by this specific project. Beyond the measurement noise, this is a durable liability: no backlink equity portability, brand-trust cost, and platform lock-in risk.
-
-**Positive signal:** 48 GitHub stars / 3 forks in ~1 month is reasonable early traction; reciprocal, fully-followable links confirmed between the landing page and its GitHub repo.
-
-Full detail: [`findings/backlinks.md`](findings/backlinks.md)
+Full detail (July baseline): [`findings/backlinks.md`](findings/backlinks.md)
 
 ---
 
-## Visual / Mobile Findings
-
-**High:** `/docs` two-column layout does not collapse on mobile (375px) — 592px page width vs 375px viewport, clipping documentation text on every section. Root cause: `.docs-sidebar` retains a ~572px computed width at the mobile breakpoint instead of switching to `width:100%`/stacking.
-
-**Medium:** Homepage mobile nav has no menu for hidden links (Features/Canvas/Themes/GitHub/Docs).
-
-**What works:** Homepage above-the-fold is solid on both viewports; H1 and primary download CTA both visible without scrolling on mobile. Desktop docs sticky sidebar confirmed working correctly through the full ~10,400px scroll depth.
-
-Full detail + screenshots: [`findings/visual.md`](findings/visual.md), screenshots in [`screenshots/`](screenshots/)
-
----
-
-## Sitemap
-
-No sitemap currently exists. Not strictly necessary for discoverability at 2 pages (both are directly linked and Googlebot will find them via normal crawling), but recommended as a near-zero-cost best practice, especially since `@astrojs/sitemap` auto-regenerates on every build as pages are added.
-
-Full detail: [`findings/sitemap.md`](findings/sitemap.md)
-
----
-
-See [`ACTION-PLAN.md`](ACTION-PLAN.md) for the prioritized, phased implementation plan.
+See [`ACTION-PLAN.md`](ACTION-PLAN.md) for the updated, prioritized implementation plan.

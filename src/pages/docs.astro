@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { APP_VERSION, GITHUB_URL, RELEASE_URL } from "../consts";
 
 const VERSION = APP_VERSION;
+const DOCS_LAST_UPDATED = "20 September 2026";
 
 const sections = [
   { id: "getting-started", label: "Getting Started" },
@@ -20,6 +21,7 @@ const sections = [
 <Layout
   title="inkwell — Documentation"
   description="Everything you need to know about inkwell: editor, canvas, themes, GitHub sync, Claude MCP, and keyboard shortcuts."
+  schemaType="webpage"
 >
   <!-- ── Nav ── -->
   <nav>
@@ -34,7 +36,7 @@ const sections = [
         <a href="/#canvas">Canvas</a>
         <a href="/#themes">Themes</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
-        <a href="/docs" class="nav-active">Docs</a>
+        <a href="/docs/" class="nav-active">Docs</a>
       </div>
       <a href={RELEASE_URL} class="btn-nav" target="_blank" rel="noopener">
         Download
@@ -49,7 +51,7 @@ const sections = [
     <!-- Sidebar -->
     <aside class="docs-sidebar">
       <div class="sidebar-inner">
-        <p class="sidebar-version">v{VERSION}</p>
+        <p class="sidebar-version">v{VERSION} · Updated {DOCS_LAST_UPDATED}</p>
         <nav class="sidebar-nav">
           {sections.map(s => (
             <a href={`#${s.id}`} class="sidebar-link">{s.label}</a>
@@ -71,27 +73,27 @@ const sections = [
         <h1>Getting Started</h1>
         <p class="lead">inkwell is a local-first markdown editor for macOS, Windows, and Linux. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
 
-        <h3>Install on macOS</h3>
+        <h3 id="install-macos">Install on macOS</h3>
         <ol>
           <li>Download the latest <code>.dmg</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Open the disk image and drag <strong>inkwell.app</strong> to <strong>/Applications</strong>.</li>
           <li>On first launch, macOS may show a security prompt — click <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</li>
         </ol>
 
-        <h3>Install on Windows</h3>
+        <h3 id="install-windows">Install on Windows</h3>
         <ol>
           <li>Download the latest <code>.exe</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Run the installer and follow the setup wizard.</li>
           <li>If Windows SmartScreen shows a warning, click <em>More info</em> → <em>Run anyway</em>.</li>
         </ol>
 
-        <h3>Install on Linux</h3>
+        <h3 id="install-linux">Install on Linux</h3>
         <ol>
           <li>Download the latest <code>.deb</code> from the <a href={RELEASE_URL} target="_blank" rel="noopener">Releases page</a>.</li>
           <li>Install it with <code>sudo apt install ./inkwell_{VERSION}_amd64.deb</code>, or double-click it in your file manager if it supports <code>.deb</code> packages.</li>
         </ol>
 
-        <h3>Open a vault</h3>
+        <h3 id="open-a-vault">Open a vault</h3>
         <p>A <strong>vault</strong> is any folder on your computer. inkwell stores all notes as <code>.md</code> files inside it, preserving your folder structure exactly.</p>
         <ol>
           <li>Click <strong>Open Vault</strong> on the welcome screen.</li>
@@ -102,7 +104,7 @@ const sections = [
           <strong>Tip:</strong> Vaults are Obsidian-compatible. If you have an existing Obsidian vault, just point inkwell at the same folder.
         </div>
 
-        <h3>Create your first note</h3>
+        <h3 id="create-first-note">Create your first note</h3>
         <p>Press <kbd>⌘N</kbd> or click the <strong>+</strong> button in the sidebar. Type a title and start writing. Notes are saved automatically — there is no Save button.</p>
       </section>
 
@@ -114,12 +116,12 @@ const sections = [
         <h2>Editor</h2>
         <p class="lead">inkwell uses CodeMirror 6 for a fast, distraction-free writing experience with live markdown syntax highlighting.</p>
 
-        <h3>Normal mode &amp; Markdown mode</h3>
+        <h3 id="normal-markdown-mode">Normal mode &amp; Markdown mode</h3>
         <p>Every note opens in <strong>Normal mode</strong>: a single, distraction-free editor with a live-preview style borrowed from Obsidian and Typora. The raw Markdown delimiters — <code>#</code>, <code>**</code>, <code>~~</code>, <code>&gt;</code>, list markers, link URLs — are hidden and the text is styled in place, so a heading looks like a heading while you write. Move the cursor onto a line and its delimiters reappear so you can edit them; move away and they hide again.</p>
         <p>Click the columns icon in the editor header to put that note into <strong>Markdown mode</strong> — a split view with the plain Markdown source on the left and a fully rendered, scroll-synced preview on the right. Drag the divider to rebalance the two panes; the ratio is remembered across notes and restarts. The mode is stored per note, so you can leave reference notes in Markdown mode and keep prose in Normal mode.</p>
         <p>In both modes, a slim <strong>outline rail</strong> runs down the right edge — one bar per heading, sized by level. The section at the top of the viewport is highlighted as you scroll, giving you a quick map of a long note.</p>
 
-        <h3>Slash commands</h3>
+        <h3 id="slash-commands">Slash commands</h3>
         <p>At the start of a line, type <code>/</code> to open a command menu for inserting block and inline elements without remembering the syntax:</p>
         <div class="code-block">
           <div class="code-block-header">Slash commands</div>
@@ -131,10 +133,10 @@ const sections = [
         </div>
         <p>Type <code>@</code> anywhere to link another note, and the abbreviation trigger (<code>:</code> by default) to expand snippets — see <a href="#organisation">Note links</a> and <a href="#abbreviations-anchor">Abbreviations</a> below.</p>
 
-        <h3>Vim mode</h3>
+        <h3 id="vim-mode">Vim mode</h3>
         <p>Vim keybindings are off by default. Turn them on in <strong>Settings → Editor → Vim mode</strong> and they apply to every note, in both Normal and Markdown mode. You get modal editing (<kbd>Esc</kbd> for normal mode, <kbd>i</kbd>/<kbd>a</kbd> to insert), motions and operators (<code>dw</code>, <code>ciw</code>, <code>yy</code>, …), <code>/</code> to search, and <code>:</code> commands, with a Vim status line at the bottom of the editor. Notes autosave, so there's no need to <code>:w</code>.</p>
 
-        <h3>Markdown support</h3>
+        <h3 id="markdown-support">Markdown support</h3>
         <p>inkwell renders full GitHub Flavored Markdown including tables, task lists, strikethrough, code blocks with syntax highlighting, blockquotes, inline images, and footnotes.</p>
 
         <div class="code-block">
@@ -156,7 +158,7 @@ const note = "write here"
 ```</code></pre>
         </div>
 
-        <h3>LaTeX math</h3>
+        <h3 id="latex-math">LaTeX math</h3>
         <p>Mathematical notation is rendered with KaTeX. Wrap inline math in single dollar signs and display math in double dollar signs. For multi-line formulas, use a fenced <code>math</code> (or <code>latex</code>) code block so you never have to escape a <code>$</code>. Math renders live in the preview and is carried through to HTML and PDF exports.</p>
         <div class="code-block">
           <div class="code-block-header">Math examples</div>
@@ -170,7 +172,7 @@ $$\\int_0^1 x^2 \\, dx = \\tfrac{1}{3}$$
 \`\`\``}</code></pre>
         </div>
 
-        <h3>Frontmatter</h3>
+        <h3 id="frontmatter">Frontmatter</h3>
         <p>Every note gets automatic YAML frontmatter on creation. You can edit it directly or leave it alone — inkwell uses it to store metadata like tags, pinned state, and timestamps.</p>
         <div class="code-block">
           <div class="code-block-header">Note frontmatter</div>
@@ -184,7 +186,7 @@ tags: [writing, ideas]
 ---</code></pre>
         </div>
 
-        <h3>Font &amp; display settings</h3>
+        <h3 id="font-display-settings">Font &amp; display settings</h3>
         <p>Open <strong>Settings → Editor</strong> to adjust the font family (sans-serif, serif, or monospace), font size, and line spacing. Changes apply instantly without restarting.</p>
 
         <h3 id="abbreviations-anchor">Abbreviations</h3>
@@ -208,10 +210,10 @@ tags: [writing, ideas]
         <h2>Canvas</h2>
         <p class="lead">A full drawing canvas lives alongside your notes. Sketch diagrams, flowcharts, and mind maps using a custom HTML5 drawing engine — no third-party libraries, no export needed.</p>
 
-        <h3>Opening the canvas</h3>
+        <h3 id="opening-the-canvas">Opening the canvas</h3>
         <p>Click the <strong>Draw</strong> icon in the sidebar (or enable it in <strong>Settings → General → Canvas</strong>). The canvas is shared across your entire vault and saves automatically to <code>.inkwell/canvas.json</code>.</p>
 
-        <h3>Tools</h3>
+        <h3 id="canvas-tools">Tools</h3>
         <div class="tool-grid">
           <div class="tool-item">
             <span class="tool-key">V</span>
@@ -264,10 +266,10 @@ tags: [writing, ideas]
           </div>
         </div>
 
-        <h3>Shape styling</h3>
+        <h3 id="shape-styling">Shape styling</h3>
         <p>Select a shape to see its options in the toolbar: stroke colour (12-colour palette), fill toggle, stroke width (thin/medium/thick), and corner radius for rectangles. Text shapes also expose font family, size, bold, and italic controls.</p>
 
-        <h3>Selection &amp; editing</h3>
+        <h3 id="selection-editing">Selection &amp; editing</h3>
         <ul>
           <li>Drag corner handles to resize a selected shape.</li>
           <li>Drag the shape itself (or any selected shape in a multi-selection) to move.</li>
@@ -278,7 +280,7 @@ tags: [writing, ideas]
           <li><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd> undo / redo.</li>
         </ul>
 
-        <h3>Templates</h3>
+        <h3 id="canvas-templates">Templates</h3>
         <p>Click the <strong>Templates</strong> button in the toolbar to load a ready-made diagram. The canvas fits it to the viewport automatically. Available templates:</p>
         <ul>
           <li><strong>Flowchart</strong> — Start, two steps, and End with arrows.</li>
@@ -289,10 +291,10 @@ tags: [writing, ideas]
           <li><strong>Venn Diagram</strong> — Two overlapping labelled sets.</li>
         </ul>
 
-        <h3>Canvas notes</h3>
+        <h3 id="canvas-notes">Canvas notes</h3>
         <p>Click the <strong>note icon</strong> (top-right of the canvas) or press <kbd>⌘/</kbd> to open a markdown notes panel. It slides in from the right at half the canvas width — the canvas stays fully interactive while the panel is open. Notes are saved to <code>.inkwell/canvas-notes.md</code> in your vault.</p>
 
-        <h3>Navigation</h3>
+        <h3 id="canvas-navigation">Navigation</h3>
         <p>Scroll (or two-finger swipe) to pan. Pinch or <kbd>⌘</kbd>+scroll to zoom. Hold <kbd>Space</kbd> and drag to pan with the hand tool.</p>
       </section>
 
@@ -303,28 +305,28 @@ tags: [writing, ideas]
         <div class="section-label">04</div>
         <h2>Organisation</h2>
 
-        <h3>Folders &amp; notes</h3>
+        <h3 id="folders-notes">Folders &amp; notes</h3>
         <p>The sidebar shows your vault's folder structure. Folders map 1:1 to real directories on disk.</p>
         <p>Press <kbd>⌘⇧F</kbd> or use the New Folder button to open the New Folder dialog — it lets you pick the parent folder, or drop the new folder at the library root, rather than only nesting it under the current selection.</p>
         <p>Drag notes and folders in the sidebar to reorder, nest, and un-nest them. A drop indicator follows the cursor so you can see exactly where an item will land, and moving a folder relocates its whole subtree on disk.</p>
         <p>Double-click any note or folder name (or right-click → Rename) to rename it inline. The file on disk is renamed at the same time.</p>
 
-        <h3>Pinned notes</h3>
+        <h3 id="pinned-notes">Pinned notes</h3>
         <p>Right-click a note and choose <strong>Pin</strong> to keep it at the top of the sidebar. Pinned notes appear in a dedicated section above the rest of your library.</p>
 
-        <h3>Search</h3>
+        <h3 id="org-search">Search</h3>
         <p>Press <kbd>⌘K</kbd> to open full-text search across every note in your vault. Results update as you type.</p>
 
-        <h3>Kanban board</h3>
+        <h3 id="kanban-board">Kanban board</h3>
         <p>Click the <strong>Board</strong> icon in the sidebar to open the Kanban view. Create multiple boards, add columns and cards, set due dates, write subtasks, and leave comments on cards. Boards are stored in your vault's <code>.inkwell</code> folder.</p>
 
-        <h3>Note links</h3>
+        <h3 id="note-links">Note links</h3>
         <p>Open the <strong>Links</strong> panel in the editor toolbar to connect notes to each other. Linked notes appear in a panel below the editor and are tracked bidirectionally. The fastest way to link while writing: type <code>@</code> and start typing a note's title — inkwell searches your vault and inserts the link for you.</p>
 
-        <h3>Attachments</h3>
+        <h3 id="attachments">Attachments</h3>
         <p>Drag files onto the <strong>Attachments</strong> bar at the bottom of the editor to attach images, PDFs, or documents to a note. Attachments are stored in <code>.inkwell/attachments/</code> inside your vault. Embed an attachment inline with <code>![[filename]]</code> syntax.</p>
 
-        <h3>Trash</h3>
+        <h3 id="trash">Trash</h3>
         <p>Deleted notes are moved to the Trash section at the bottom of the sidebar. They are not removed from disk until you empty the trash — so you can recover them.</p>
       </section>
 
@@ -361,10 +363,10 @@ tags: [writing, ideas]
           ))}
         </div>
 
-        <h3>Custom themes</h3>
+        <h3 id="custom-themes">Custom themes</h3>
         <p>Open <strong>Settings → Themes → New Custom Theme</strong> to build your own. The live preview updates instantly as you adjust the background, accent, and text colours. Custom themes are stored in your vault's app data and travel with it.</p>
 
-        <h3>Syntax highlighting</h3>
+        <h3 id="syntax-highlighting">Syntax highlighting</h3>
         <p>Code block syntax colours are derived automatically from the active theme's accent colour — you don't need to configure anything.</p>
       </section>
 
@@ -402,14 +404,14 @@ tags: [writing, ideas]
         <h2>GitHub Sync</h2>
         <p class="lead">Push any note to a GitHub repository as a <code>.md</code> file, and pull the latest version back in with one click.</p>
 
-        <h3>Setup</h3>
+        <h3 id="github-setup">Setup</h3>
         <ol>
           <li>Open <strong>Settings → GitHub</strong>.</li>
           <li>Enter a Personal Access Token with <code>repo</code> scope (create one at github.com/settings/tokens).</li>
           <li>inkwell saves the token securely in your system keychain.</li>
         </ol>
 
-        <h3>Push a note</h3>
+        <h3 id="push-a-note">Push a note</h3>
         <ol>
           <li>Open the note you want to sync.</li>
           <li>Click the <strong>GitHub</strong> icon in the editor toolbar.</li>
@@ -417,7 +419,7 @@ tags: [writing, ideas]
           <li>Click <strong>Push</strong>. inkwell commits the note as a <code>.md</code> file.</li>
         </ol>
 
-        <h3>Pull a note</h3>
+        <h3 id="pull-a-note">Pull a note</h3>
         <p>In the GitHub sync dialog, click <strong>Pull</strong> to fetch the latest version of the file from GitHub and overwrite the current note content.</p>
 
         <div class="callout">
@@ -433,10 +435,10 @@ tags: [writing, ideas]
         <h2>Claude MCP</h2>
         <p class="lead">inkwell ships a native Rust MCP server so Claude can read, write, and search your vault directly — without copy-paste.</p>
 
-        <h3>How it works</h3>
+        <h3 id="mcp-how-it-works">How it works</h3>
         <p>The <code>inkwell-mcp</code> binary is bundled inside the app. It communicates with Claude Desktop (or any MCP-compatible client) over stdio using JSON-RPC 2.0. It reads the active vault path from <code>~/.inkwell/active-vault</code>, which inkwell writes whenever you open a vault.</p>
 
-        <h3>Setup</h3>
+        <h3 id="mcp-setup">Setup</h3>
         <ol>
           <li>Build the MCP server binary (or use the one bundled in the app):<br/><code class="inline-code">cd src-tauri &amp;&amp; cargo build --release -p inkwell-mcp</code></li>
           <li>Add it to your Claude Desktop config at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</li>
@@ -457,7 +459,7 @@ tags: [writing, ideas]
           <li>Restart Claude Desktop. Open a vault in inkwell. Claude now has access to your notes.</li>
         </ol>
 
-        <h3>Available tools</h3>
+        <h3 id="mcp-available-tools">Available tools</h3>
         <div class="mcp-tools">
           <div class="mcp-tool">
             <code>list_notes</code>
@@ -493,7 +495,7 @@ tags: [writing, ideas]
         <div class="section-label">09</div>
         <h2>Keyboard Shortcuts</h2>
 
-        <h3>Global</h3>
+        <h3 id="shortcuts-global">Global</h3>
         <div class="shortcut-table">
           <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
           <div class="shortcut-row"><span>Quick Note (capture window)</span><span><kbd>⌘N</kbd></span></div>
@@ -506,7 +508,7 @@ tags: [writing, ideas]
           <div class="shortcut-row"><span>Redo</span><span><kbd>⌘⇧Z</kbd></span></div>
         </div>
 
-        <h3>Canvas</h3>
+        <h3 id="shortcuts-canvas">Canvas</h3>
         <div class="shortcut-table">
           <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
           <div class="shortcut-row"><span>Select tool</span><span><kbd>V</kbd></span></div>
@@ -526,7 +528,7 @@ tags: [writing, ideas]
           <div class="shortcut-row"><span>Constrain shape / snap angle</span><span><kbd>⇧</kbd> while drawing</span></div>
         </div>
 
-        <h3>Editor</h3>
+        <h3 id="shortcuts-editor">Editor</h3>
         <div class="shortcut-table">
           <div class="shortcut-row header"><span>Action</span><span>Shortcut</span></div>
           <div class="shortcut-row"><span>Bold</span><span><kbd>⌘B</kbd></span></div>
@@ -546,7 +548,7 @@ tags: [writing, ideas]
         <span>inkwell</span>
       </div>
       <p class="footer-copy">An open-source project by <a href={GITHUB_URL} target="_blank" rel="noopener">coros-hq</a>. Built with Tauri, React, and Rust.</p>
-      <a href="/privacy" class="footer-docs">Privacy</a>
+      <a href="/privacy/" class="footer-docs">Privacy</a>
       <a href={GITHUB_URL} class="footer-gh" target="_blank" rel="noopener" aria-label="GitHub">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
