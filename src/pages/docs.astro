@@ -8,6 +8,7 @@ const DOCS_LAST_UPDATED = "20 September 2026";
 const sections = [
   { id: "getting-started", label: "Getting Started" },
   { id: "editor",          label: "Editor" },
+  { id: "charts",          label: "Charts" },
   { id: "canvas",          label: "Canvas" },
   { id: "organisation",    label: "Organisation" },
   { id: "themes",          label: "Themes" },
@@ -205,9 +206,47 @@ tags: [writing, ideas]
 
       <hr />
 
+      <!-- ── Charts ── -->
+      <section id="charts" class="doc-section">
+        <div class="section-label">03</div>
+        <h2>Charts</h2>
+        <p class="lead">Turn a data table into a bar, line, area, pie, or donut chart and drop it straight into your note — no formulas, no external tools.</p>
+
+        <h3 id="inserting-a-chart">Inserting a chart</h3>
+        <p>Type <code>/chart</code> at the start of a line to open the <strong>Insert Chart</strong> dialog. Pick a chart type, optionally give it a title, then fill in the data grid: one row per category, one column per series.</p>
+        <ul>
+          <li><strong>Bar, Line, Area</strong> support multiple series — click <strong>+ Series</strong> to add up to 8, and each gets its own column and label.</li>
+          <li><strong>Pie</strong> and <strong>Donut</strong> plot a single value per row instead of a series grid.</li>
+          <li>Click <strong>+ Row</strong> to add up to 30 categories. Remove a row or series with the trash icon next to it.</li>
+        </ul>
+        <p>Click <strong>Insert Chart</strong> to write the chart into your note.</p>
+
+        <h3 id="how-charts-are-stored">How charts are stored</h3>
+        <p>A chart is just a fenced code block tagged <code>chart</code>, holding a small JSON spec — <code>type</code>, <code>labels</code>, and <code>datasets</code>, plus an optional <code>title</code>. It's plain text, so it travels with the note like any other Markdown and merges cleanly in Git or GitHub Sync.</p>
+        <div class="code-block">
+          <div class="code-block-header">Chart spec</div>
+          <pre><code>{`\`\`\`chart
+{
+  "type": "bar",
+  "title": "Weekly Sales",
+  "labels": ["Mon", "Tue", "Wed"],
+  "datasets": [{ "label": "Sales", "data": [10, 20, 15] }]
+}
+\`\`\``}</code></pre>
+        </div>
+
+        <h3 id="editing-a-chart">Editing a chart</h3>
+        <p>A chart renders live in place of the raw code block, in both Normal and Markdown mode. Click it to reopen the same dialog, pre-filled with its current data, and save your changes back into the block. You can also edit the JSON spec directly as text if you prefer.</p>
+
+        <h3 id="charts-in-exports">Charts in exports</h3>
+        <p>Charts render the same way in HTML and PDF exports as they do in the editor — no separate image to manage, and no chart library to install on the reading end.</p>
+      </section>
+
+      <hr />
+
       <!-- ── Canvas ── -->
       <section id="canvas" class="doc-section">
-        <div class="section-label">03</div>
+        <div class="section-label">04</div>
         <h2>Canvas</h2>
         <p class="lead">A full drawing canvas lives alongside your notes. Sketch diagrams, flowcharts, and mind maps using a custom HTML5 drawing engine — no third-party libraries, no export needed.</p>
 
@@ -303,7 +342,7 @@ tags: [writing, ideas]
 
       <!-- ── Organisation ── -->
       <section id="organisation" class="doc-section">
-        <div class="section-label">04</div>
+        <div class="section-label">05</div>
         <h2>Organisation</h2>
 
         <h3 id="folders-notes">Folders &amp; notes</h3>
@@ -335,7 +374,7 @@ tags: [writing, ideas]
 
       <!-- ── Themes ── -->
       <section id="themes" class="doc-section">
-        <div class="section-label">05</div>
+        <div class="section-label">06</div>
         <h2>Themes</h2>
         <p class="lead">inkwell ships with ten hand-crafted themes. Switch any time from <strong>Settings → Themes</strong> — the change applies instantly across the editor, sidebar, and code highlighting.</p>
         <p><strong>Graphite</strong> and <strong>Onyx</strong> are the newest: a light and a dark pair of minimal, near-grayscale themes in the style of Notion, for when you want the page to disappear entirely.</p>
@@ -375,7 +414,7 @@ tags: [writing, ideas]
 
       <!-- ── Export ── -->
       <section id="export" class="doc-section">
-        <div class="section-label">06</div>
+        <div class="section-label">07</div>
         <h2>Export</h2>
         <p>Click the <strong>Share</strong> icon in the editor toolbar to open the export dialog. A live preview shows exactly how the output will look.</p>
 
@@ -401,7 +440,7 @@ tags: [writing, ideas]
 
       <!-- ── GitHub Sync ── -->
       <section id="github-sync" class="doc-section">
-        <div class="section-label">07</div>
+        <div class="section-label">08</div>
         <h2>GitHub Sync</h2>
         <p class="lead">Push any note to a GitHub repository as a <code>.md</code> file, and pull the latest version back in with one click.</p>
 
@@ -432,7 +471,7 @@ tags: [writing, ideas]
 
       <!-- ── Claude MCP ── -->
       <section id="claude-mcp" class="doc-section">
-        <div class="section-label">08</div>
+        <div class="section-label">09</div>
         <h2>Claude MCP</h2>
         <p class="lead">inkwell ships a native Rust MCP server so Claude can read, write, and search your vault directly — without copy-paste.</p>
 
@@ -493,7 +532,7 @@ tags: [writing, ideas]
 
       <!-- ── Shortcuts ── -->
       <section id="shortcuts" class="doc-section">
-        <div class="section-label">09</div>
+        <div class="section-label">10</div>
         <h2>Keyboard Shortcuts</h2>
 
         <h3 id="shortcuts-global">Global</h3>
