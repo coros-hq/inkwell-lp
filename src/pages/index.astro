@@ -244,6 +244,7 @@ const themePalettes = {
         <a href="#whats-new">What's new</a>
         <a href="#features">Features</a>
         <a href="#canvas">Canvas</a>
+        <a href="#charts">Charts</a>
         <a href="#themes">Themes</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
         <a href="/docs/">Docs</a>
@@ -373,6 +374,13 @@ const themePalettes = {
       <h2>What's new<br /><span class="muted">in {VERSION}.</span></h2>
 
       <div class="whatsnew-grid">
+        <div class="whatsnew-item">
+          <h3>Insert charts</h3>
+          <p>
+            Build a bar, line, area, pie, or donut chart from a data table and drop
+            it straight into your note — see <a href="#charts">Charts</a> below.
+          </p>
+        </div>
         <div class="whatsnew-item">
           <h3>LaTeX math, everywhere</h3>
           <p>
@@ -573,6 +581,93 @@ const themePalettes = {
         <span class="pill">Sequence</span>
         <span class="pill">Timeline</span>
         <span class="pill">Venn Diagram</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Charts ───────────────────────────────────────────── -->
+  <section class="charts-section" id="charts">
+    <div class="section-inner">
+      <div class="section-label">Charts</div>
+      <h2>
+        Turn data into<br /><span class="muted">a chart.</span>
+      </h2>
+      <p class="section-sub">
+        Build a bar, line, area, pie, or donut chart from a simple data table and drop it straight into your note — no formulas, no external tools.
+      </p>
+
+      <!-- Insert Chart dialog mockup -->
+      <div class="chart-window">
+        <div class="titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="window-title">Insert Chart</span>
+        </div>
+        <div class="chart-body">
+          <div class="chart-field-label">Chart type</div>
+          <div class="chart-type-tabs">
+            <span class="chart-type-tab active">Bar</span>
+            <span class="chart-type-tab">Line</span>
+            <span class="chart-type-tab">Area</span>
+            <span class="chart-type-tab">Pie</span>
+            <span class="chart-type-tab">Donut</span>
+          </div>
+
+          <div class="chart-grid">
+            <div class="chart-data">
+              <div class="chart-data-head">
+                <span class="chart-field-label">Data</span>
+                <span class="chart-add-link">+ Series</span>
+              </div>
+              <div class="chart-table">
+                <div class="chart-row chart-row-head">
+                  <span>Label</span>
+                  <span>Series 1</span>
+                </div>
+                <div class="chart-row">
+                  <span>Mon</span>
+                  <span>10</span>
+                </div>
+                <div class="chart-row">
+                  <span>Tue</span>
+                  <span>20</span>
+                </div>
+                <div class="chart-row">
+                  <span>Wed</span>
+                  <span>15</span>
+                </div>
+              </div>
+              <span class="chart-add-link chart-add-row">+ Row</span>
+            </div>
+
+            <div class="chart-preview" aria-hidden="true">
+              <div class="chart-bar-col">
+                <div class="chart-bar" style="height:50%"><span>10</span></div>
+                <span class="chart-bar-label">Mon</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar" style="height:100%"><span>20</span></div>
+                <span class="chart-bar-label">Tue</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar" style="height:75%"><span>15</span></div>
+                <span class="chart-bar-label">Wed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qn-footer">
+          <span class="qn-hints">Renders live · Editable anytime</span>
+          <button class="qn-save-btn">Insert Chart</button>
+        </div>
+      </div>
+
+      <div class="qn-pills">
+        <span class="qn-pill">Bar, line, area, pie &amp; donut</span>
+        <span class="qn-pill">Editable data table</span>
+        <span class="qn-pill">Inline in your notes</span>
+        <span class="qn-pill">Exports with your note</span>
       </div>
     </div>
   </section>
@@ -1790,6 +1885,146 @@ const themePalettes = {
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 4px 12px;
+  }
+
+  /* ── Charts section ──────────────────────────────────────── */
+  .charts-section {
+    padding: 100px 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .chart-window {
+    max-width: 640px;
+    margin: 48px auto 28px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-mid);
+    box-shadow:
+      0 40px 100px rgba(0, 0, 0, 0.55),
+      0 0 0 0.5px rgba(255, 255, 255, 0.06);
+    background: #141210;
+  }
+
+  .chart-body {
+    padding: 22px 28px 26px;
+  }
+
+  .chart-field-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 10px;
+  }
+
+  .chart-type-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .chart-type-tab {
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .chart-type-tab.active {
+    background: #fff;
+    border-color: #fff;
+    color: #111;
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .chart-data-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .chart-add-link {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .chart-add-row {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .chart-table {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .chart-row:last-child {
+    border-bottom: none;
+  }
+
+  .chart-row-head {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+  }
+
+  .chart-preview {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 16px;
+    height: 140px;
+    padding: 0 8px 20px;
+  }
+
+  .chart-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .chart-bar {
+    width: 26px;
+    background: linear-gradient(180deg, var(--accent-light), var(--accent));
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+
+  .chart-bar span {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .chart-bar-label {
+    margin-top: 8px;
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.35);
   }
 
   /* ── Weekly Planner section ──────────────────────────────── */
