@@ -655,8 +655,8 @@
     "semantic_hash": ""
   },
   "src/consts.ts": {
-    "mtime": 1789051753.544053,
-    "ast_hash": "874d9bcab0e0aaf1a09b4df4aaf84fec",
+    "mtime": 1790172751.3809247,
+    "ast_hash": "de482f9637c2df49534f3bea9eecc8ef",
     "semantic_hash": ""
   },
   "src/layouts/Layout.astro": {
@@ -665,13 +665,13 @@
     "semantic_hash": ""
   },
   "src/pages/docs.astro": {
-    "mtime": 1789935068.3786442,
-    "ast_hash": "20bc4e97bd73fe015c618c94ec18aed5",
+    "mtime": 1789994466.303914,
+    "ast_hash": "eb4dafc1c6d1bf36a1d5df2961a5dbbd",
     "semantic_hash": ""
   },
   "src/pages/index.astro": {
-    "mtime": 1789934940.2620966,
-    "ast_hash": "b822d741d213b411fce9fc3ebf84228b",
+    "mtime": 1789996460.3185787,
+    "ast_hash": "e6c8ade09cd30afae26d1f62b6845ce2",
     "semantic_hash": ""
   },
   "src/pages/privacy.astro": {
