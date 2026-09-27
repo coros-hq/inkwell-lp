@@ -230,9 +230,15 @@ const themePalettes = {
     "--nav-bg": "rgba(26,26,26,0.9)",
   },
 };
+
+// Rendered into the page's CSS as well as booted by the script below, so the
+// page paints in this theme before (or without) the theme-switcher script.
+const DEFAULT_THEME = "Onyx";
+const defaultThemeCSS = `:root{${Object.entries(themePalettes[DEFAULT_THEME]).map(([k, v]) => `${k}:${v}`).join(";")}}`;
 ---
 
 <Layout>
+  <style set:html={defaultThemeCSS}></style>
   <!-- ── Nav ───────────────────────────────────────────────── -->
   <nav>
     <div class="nav-inner">
@@ -271,9 +277,9 @@ const themePalettes = {
         <h1>Write without<br />distraction.</h1>
 
         <p class="hero-sub">
-          A local-first markdown editor for every platform. Your notes stay as
-          plain&nbsp;<code>.md</code>&nbsp;files — private, portable, entirely
-          yours.
+          A local-first markdown editor for every platform. Your notes live as
+          plain&nbsp;<code>.md</code>&nbsp;files on your disk — portable, entirely
+          yours, and shared only when you choose.
         </p>
 
         <div class="hero-ctas">
@@ -375,55 +381,53 @@ const themePalettes = {
 
       <div class="whatsnew-grid">
         <div class="whatsnew-item">
-          <h3>Insert charts</h3>
+          <h3>Share a vault</h3>
           <p>
-            Build a bar, line, area, pie, or donut chart from a data table and drop
-            it straight into your note — see <a href="#charts">Charts</a> below.
+            Share any vault with the people you invite, or with a whole team. Notes,
+            folders, boards and attachments all come along — see
+            <a href="#collab">Collaboration</a> below.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>LaTeX math, everywhere</h3>
+          <h3>Edit together, live</h3>
           <p>
-            Inline <code>$…$</code>, display <code>$$…$$</code>, and fenced
-            <code>```math</code> blocks, rendered live with KaTeX in the editor and
-            preview — and carried into HTML and PDF exports.
+            Two people can type in the same note at once. Edits merge character by
+            character, so nobody's changes get overwritten.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>Markdown mode</h3>
+          <h3>See who's here</h3>
           <p>
-            A per-note toggle splits any note into raw Markdown and a live,
-            scroll-synced preview. Drag the divider to rebalance the panes, or
-            switch back to the distraction-free editor.
+            Collaborators' cursors show up in the editor with their name, and avatars
+            in the header show who is online and which note they're in.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>Vim mode</h3>
+          <h3>Owners, editors &amp; viewers</h3>
           <p>
-            Turn on Vim keybindings in <strong>Settings&nbsp;→&nbsp;Editor</strong> —
-            modal editing, motions, and <code>:</code> commands, with a status line
-            under the editor.
+            Owners manage who has access. Editors change anything in the vault.
+            Viewers follow along live without being able to edit.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>Graphite &amp; Onyx themes</h3>
+          <h3>Invite by email or link</h3>
           <p>
-            Two Notion-inspired grayscale themes — Graphite in light, Onyx in dark —
-            bringing the built-in theme count to ten.
+            Add someone by email, or create an invite link. Links expire after 7 days,
+            and <code>inkwell://join/…</code> links open straight in the app.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>Create a folder anywhere</h3>
+          <h3>Offline-safe</h3>
           <p>
-            The New Folder dialog now lets you choose the parent folder — or drop it
-            at the library root — instead of only nesting under the current one.
+            Your files stay on disk as plain <code>.md</code>. Edits you make offline
+            are saved locally and merged when you reconnect.
           </p>
         </div>
         <div class="whatsnew-item">
-          <h3>Sharper drag &amp; drop</h3>
+          <h3>Accounts are optional</h3>
           <p>
-            Reorder, nest, and un-nest notes and folders with a drop indicator that
-            follows the cursor. Moving a folder relocates its whole subtree on disk.
+            Sign in with email and password only when you want to share or join a
+            vault. A vault you haven't shared never talks to a server.
           </p>
         </div>
       </div>
@@ -448,6 +452,59 @@ const themePalettes = {
             </div>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Collaboration ────────────────────────────────────── -->
+  <section class="collab-section" id="collab">
+    <div class="section-inner">
+      <div class="section-label">Collaboration</div>
+      <h2>
+        Write together.<br /><span class="muted">Keep your files.</span>
+      </h2>
+      <p class="section-sub">
+        Share a vault and edit it with others in real time. Everyone's copy stays a folder of plain <code>.md</code> files on their own disk — inkwell keeps them in sync.
+      </p>
+
+      <!-- Shared note mockup: live cursors + presence -->
+      <div class="collab-window" aria-hidden="true">
+        <div class="titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="window-title">Launch plan</span>
+          <div class="collab-presence">
+            <span class="collab-avatar" style="--peer:#0090ff">M</span>
+            <span class="collab-avatar" style="--peer:#46a758">L</span>
+            <span class="collab-avatar collab-avatar--away" style="--peer:#d6409f">S</span>
+            <span class="collab-status"></span>
+          </div>
+        </div>
+        <div class="collab-body">
+          <div class="mock-line mock-h1">Launch plan</div>
+          <div class="mock-line mock-text">
+            The beta ships on Friday. Maya owns the release<span class="collab-cursor" style="--peer:#0090ff"><span class="collab-cursor-name">maya</span></span> notes,
+          </div>
+          <div class="mock-line mock-text">and Leo is on the changelog.</div>
+          <div class="mock-line mock-gap"></div>
+          <div class="mock-line mock-h2">## Checklist</div>
+          <div class="mock-line mock-list">- [x] Freeze the feature list</div>
+          <div class="mock-line mock-list">- [ ] Final copy<span class="collab-cursor" style="--peer:#46a758"><span class="collab-cursor-name">leo</span></span> review</div>
+          <div class="mock-line mock-list">- [ ] Record the demo</div>
+        </div>
+        <div class="qn-footer">
+          <span class="qn-hints"><span class="collab-synced"></span>Synced · 3 online</span>
+          <span class="qn-save-btn">Share</span>
+        </div>
+      </div>
+
+      <div class="qn-pills">
+        <span class="qn-pill">Owner, editor &amp; viewer roles</span>
+        <span class="qn-pill">Invite by email or link</span>
+        <span class="qn-pill">Offline edits merge on reconnect</span>
+        <span class="qn-pill">Notes, folders, boards &amp; attachments</span>
+        <span class="qn-pill">Opt-in, per vault</span>
       </div>
     </div>
   </section>
@@ -844,7 +901,7 @@ const themePalettes = {
               class="theme-swatch"
               data-theme={t.name}
               style={`background:${t.bg}`}
-              class:list={["theme-swatch", i === 0 && "active"]}
+              class:list={["theme-swatch", t.name === DEFAULT_THEME && "active"]}
             >
               <div class="theme-swatch-content">
                 <div
@@ -1025,10 +1082,10 @@ const themePalettes = {
             >
           </div>
           <div>
-            <strong>Fully local</strong>
+            <strong>Local by default</strong>
             <span
-              >No accounts, no telemetry, no cloud. Everything stays on your
-              Mac.</span
+              >No account needed and no telemetry. A cloud copy exists only for
+              vaults you choose to share.</span
             >
           </div>
         </div>
@@ -2042,6 +2099,126 @@ const themePalettes = {
     color: rgba(255, 255, 255, 0.4);
   }
 
+  /* ── Collaboration section ───────────────────────────────── */
+  .collab-section {
+    padding: 100px 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .collab-section .section-sub code {
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 14px;
+    background: var(--bg-subtle);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--accent-light);
+  }
+
+  .collab-window {
+    max-width: 640px;
+    margin: 48px auto 28px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-mid);
+    box-shadow:
+      0 40px 100px rgba(0, 0, 0, 0.55),
+      0 0 0 0.5px rgba(255, 255, 255, 0.06);
+    background: #141210;
+  }
+
+  .collab-window .window-title {
+    margin-right: 0;
+  }
+
+  .collab-presence {
+    display: flex;
+    align-items: center;
+  }
+
+  .collab-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--peer);
+    border: 2px solid var(--bg-card);
+    margin-left: -6px;
+  }
+
+  .collab-avatar:first-child {
+    margin-left: 0;
+  }
+
+  .collab-avatar--away {
+    opacity: 0.5;
+  }
+
+  .collab-status {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #28c840;
+    margin-left: 8px;
+  }
+
+  .collab-body {
+    padding: 22px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .collab-body .mock-line {
+    font-size: 13px;
+    line-height: 2.2;
+  }
+
+  .collab-body .mock-h1 {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .collab-body .mock-h2 {
+    font-size: 13px;
+  }
+
+  .collab-cursor {
+    position: relative;
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    margin: 0 1px;
+    vertical-align: text-bottom;
+    background: var(--peer);
+    border-radius: 1px;
+  }
+
+  .collab-cursor-name {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    color: #fff;
+    background: var(--peer);
+    padding: 2px 5px;
+    border-radius: 3px 3px 3px 0;
+    white-space: nowrap;
+  }
+
+  .collab-synced {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #28c840;
+  }
+
   /* ── Weekly Planner section ──────────────────────────────── */
   .planner-section {
     padding: 100px 32px;
@@ -2706,7 +2883,7 @@ const themePalettes = {
   }
 </style>
 
-<script define:vars={{ themePalettes }}>
+<script define:vars={{ themePalettes, DEFAULT_THEME }}>
   function applyTheme(name) {
     const palette = themePalettes[name];
     if (!palette) return;
@@ -2741,8 +2918,8 @@ const themePalettes = {
     });
   });
 
-  // Boot with Midnight active
-  applyTheme("Midnight");
+  // Boot with the default theme active
+  applyTheme(DEFAULT_THEME);
 
   // ── OS detection: highlight & scale the matching download button ──────────
   (function () {

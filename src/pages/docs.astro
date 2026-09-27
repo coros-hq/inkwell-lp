@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { APP_VERSION, GITHUB_URL, RELEASE_URL } from "../consts";
 
 const VERSION = APP_VERSION;
-const DOCS_LAST_UPDATED = "20 September 2026";
+const DOCS_LAST_UPDATED = "27 September 2026";
 
 const sections = [
   { id: "getting-started", label: "Getting Started" },
@@ -14,6 +14,7 @@ const sections = [
   { id: "themes",          label: "Themes" },
   { id: "export",          label: "Export" },
   { id: "github-sync",     label: "GitHub Sync" },
+  { id: "collaboration",   label: "Collaboration" },
   { id: "claude-mcp",      label: "Claude MCP" },
   { id: "shortcuts",       label: "Shortcuts" },
 ];
@@ -21,7 +22,7 @@ const sections = [
 
 <Layout
   title="inkwell — Documentation"
-  description="Everything you need to know about inkwell: editor, canvas, themes, GitHub sync, Claude MCP, and keyboard shortcuts."
+  description="Everything you need to know about inkwell: editor, canvas, themes, sharing and collaboration, GitHub sync, Claude MCP, and keyboard shortcuts."
   schemaType="webpage"
 >
   <!-- ── Nav ── -->
@@ -73,7 +74,7 @@ const sections = [
       <section id="getting-started" class="doc-section">
         <div class="section-label">01</div>
         <h1>Getting Started</h1>
-        <p class="lead">inkwell is a local-first markdown editor for macOS, Windows, and Linux. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up, no cloud, no lock-in.</p>
+        <p class="lead">inkwell is a local-first markdown editor for macOS, Windows, and Linux. Your notes are stored as plain <code>.md</code> files in a folder you choose — no sign-up required, no lock-in, and nothing leaves your machine unless you <a href="#collaboration">share a vault</a>.</p>
 
         <h3 id="install-macos">Install on macOS</h3>
         <ol>
@@ -469,9 +470,70 @@ tags: [writing, ideas]
 
       <hr />
 
+      <!-- ── Sharing & Collaboration ── -->
+      <section id="collaboration" class="doc-section">
+        <div class="section-label">09</div>
+        <h2>Sharing &amp; collaboration</h2>
+        <p class="lead">Share a vault with other people and edit it together in real time. Every member keeps the vault as a folder of plain <code>.md</code> files on their own disk — inkwell keeps the copies in sync. Sharing is opt-in: a vault you haven't shared never talks to a server.</p>
+
+        <h3 id="collab-sign-in">Sign in</h3>
+        <p>You only need an account to share or join a vault. Everything else in inkwell works without one.</p>
+        <ol>
+          <li>Open <strong>Settings → Team</strong> and click <strong>Sign in</strong>.</li>
+          <li>Sign in with your email and password, or switch to <strong>Create account</strong> if you don't have one yet.</li>
+        </ol>
+
+        <h3 id="collab-share-a-vault">Share a vault</h3>
+        <ol>
+          <li>Open the vault you want to share.</li>
+          <li>Click the <strong>people</strong> icon in the editor header, or go to <strong>Settings → Vault</strong> and click <strong>Share vault</strong>.</li>
+          <li>Under <strong>Access</strong>, choose <strong>Only people I invite</strong>, or one of your teams to give everyone in it edit access.</li>
+          <li>Click <strong>Share vault</strong>. inkwell uploads the vault's notes, folders, boards, and attachments, and you become its owner.</li>
+        </ol>
+
+        <h3 id="collab-invite">Invite people</h3>
+        <p>Once a vault is shared, its owner can invite people from the same Share dialog:</p>
+        <ul>
+          <li><strong>By email</strong> — enter their address, pick a role, and click <strong>Invite</strong>. inkwell doesn't send an email, so let them know; they get access as soon as they sign in to inkwell with that address.</li>
+          <li><strong>By link</strong> — pick a role and click <strong>Create link</strong>, then copy the <code>inkwell://join/…</code> link and send it. Links expire after 7 days. Anyone with the link who signs in can join, so share it only with the people you mean to.</li>
+        </ul>
+        <p>To join, open the link — it opens inkwell — or go to <strong>Settings → Vault → Join a shared vault</strong> and paste it. Choose an <strong>empty</strong> folder for the vault; inkwell downloads it there. Vaults you've been invited to by email appear in the same dialog.</p>
+
+        <h3 id="collab-roles">Roles</h3>
+        <div class="mcp-tools">
+          <div class="mcp-tool">
+            <code>Owner</code>
+            <p>Everything an editor can do, plus inviting people, creating invite links, changing roles, and removing members.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>Editor</code>
+            <p>Edits notes, folders, boards, and attachments. Shown as <em>Can edit</em> in the app.</p>
+          </div>
+          <div class="mcp-tool">
+            <code>Viewer</code>
+            <p>Sees the whole vault and follows edits live, but can't change anything. Shown as <em>Can view</em>.</p>
+          </div>
+        </div>
+
+        <h3 id="collab-live-editing">Editing together</h3>
+        <p>When several people type in the same note, their edits merge character by character, so nobody's changes are overwritten. Collaborators' cursors show in the editor with their name, and the avatars in the editor header show who is online — people in the note you're viewing are shown first, others are dimmed.</p>
+
+        <h3 id="collab-offline">Working offline</h3>
+        <p>You can keep editing a shared vault without a connection. Your changes are written to your <code>.md</code> files and saved locally, then merged with everyone else's when you reconnect. A small dot on the people icon shows the sync state — hover it to read <em>Synced</em>, <em>Syncing…</em>, or <em>Offline — changes sync when you reconnect</em>.</p>
+
+        <h3 id="collab-stop-syncing">Stop syncing on a device</h3>
+        <p>In the Share dialog, click <strong>Stop syncing on this device</strong> and confirm. The folder is unlinked from the shared vault, and your files stay exactly where they are. If an owner removes you, the same happens automatically: you keep your local copy, but it no longer syncs.</p>
+
+        <div class="callout">
+          <strong>Privacy:</strong> the content of a shared vault is stored in Supabase, the service inkwell uses for sync, so members can stay in sync. See the <a href="/privacy/">privacy page</a> for exactly what is stored.
+        </div>
+      </section>
+
+      <hr />
+
       <!-- ── Claude MCP ── -->
       <section id="claude-mcp" class="doc-section">
-        <div class="section-label">09</div>
+        <div class="section-label">10</div>
         <h2>Claude MCP</h2>
         <p class="lead">inkwell ships a native Rust MCP server so Claude can read, write, and search your vault directly — without copy-paste.</p>
 
@@ -532,7 +594,7 @@ tags: [writing, ideas]
 
       <!-- ── Shortcuts ── -->
       <section id="shortcuts" class="doc-section">
-        <div class="section-label">10</div>
+        <div class="section-label">11</div>
         <h2>Keyboard Shortcuts</h2>
 
         <h3 id="shortcuts-global">Global</h3>

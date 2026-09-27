@@ -2,12 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import { GITHUB_URL } from "../consts";
 
-const LAST_UPDATED = "17 July 2026";
+const LAST_UPDATED = "27 September 2026";
 ---
 
 <Layout
   title="inkwell — Privacy"
-  description="What inkwell the app collects (nothing), what this website collects (anonymous, cookieless analytics), and where your notes actually live."
+  description="What the inkwell app collects (nothing, unless you share a vault), what this website collects (anonymous, cookieless analytics), and where notes live."
   schemaType="webpage"
 >
   <!-- ── Nav ── -->
@@ -33,26 +33,53 @@ const LAST_UPDATED = "17 July 2026";
     <div class="section-label">Privacy</div>
     <h1>Privacy</h1>
     <p class="lead">
-      Short version: the app collects nothing, and this website collects the
-      bare minimum needed to know it's being visited. Below is exactly what
-      that means and why.
+      Short version: the app collects nothing unless you choose to share a
+      vault, and this website collects the bare minimum needed to know it's
+      being visited. Below is exactly what that means and why.
     </p>
 
     <h3>The inkwell app</h3>
     <p>
-      inkwell is local-first by design. There is no account, no sign-up, and
-      no sync server. Your notes are stored as plain <code>.md</code> files in
-      a vault folder you choose on your own machine, and the app does not
-      transmit their contents anywhere. inkwell does not run telemetry or
-      usage tracking of any kind.
+      inkwell is local-first by design. You don't need an account to use it.
+      Your notes are stored as plain <code>.md</code> files in a vault folder
+      you choose on your own machine, and a vault you haven't shared never
+      leaves it. inkwell does not run telemetry or usage tracking of any kind.
     </p>
     <p>
-      Two features make outbound network requests, and only when you use them:
+      Two features make outbound requests, and only when you use them:
       GitHub Sync, which pushes or pulls the specific note you choose to your
       own GitHub repository, and the Claude MCP integration, which lets a
       locally-configured Claude client read from and write to your vault. Both
       are opt-in and both talk directly to the service you've configured —
-      not to us.
+      not to us. Separately, the app checks GitHub for a newer release when it
+      starts; that request doesn't include anything from your vault.
+    </p>
+
+    <h3>Sharing &amp; collaboration</h3>
+    <p>
+      Sharing a vault is opt-in, and it's the one feature that stores your
+      notes off your device. It runs on
+      <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase</a>
+      (database, realtime messaging, and file storage).
+    </p>
+    <p>
+      To share or join a vault you sign in with an email and password. Your
+      account stores your email address. When you create a team or invite
+      someone, the team's name and each invitee's email address and role are
+      stored too, so members can see who has access.
+    </p>
+    <p>
+      For a vault you share, its content is stored in Supabase so members can
+      stay in sync: note text, the folder structure, boards and tasks,
+      attachments, and the history of edits. Access rules limit reading it to
+      the vault's members. While you're editing, your changes, cursor position, and which note
+      you have open are relayed live to the other members online.
+    </p>
+    <p>
+      Vaults you haven't shared are never uploaded, and nothing about them is
+      sent to Supabase. If you stop syncing a vault on a device, or its owner
+      removes you, that device stops syncing but keeps your local files. What
+      you already contributed stays in the shared vault for its other members.
     </p>
 
     <h3>This website (inkwell-lp.vercel.app)</h3>

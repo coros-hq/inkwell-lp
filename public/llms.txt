@@ -1,16 +1,16 @@
 # inkwell
 
-> A local-first markdown editor for macOS, Windows, and Linux. Notes are stored as plain .md files in a folder you choose — no accounts, no cloud, no telemetry.
+> A local-first markdown editor for macOS, Windows, and Linux. Notes are stored as plain .md files in a folder you choose — no account required and no telemetry. Vaults stay on your device unless you choose to share one for real-time collaboration.
 
 inkwell is free and open source, built with Tauri, React, and Rust.
 
-Key features: live split-view markdown preview, eight built-in themes, a full drawing canvas (flowcharts, mind maps, sequence diagrams), Kanban boards, GitHub sync for notes, a Claude MCP server for reading/writing the vault from Claude, a global Quick Note capture window, and a weekly planner with tagged tasks.
+Key features: live split-view markdown preview, ten built-in themes, a full drawing canvas (flowcharts, mind maps, sequence diagrams), Kanban boards, GitHub sync for notes, a Claude MCP server for reading/writing the vault from Claude, a global Quick Note capture window, a weekly planner with tagged tasks, and opt-in real-time collaboration on shared vaults (owner, editor and viewer roles; offline edits merge on reconnect).
 
 ## Pages
 
 - [Homepage](https://inkwell-lp.vercel.app/): overview, features, and download links for macOS, Windows, and Linux
-- [Documentation](https://inkwell-lp.vercel.app/docs): install instructions per platform, editor and canvas usage, themes, export, GitHub sync, Claude MCP setup, and keyboard shortcuts
-- [Privacy](https://inkwell-lp.vercel.app/privacy): what the app collects (nothing) and what the website collects (anonymous page-view analytics)
+- [Documentation](https://inkwell-lp.vercel.app/docs): install instructions per platform, editor and canvas usage, themes, export, sharing and collaboration, GitHub sync, Claude MCP setup, and keyboard shortcuts
+- [Privacy](https://inkwell-lp.vercel.app/privacy): what the app collects (nothing, unless you share a vault) and what the website collects (anonymous page-view analytics)
 
 ## Source
 
